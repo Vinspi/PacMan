@@ -11,7 +11,7 @@ Projet de groupe réalisé dans le cadre de l'UE Génie logiciel en M1 informati
 
 ## Objectifs ##
 Il s'agit ici de réaliser un jeu vidéo dans le langage C++ avec le framework Qt en temps imparti.
-Le jeu développé ici sera le célèbre jeu des années 80 [PacMan] (fr.wikipedia.org/wiki/Pac-Man). Il s'agit d'un petit disque qui doit, en temps imparti, manger toutes les gommes se trouvant dans le labyrinthe sans croiser de fantômes.
+Le jeu développé ici sera le célèbre jeu des années 80 [PacMan](fr.wikipedia.org/wiki/Pac-Man). Il s'agit d'un petit disque qui doit, en temps imparti, manger toutes les gommes se trouvant dans le labyrinthe sans croiser de fantômes.
 
 ## Fonctionnalités ##
   * Permettre la création d'un profil de joueur.
