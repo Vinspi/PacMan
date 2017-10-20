@@ -3,14 +3,16 @@
 #include "sommet.h"
 #include "const.h"
 
+using namespace std;
+
 class Graph
 {
 public:
-    Graph();
+    Graph(const char *name);
 
 private:
-   Sommet* matrice[W_WIDTH/T_SIZE][W_HEIGHT/T_SIZE];
-
+   Sommet* matrice[(W_WIDTH/T_SIZE)*3][(W_HEIGHT/T_SIZE)*3];
+   void initMatrice();
 
 };
 
