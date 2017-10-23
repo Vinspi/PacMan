@@ -37,7 +37,8 @@ HEADERS += \
     sommet.h \
     const.h \
     profil.h \
-    vueprofil.h \
+    entité.h \
+    joueur.h \
     vueprofil.h
 
 FORMS += \
