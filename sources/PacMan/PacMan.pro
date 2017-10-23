@@ -27,13 +27,19 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     graph.cpp \
-    sommet.cpp
+    sommet.cpp \
+    profil.cpp \
+    vueprofil.cpp
 
 HEADERS += \
         mainwindow.h \
     graph.h \
     sommet.h \
-    const.h
+    const.h \
+    profil.h \
+    vueprofil.h \
+    vueprofil.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    vueprofil.ui

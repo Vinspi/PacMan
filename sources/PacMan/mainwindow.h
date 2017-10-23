@@ -11,6 +11,9 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
+public slots:
+    void changerLargeur();
+
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
