@@ -20,6 +20,13 @@ Profil::Profil(string nom, int score, int niv_max_atteint, int classement){
     this->classement = classement;
 }
 
+Profil::Profil(){
+    score = 0;
+    niv_max_atteint = 0;
+    classement = -1;
+    nom = "anonymousse";
+}
+
 Profil* Profil::loadProfile(string filename){
     ifstream file(filename,ios::in);
 

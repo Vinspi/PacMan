@@ -10,6 +10,7 @@ class Profil
 
 
 public:
+    Profil();
     Profil(string name);
     Profil(string nom, int score, int niv_max_atteint, int classement);
     void saveProfile(string directory);
@@ -24,6 +25,7 @@ private:
     int niv_max_atteint;
     int classement;
     string nom;
+
 
 };
 

@@ -21,6 +21,7 @@ int main(int argc, char *argv[])
 //    p->saveProfile("../PacMan/profil");
 
     VueProfil vp;
+    vp.setProfil(Profil::loadProfile("../PacMan/profil/pierre.pf"));
     vp.show();
 
     return a.exec();
