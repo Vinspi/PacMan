@@ -40,6 +40,8 @@ HEADERS += \
     profil.h \
     vueprofile.h \
     vuemenu.h
+    vueprofil.h
+
 
 FORMS += \
         mainwindow.ui \
