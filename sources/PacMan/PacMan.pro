@@ -29,7 +29,8 @@ SOURCES += \
     graph.cpp \
     sommet.cpp \
     profil.cpp \
-    vueprofil.cpp
+    vueprofile.cpp \
+    vuemenu.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -37,9 +38,10 @@ HEADERS += \
     sommet.h \
     const.h \
     profil.h \
-    vueprofil.h \
-    vueprofil.h
+    vueprofile.h \
+    vuemenu.h
 
 FORMS += \
         mainwindow.ui \
-    vueprofil.ui
+    vueprofile.ui \
+    vuemenu.ui
