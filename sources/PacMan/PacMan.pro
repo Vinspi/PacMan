@@ -29,7 +29,9 @@ SOURCES += \
     graph.cpp \
     sommet.cpp \
     profil.cpp \
-    vueprofil.cpp
+    vueprofil.cpp \
+    entite.cpp \
+    joueur.cpp
 
 HEADERS += \
         mainwindow.h \

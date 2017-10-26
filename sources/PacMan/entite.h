@@ -1,43 +1,43 @@
-#ifndef PERSONNAGE_H
-#define PERSONNAGE_H
+#ifndef ENTITE_H
+#define ENTITE_H
 
-class personnage
+class entite
 {
     protected:
-        //Position actuelle
-        int x;
-        int y;
+        //Position dans la fenetre
+        int px_x;
+        int px_y;
 
-        //Position precedente
-        int prec_x;
-        int prec_y;
+        //Position dans le graphe
+        int gr_x;
+        int gr_y;
 
-        // Direction du personnage
-        // 1 -> haut   | 2 -> bas
-        // 3 -> gauche | 4 -> droite
-        int dir;
+        // Direction de l'entité
+        // dir[0] : x = {-1, 0, 1}
+        // dir[1] : y = {-1, 0, 1}
+        int dir[2];
 
     public:
         //Constructeur
-        personnage(int x, int y);
+        entite(int x, int y);
 
         //Fonctions de déplacement
+        // (juste la direction pour le moment)
         bool MoveUp();
         bool MoveDown();
         bool MoveLeft();
         bool MoveRight();
 
         //Getter
-        int GetX();
-        int GetY();
-        int GetPrec_X();
-        int GetPrec_Y();
+        int GetPX_X();
+        int GetPX_Y();
+        int GetGR_X();
+        int GetGR_Y();
         int GetDir();
 
         //Setter
         void SetX(int x);
         void SetY(int y);
-        void SetDir(int d);
 };
 
-#endif // PERSONNAGE_H
+#endif // ENTITE_H
