@@ -1,10 +1,11 @@
-#include "vueprofil.h"
-#include "ui_vueprofil.h"
+#include "vueprofile.h"
+#include "ui_vueprofile.h"
+
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string>
-#include "pac_qlabel.h"
+
 
 #include <sstream>
 
@@ -12,9 +13,9 @@
 
 using namespace std;
 
-VueProfil::VueProfil(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::VueProfil)
+VueProfile::VueProfile(QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::VueProfile)
 {
     ui->setupUi(this);
     //p = Profil::loadProfile("../PacMan/profil/"+profil+".pf");
@@ -23,12 +24,12 @@ VueProfil::VueProfil(QWidget *parent) :
     //ui->label->setText(str);
 }
 
-VueProfil::~VueProfil()
+VueProfile::~VueProfile()
 {
     delete ui;
 }
 
-void VueProfil::setProfil(Profil *p){
+void VueProfile::setProfil(Profil *p){
     this->p = p;
 
 

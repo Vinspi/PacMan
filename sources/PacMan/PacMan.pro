@@ -29,9 +29,14 @@ SOURCES += \
     graph.cpp \
     sommet.cpp \
     profil.cpp \
+<<<<<<< HEAD
     vueprofil.cpp \
     entite.cpp \
     joueur.cpp
+=======
+    vueprofile.cpp \
+    vuemenu.cpp
+>>>>>>> 46763a383f41df04b6395328bd76c4bb11d57833
 
 HEADERS += \
         mainwindow.h \
@@ -39,10 +44,12 @@ HEADERS += \
     sommet.h \
     const.h \
     profil.h \
-    entite.h \
-    joueur.h \
+    vueprofile.h \
+    vuemenu.h
     vueprofil.h
+
 
 FORMS += \
         mainwindow.ui \
-    vueprofil.ui
+    vueprofile.ui \
+    vuemenu.ui
