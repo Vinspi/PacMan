@@ -24,32 +24,34 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-        main.cpp \
-        mainwindow.cpp \
+    main.cpp \
+    mainwindow.cpp \
     graph.cpp \
     sommet.cpp \
     profil.cpp \
-<<<<<<< HEAD
     vueprofil.cpp \
     entite.cpp \
-    joueur.cpp
-=======
+    joueur.cpp \
     vueprofile.cpp \
-    vuemenu.cpp
->>>>>>> 46763a383f41df04b6395328bd76c4bb11d57833
+    vuemenu.cpp \
+    modele.cpp \
+    controleur.cpp
 
 HEADERS += \
-        mainwindow.h \
+    mainwindow.h \
     graph.h \
     sommet.h \
     const.h \
     profil.h \
     vueprofile.h \
-    vuemenu.h
-    vueprofil.h
+    vuemenu.h \
+    vueprofil.h \
+    modele.h \
+    controleur.h
 
 
 FORMS += \
-        mainwindow.ui \
+
+    mainwindow.ui \
     vueprofile.ui \
     vuemenu.ui
