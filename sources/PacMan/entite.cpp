@@ -1,6 +1,7 @@
 #include "entite.h"
 
-entite::entite(int x, int y)
+// collision à changer
+entite::entite(int x, int y) : collision(x, y, ENTITE_SIZE, ENTITE_SIZE)
 {
     this->x = x;
     this->y = y;
@@ -40,32 +41,32 @@ void entite::SetY(int y)
 
 bool entite::MoveUp()
 {
-    this->dir[0] = 0;
-    this->dir[1] = -1;
+    this->dir[0] = stop;
+    this->dir[1] = reculer;
 
     return true;
 }
 
 bool entite::MoveDown()
 {
-    this->dir[0] = 0;
-    this->dir[1] = 1;
+    this->dir[0] = stop;
+    this->dir[1] = avancer;
 
     return true;
 }
 
 bool entite::MoveLeft()
 {
-    this->dir[0] = -1;
-    this->dir[1] = 0;
+    this->dir[0] = reculer;
+    this->dir[1] = stop;
 
     return true;
 }
 
 bool entite::MoveRight()
 {
-    this->dir[0] = 1;
-    this->dir[1] = 0;
+    this->dir[0] = avancer;
+    this->dir[1] = stop;
 
     return true;
 }

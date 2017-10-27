@@ -7,15 +7,15 @@
 
 class TileManager
 {
-public:
-    TileManager(QString filename);
-    QVector<QPixmap> Tiles();
+    public:
+        TileManager(QString filename);
+        QVector<QPixmap> Tiles();
 
-    QPixmap drawPixmapLevel();
+        QPixmap drawPixmapLevel();
 
-private:
-    QVector<QPixmap> tiles;
-    //Pointeur du pixmap du tileset au cas ou
+    private:
+        QVector<QPixmap> tiles;
+        //Pointeur du pixmap du tileset au cas ou
 };
 
 #endif // TILESET_H

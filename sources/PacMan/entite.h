@@ -1,8 +1,12 @@
 #ifndef ENTITE_H
 #define ENTITE_H
 
+#include "const.h"
+
 class entite
 {
+    enum DIRECTION {reculer = -1, stop = 0, avancer = 1};
+
     protected:
         //Position dans la fenetre
         int px_x;
@@ -13,16 +17,19 @@ class entite
         int gr_y;
 
         // Direction de l'entité
-        // dir[0] : x = {-1, 0, 1}
-        // dir[1] : y = {-1, 0, 1}
-        int dir[2];
+        // dir[0] : x
+        // dir[1] : y
+        DIRECTION dir[2];
+
+        // Rectangle de collision
+        QRect collision;
 
     public:
         //Constructeur
         entite(int x, int y);
 
         //Fonctions de déplacement
-        // (juste la direction pour le moment)
+        // (juste la direction)
         bool MoveUp();
         bool MoveDown();
         bool MoveLeft();
@@ -34,10 +41,12 @@ class entite
         int GetGR_X();
         int GetGR_Y();
         int GetDir();
+        QRect GetCol();
 
         //Setter
         void SetX(int x);
         void SetY(int y);
+        void SetCol(QRect c);
 };
 
 #endif // ENTITE_H

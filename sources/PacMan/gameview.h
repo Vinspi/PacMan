@@ -9,17 +9,17 @@
 class GameView : public QWidget
 {
     Q_OBJECT
-public:
-    explicit GameView(QWidget *parent = nullptr);
-    //setmodel
+    public:
+        explicit GameView(QWidget *parent = nullptr);
+        //setmodel
 
-signals:
+    signals:
 
-public slots:
+    public slots:
 
-private:
-    QLabel * labyrinthe;
-    QLabel * dynamic; // Ou une liste pour représenter chaque entités
+    private:
+        QLabel * labyrinthe;
+        QLabel * dynamic; // Ou une liste pour représenter chaque entités
 };
 
 #endif // GAMEVIEW_H
