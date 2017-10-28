@@ -59,3 +59,6 @@ FORMS += \
     mainwindow.ui \
     vueprofile.ui \
     vuemenu.ui
+
+RESOURCES += \
+    resources.qrc

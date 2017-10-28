@@ -14,10 +14,11 @@ VueMenu::~VueMenu()
     delete ui;
 }
 
-void VueMenu::on_guest_clicked(){
+void VueMenu::on_play_as_guest_clicked(){
 
 }
 
 void VueMenu::on_load_profile_clicked(){
     ((QStackedWidget*)this->parent())->setCurrentIndex(0);
 }
+

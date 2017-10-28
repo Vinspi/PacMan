@@ -17,11 +17,6 @@ int main(int argc, char *argv[])
     w.show();
 
 
-
-
-
-
-
     //box_layout.addWidget(&widgetStack);
     //w.setLayout(&box_layout);
 
@@ -33,9 +28,6 @@ int main(int argc, char *argv[])
 //    Profil* p = new Profil("michel");
 
 //    p->saveProfile("../PacMan/profil");
-
-
-
 
 
     return a.exec();

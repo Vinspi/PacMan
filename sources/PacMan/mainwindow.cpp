@@ -23,7 +23,6 @@ MainWindow::MainWindow(QWidget *parent) :
     /* on créé le stack widget */
 
 
-
     /* on ajoute des element au QStackWidget */
     VueProfile* vp = new VueProfile();
     vp->show();
@@ -32,6 +31,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     VueMenu* vm = new VueMenu();
     vm->show();
+
     ui->stackedWidget->addWidget(vm);
 
     ui->stackedWidget->setCurrentIndex(1);

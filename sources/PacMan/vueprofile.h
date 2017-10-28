@@ -17,8 +17,13 @@ public:
     ~VueProfile();
     void setProfil(Profil *p);
 
+public slots:
+    void changeProfil();
+    void playlingLevelSelected();
+
 private:
     Ui::VueProfile *ui;
+
     Profil* p;
 
 
