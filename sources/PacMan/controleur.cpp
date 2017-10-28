@@ -10,7 +10,7 @@ Modele* Controleur::getModele(){
     return modele;
 }
 
-void Controleur::getProchainMvmt(){
+int Controleur::getProchainMvmt(){
     return prochainMvmt;
 }
 void Controleur::setProchainMvmt(int mvmt){

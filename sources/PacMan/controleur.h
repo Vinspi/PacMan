@@ -13,7 +13,7 @@ class Controleur
 public:
     Controleur(Modele* modele);
     void startTimer();
-    void finPartie();
+    void finPartie(int etat);
     void setModele(Modele modele);
     Modele* getModele();
     //Sommet* nextSommet(Entite e);

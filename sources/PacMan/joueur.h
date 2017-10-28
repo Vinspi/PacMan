@@ -3,10 +3,11 @@
 
 #include "entite.h"
 
+
 class joueur : public entite
 {
     private:
-        int buffer_event;
+
 
     public:
         joueur(int x, int y);
