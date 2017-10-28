@@ -54,3 +54,12 @@ void Sommet::clearGum(){
     contain_big_gum = false;
     contain_gum = false;
 }
+
+
+bool Sommet::getGum(){
+    return contain_gum;
+}
+
+bool Sommet::getBigGum(){
+    return contain_big_gum;
+}

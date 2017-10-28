@@ -20,6 +20,9 @@ public:
     void setGum();
     void clearGum();
 
+    bool getGum();
+    bool getBigGum();
+
 private:
         Sommet* s_haut;
         Sommet* s_bas;

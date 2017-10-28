@@ -10,6 +10,13 @@ Modele* Controleur::getModele(){
     return modele;
 }
 
+void Controleur::getProchainMvmt(){
+    return prochainMvmt;
+}
+void Controleur::setProchainMvmt(int mvmt){
+    prochainMvmt = mvmt;
+}
+
 
 void Controleur::startTimer(){
     partieEnCours = true;
@@ -17,7 +24,13 @@ void Controleur::startTimer(){
     AThread.detach();
 }
 
-void Controleur::finPartie(){
+void Controleur::finPartie(int etat){   //etat == 0 -> Victoire, etat == 1 -> Défaite;
+    if(etat == 0){
+        std::cout << "VICTOIRE !" << std::endl;
+    }
+    else if (etat == 1){
+        std::cout << "Defaite." << std::endl;
+    }
     partieEnCours = false;
 }
 
@@ -25,8 +38,8 @@ void Controleur::threadCall(){
     std::cout << "Partie commencee !" << std::endl;
     int acc = 0;
 
-    /*int posx = 0, posy = 0;
-    int fposx = 0, fposy = 0, fmposx = 0, fmposy = 0;
+    /*int nbDeplacements = 0;
+    Sommet* nextSommet = new Sommet();
     bool collision = false;*/
     while (partieEnCours) {
        std::this_thread::sleep_for(std::chrono::milliseconds(32)); //30 FPS ?
@@ -53,30 +66,53 @@ void Controleur::threadCall(){
 
        /*
         collision = 0;
-        posx = this->getModele()->pcmn.x + (X)*this->getModele()->pcmn.dir[0]; //Position du PacMan après déplacement horizontal X (X valeur du déplacement dans la fonction move).
-        posy = this->getModele()->pcmn.t + (Y)*this->getModele()->pcmn.dir[1]; //Position du PacMan après déplacement vertical Y (Y valeur du déplacement dans la fonction move).
-
         for(Fantome f : this->getModele()->tabFantomes){
-            fposx = f.x + (X'+f.taille)*f.dir[0];   //Bout du fantome dans le sens de son déplacement (<=> avant du fantome).
-            fposxop = f.x + X'+(f.taille)*f.dir[0];  //Bout du fantome dans le sens inverse de son déplacement (<=> arrière du fantome).
-            fposy = f.y + (Y'+f.taille)*f.dir[1];
-            fposyop = f.y + Y'+(f.taille)*f.dir[1];
 
 
-            //Si le bout d'une entité après déplacement se trouve entre les deux bouts d'une entité opposée, c'est qu'il y a contact.
-            if( (fposx <= posx+this->getModele()->pcmn.taille && fposx >= posx-this->getModele()->pcmn.taille) || (fposxop <= posx+this->getModele()->pcmn.taille && fposxop >= posx-this->getModele()->pcmn.taille) || (fposy <= posy+this->getModele()->pcmn.taille && fposy >= posy-this->getModele()->pcmn.taille) || (fposyop <= posy+this->getModele()->pcmn.taille && fposyop >= posy-this->getModele()->pcmn.taille)){
+            //S'il y a intersection entre la hitbox du PacMan et celle d'un fantôme, il y a collision.
+            if((this->getModele()->pcmn.hitbox).intersects(f.hitbox)){
                 //Animation de collision ?
                 collision = 1;
             }
          }
          if (collision == 0){
+
+            //Si on a fait assez de déplacement pour arriver sur un nouveau sommet :
+            if(nbDeplacements == D-1){        //D = nombre de déplacements entre les différents sommets. On met -1 puisqu'on déplace le PacMan à la fin (permet de connaitre l'environnement dans lequel va bouger le Pacman avant de le redessiner).
+              nbDeplacements = 0;
+
+              nextSommet = this->nextSommet(this->getModele()->pcmn);
+
+              //On vérifie s'il y a des gommes dans ce nouveau sommet :
+              if (nextSommet.getGum() == true){
+                 this->getModele()->nbGommes--;
+                 if(this->getModele()->nbGommes == 0){  //Fin de partie;
+                    this->finPartie(0);
+                 }
+                 nextSommet.clearGum();
+                 //nextSommet.redraw(); ?
+              }
+              else if (nextSommet.getBigGum() == true){
+                 this->getModele()->setModeBerserk(timerADeterminePourLeBerserk);
+                 nextSommet.clearGum();
+                 //nextSommet.redraw(); ?
+              }
+
+              //Et on passe le pacMan au nouveau sommet :
+              this->getModele()->pcmn->setSommet(nextSommet);
+            }
+
             this->getModele()->pcmn.move();
-            //Vérifier les gommes toussa.
+            nbDeplacements++;
+
+            //GERER LE NOUVEAU DEPLACEMENT.
 
 
 
             for(Fantome f : this->getModele()->tabFantomes){
               f.move();
+
+              //Si nécessaire de conserver l'aspect "Sommet" pour les fantomes, ajouter ici une gestion du nombre de déplacements de la même manière que pour le Pacman.
             }
          }
          else {
@@ -90,7 +126,7 @@ void Controleur::threadCall(){
                 }
                 else {
                     //Faire une animation ?
-                    this->finPartie();
+                    this->finPartie(1);
                 }
             }
          }
@@ -102,6 +138,22 @@ void Controleur::threadCall(){
 }
 
 
+/*Sommet* Controleur::nextSommet(Entite e){
+
+    if (e.dir[0] == 1 && e.dir[1] == 0)             //Droite
+      return e->sommet->getSDroite();
+
+    if (e.dir[0] == -1 && e.dir[1] == 0)            //Gauche
+     return e->sommet->getSGauche();
+
+    if (e.dir[0] == 0 && e.dir[1] == 1)             //Haut
+      return e->sommet->getSHaut();
+
+    if (e.dir[0] == 0 && e.dir[1] == -1)            //Bas
+      return e->sommet->getSBas();
+
+}
+    */
 
 
 
