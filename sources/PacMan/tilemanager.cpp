@@ -1,6 +1,6 @@
 #include "tilemanager.h"
 #include <QPainter>
-#include "levels.h"
+//#include "levels.h"
 
 TileManager::TileManager(QString filename) : tiles()
 {

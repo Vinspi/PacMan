@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT += widgets
+QT += xml
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -26,7 +27,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     controleur.cpp \
   #  entite.cpp \
-  # gameview.cpp \
+    gameview.cpp \
     graph.cpp \
   #  joueur.cpp \
     main.cpp \
@@ -36,13 +37,17 @@ SOURCES += \
     sommet.cpp \
     tilemanager.cpp \
     vuemenu.cpp \
-    vueprofile.cpp
+    vueprofile.cpp \
+    collectableitem.cpp \
+    dotitem.cpp \
+    gamescene.cpp \
+    tilemap.cpp
 
 HEADERS += \
     const.h \
     controleur.h \
  #   entite.h \
- #   gameview.h \
+    gameview.h \
     graph.h \
  #   joueur.h \
     mainwindow.h \
@@ -51,7 +56,12 @@ HEADERS += \
     sommet.h \
     tilemanager.h \
     vuemenu.h \
-    vueprofile.h
+    vueprofile.h \
+    collectableitem.h \
+    dotitem.h \
+    gamescene.h \
+    tilemap.h
+
 
 
 

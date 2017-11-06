@@ -2,6 +2,7 @@
 #define TILEMAP_H
 
 #include <QVector>
+#include <QtXml>
 
 class TileMap
 {

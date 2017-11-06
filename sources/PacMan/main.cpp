@@ -6,6 +6,7 @@
 #include "vueprofile.h"
 #include <QStackedWidget>
 #include <QVBoxLayout>
+#include "tilemap.h"
 
 using namespace std;
 
@@ -15,6 +16,8 @@ int main(int argc, char *argv[])
 
     MainWindow w;
     w.show();
+
+    TileMap tm("yolo");
 
 
     //box_layout.addWidget(&widgetStack);
