@@ -4,7 +4,7 @@
 const int W_HEIGHT = 3*64;
 const int W_WIDTH = 3*64;
 
-const int  T_SIZE = 16;
+const int  T_SIZE = 32;
 
 const int ENTITE_SIZE = 20;
 

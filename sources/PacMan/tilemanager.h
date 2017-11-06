@@ -5,6 +5,7 @@
 #include <QVector>
 #include <QString>
 #include "tilemap.h"
+#include "const.h"
 
 class TileManager
 {

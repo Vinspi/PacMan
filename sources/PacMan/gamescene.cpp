@@ -3,7 +3,7 @@
 #include <QPixmap>
 
 
-GameScene::GameScene(TileManager *tm, QObject *parent) : QGraphicsScene(parent), dots(), superDots()
+GameScene::GameScene(TileManager *tm) : QGraphicsScene(), dots(), superDots()
 {
     this->tm = tm;
 }
@@ -12,18 +12,18 @@ void GameScene::init(TileMap &map)
 {
     clear();
     score = 0;
-    setSceneRect(0, 0, map.width() * 8 + 32, map.height() * 8 + 32);
-    QPixmap bg(map.width() * 8 + 32, map.height() * 8 + 32);
+    setSceneRect(0, 0, map.width() * T_SIZE, map.height() * T_SIZE);
+    QPixmap bg(map.width() * T_SIZE, map.height() * T_SIZE);
     bg.fill(Qt::black);
     background = addPixmap(bg);
     labyrinthe = addPixmap(tm->drawTileMap(map));
-    labyrinthe->setOffset(16, 16);
+    //labyrinthe->setOffset(16, 16);
 
     DotItem * dot = new DotItem();
     addItem(dot);
 
-    Pacman = addPixmap(QPixmap("../pacmanmoves").copy(0,28,14,14));
-    Pacman->setOffset(21, 198);
+    //Pacman = addPixmap(QPixmap("../pacmanmoves").copy(0,28,14,14));
+    //Pacman->setOffset(21, 198);
 }
 
 void GameScene::checkCollisions()

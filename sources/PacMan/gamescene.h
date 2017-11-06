@@ -9,12 +9,13 @@
 #include "tilemanager.h"
 #include "tilemap.h"
 #include "dotitem.h"
+#include "const.h"
 
 class GameScene : public QGraphicsScene
 {
     Q_OBJECT
 public:
-    explicit GameScene(TileManager *tm, QObject *parent = nullptr);
+    explicit GameScene(TileManager *tm);
     //build scene from modele/level
     //
     void init(TileMap &map);// niveau

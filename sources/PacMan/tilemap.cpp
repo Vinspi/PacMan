@@ -28,12 +28,12 @@ TileMap::TileMap(QString filename) : m_map()
 
     QDomNodeList node_list = dom.elementsByTagName("tilemap-width");
     QDomNode w_node = node_list.at(0);
-    int m_width = w_node.toElement().attribute("value","undefined").toInt();
+    m_width = w_node.toElement().attribute("value","undefined").toInt();
     m_map.resize(m_width);
 
     node_list = dom.elementsByTagName("tilemap-height");
     QDomNode h_node = node_list.at(0);
-    int m_height = h_node.toElement().attribute("value","undefined").toInt();
+    m_height = h_node.toElement().attribute("value","undefined").toInt();
     for(int i=0;i<m_width;i++){
         m_map[i].resize(m_height);
     }
@@ -61,7 +61,7 @@ TileMap::TileMap(QString filename) : m_map()
 //            cout << tile.toElement().attribute("row","undefined").toStdString() << " ";
 //            cout << tile.toElement().attribute("col","undefined").toStdString() << " ";
 //            cout << tile.toElement().attribute("value","undefined").toStdString() << endl;
-            m_map[tile.toElement().attribute("row").toInt()][tile.toElement().attribute("col").toInt()] = tile.toElement().attribute("value").toInt();
+            m_map[tile.toElement().attribute("col").toInt()][tile.toElement().attribute("row").toInt()] = tile.toElement().attribute("value").toInt();
 
             tile = tile.nextSibling();
         }

@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
-    TileMap tm("yolo");
+
 
 
     //box_layout.addWidget(&widgetStack);

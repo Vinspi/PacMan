@@ -9,8 +9,8 @@ TileManager::TileManager(QString filename) : tiles()
     width = tileset.width();
     height = tileset.height();
 
-    int tilesize = 8;
-    tiles.append(QPixmap(0,0));//Tile numéroté à partir de 1,on ajoute un pixmap vide en indice 0
+    int tilesize = T_SIZE;
+    //tiles.append(QPixmap(0,0));//Tile numéroté à partir de 1,on ajoute un pixmap vide en indice 0
 
     for(int h = 0; h < height / tilesize; h++)
     {
@@ -26,7 +26,7 @@ TileManager::TileManager(QString filename) : tiles()
 
 QPixmap TileManager::drawTileMap(TileMap &map)
 {
-    int tilesize = 8;
+    int tilesize = T_SIZE;
     int w = map.width();
     int h = map.height();
 
