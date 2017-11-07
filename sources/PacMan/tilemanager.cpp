@@ -22,6 +22,8 @@ TileManager::TileManager(QString filename) : tiles()
         }
     }
 
+
+
 }
 
 QPixmap TileManager::drawTileMap(TileMap &map)
@@ -43,6 +45,8 @@ QPixmap TileManager::drawTileMap(TileMap &map)
 
     return level;
 }
+
+
 
 QVector<QPixmap> TileManager::Tiles()
 {

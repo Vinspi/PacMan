@@ -41,7 +41,8 @@ SOURCES += \
     collectableitem.cpp \
     dotitem.cpp \
     gamescene.cpp \
-    tilemap.cpp
+    tilemap.cpp \
+    superdotitem.cpp
 
 HEADERS += \
     const.h \
@@ -60,7 +61,8 @@ HEADERS += \
     collectableitem.h \
     dotitem.h \
     gamescene.h \
-    tilemap.h
+    tilemap.h \
+    superdotitem.h
 
 
 

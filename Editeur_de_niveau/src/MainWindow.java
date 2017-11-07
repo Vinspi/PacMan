@@ -55,7 +55,7 @@ public class MainWindow extends JFrame implements ActionListener{
         for(int i=0;i<this.width;i++){
             for(int j=0;j<this.height;j++){
                 if(source.equals(this.matriceButton[i][j])){
-                    System.out.println(i+" "+j);
+
                     if(this.matriceButton[i][j].getEtat() == Bloc.E_BLOC)
                         this.matriceButton[i][j].setEtat(Bloc.E_PATH);
                     else this.matriceButton[i][j].setEtat(Bloc.E_BLOC);
@@ -64,7 +64,7 @@ public class MainWindow extends JFrame implements ActionListener{
         }
         if(source.equals(ecriture)){
             try {
-                System.out.println("coucou");
+
                 File file = new File("xml_level.xml");
 
                 if(!file.exists()){
@@ -79,6 +79,16 @@ public class MainWindow extends JFrame implements ActionListener{
                         "\t<tilemap-height value=\""+height+"\"></tilemap-height>\n");
 
                 out.write("\t\t<layer id=\"background\">\n");
+                for (int i = 0; i < width; i++) {
+                    out.write("\t\t\t<row id=\""+i+"\">\n");
+                    for (int j = 0; j < height; j++) {
+                        out.write("\t\t\t\t<tile col=\""+i+"\" row=\""+j+"\" value=\""+this.matriceButton[i][j].getEtat()+"\"></tile>\n");
+                    }
+                    out.write("\t\t\t</row>\n");
+                }
+                out.write("\t\t</layer>\n");
+
+                out.write("\t\t<layer id=\"control\">\n");
                 for (int i = 0; i < width; i++) {
                     out.write("\t\t\t<row id=\""+i+"\">\n");
                     for (int j = 0; j < height; j++) {

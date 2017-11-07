@@ -2,7 +2,7 @@
 
 DotItem::DotItem() : CollectableItem(10)
 {
-    setPixmap(QPixmap("../gums_8px").copy(0,0,8,8));
+    setPixmap(QPixmap("../PacMan/graphics_pacman/gumgum.png").copy(0,0,32,32));
 }
 
 int DotItem::type() const

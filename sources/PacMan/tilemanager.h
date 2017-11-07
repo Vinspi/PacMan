@@ -13,6 +13,7 @@ public:
     TileManager(QString filename);
     QVector<QPixmap> Tiles();
 
+
     QPixmap drawTileMap(TileMap &map);
 
 private:

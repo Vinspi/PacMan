@@ -19,8 +19,23 @@ void GameScene::init(TileMap &map)
     labyrinthe = addPixmap(tm->drawTileMap(map));
     //labyrinthe->setOffset(16, 16);
 
-    DotItem * dot = new DotItem();
-    addItem(dot);
+    DotItem *dot;
+
+    for(int i=0;i<map.width();i++){
+        for(int j=0;j<map.height();j++){
+            if(map.tile_collectibles(i,j) == 1){
+                dot = new DotItem();
+                dot->setPos(j*32,i*32);
+                dots.append(dot);
+                addItem(dot);
+            }
+        }
+    }
+
+
+
+
+
 
     //Pacman = addPixmap(QPixmap("../pacmanmoves").copy(0,28,14,14));
     //Pacman->setOffset(21, 198);
