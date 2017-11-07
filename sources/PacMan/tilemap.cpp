@@ -72,7 +72,7 @@ TileMap::TileMap(QString filename) : m_map()
     node_list = dom.elementsByTagName("layer");
     QDomNode control_node;
     for(int i=0;i<node_list.size();i++){
-        if(node_list.at(i).toElement().attribute("id","undefined") == "control"){
+        if(node_list.at(i).toElement().attribute("id","undefined") == "collectibles"){
             control_node = node_list.at(i);
         }
     }

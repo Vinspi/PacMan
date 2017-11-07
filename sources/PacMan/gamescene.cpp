@@ -19,12 +19,18 @@ void GameScene::init(TileMap &map)
     labyrinthe = addPixmap(tm->drawTileMap(map));
     //labyrinthe->setOffset(16, 16);
 
-    DotItem *dot;
+    CollectableItem *dot;
 
     for(int i=0;i<map.width();i++){
         for(int j=0;j<map.height();j++){
             if(map.tile_collectibles(i,j) == 1){
                 dot = new DotItem();
+                dot->setPos(j*32,i*32);
+                dots.append(dot);
+                addItem(dot);
+            }
+            if(map.tile_collectibles(i,j) == 2){
+                dot = new SuperDotItem();
                 dot->setPos(j*32,i*32);
                 dots.append(dot);
                 addItem(dot);

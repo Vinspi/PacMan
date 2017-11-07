@@ -10,6 +10,7 @@
 #include "tilemap.h"
 #include "dotitem.h"
 #include "const.h"
+#include "superdotitem.h"
 
 class GameScene : public QGraphicsScene
 {
@@ -40,7 +41,7 @@ private:
     QGraphicsPixmapItem * PhantomYellow;
 
     //Collectable
-    QList<DotItem * > dots;
+    QList<CollectableItem * > dots;
     QList<QGraphicsPixmapItem * > superDots;
     QGraphicsPixmapItem * fruit;
 

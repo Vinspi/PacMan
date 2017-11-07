@@ -14,6 +14,7 @@ public class Bloc extends JButton implements MouseListener{
 
     private boolean survol = false;
     private int etat;
+    public boolean isBigGum = false;
 
     public int getEtat() {
         return etat;
@@ -34,6 +35,8 @@ public class Bloc extends JButton implements MouseListener{
 
         super.paint(graphics);
 
+
+
         if(etat == E_BLOC) {
             graphics.setColor(new Color(27, 59, 145));
             graphics.fillRect(0, 0, this.getWidth(), this.getHeight());
@@ -41,6 +44,10 @@ public class Bloc extends JButton implements MouseListener{
             graphics.drawRect(0, 0, this.getWidth(), this.getHeight());
             if(survol){
                 graphics.setColor(new Color(209, 214, 229));
+                graphics.fillRect(0, 0, this.getWidth(), this.getHeight());
+            }
+            if(isBigGum) {
+                graphics.setColor(Color.RED);
                 graphics.fillRect(0, 0, this.getWidth(), this.getHeight());
             }
         }
@@ -51,7 +58,12 @@ public class Bloc extends JButton implements MouseListener{
                     graphics.setColor(new Color(209, 214, 229));
                     graphics.fillRect(0, 0, this.getWidth(), this.getHeight());
             }
+            if(isBigGum) {
+                graphics.setColor(new Color(240, 221, 28));
+                graphics.fillRect(0, 0, this.getWidth(), this.getHeight());
+            }
         }
+
     }
 
     @Override
