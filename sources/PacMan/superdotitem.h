@@ -6,7 +6,10 @@
 class SuperDotItem : public CollectableItem
 {
 public:
+    enum { Type = UserType + 2};
+
     SuperDotItem();
+    int type() const;
 };
 
 #endif // SUPERDOTITEM_H

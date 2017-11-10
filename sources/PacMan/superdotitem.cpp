@@ -6,3 +6,7 @@ SuperDotItem::SuperDotItem(): CollectableItem(100)
 }
 
 
+int SuperDotItem::type() const
+{
+    return Type;
+}

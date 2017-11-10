@@ -17,6 +17,8 @@ void GameScene::init(TileMap &map)
     bg.fill(Qt::black);
     background = addPixmap(bg);
     labyrinthe = addPixmap(tm->drawTileMap(map));
+    Pacman = new PacMan();
+
     //labyrinthe->setOffset(16, 16);
 
     CollectableItem *dot;
@@ -38,12 +40,13 @@ void GameScene::init(TileMap &map)
         }
     }
 
+    qDebug() << map.get_pos_pacman_init_col();
+    Pacman->setPos(map.get_pos_pacman_init_col()*T_SIZE,map.get_pos_pacman_init_row()*T_SIZE);
+    addItem(Pacman);
 
 
 
-
-
-    Pacman = addPixmap(QPixmap("../pacmanmoves").copy(0,28,14,14));
+    //Pacman = addPixmap(QPixmap("../pacmanmoves").copy(0,28,14,14));
     //Pacman->setOffset(21, 198);
 }
 

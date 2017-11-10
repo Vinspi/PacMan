@@ -12,6 +12,8 @@
 #include "const.h"
 #include "superdotitem.h"
 #include "collectableitem.h"
+#include "entity.h"
+#include "pacman.h"
 
 class GameScene : public QGraphicsScene
 {
@@ -35,7 +37,7 @@ private:
     QGraphicsPixmapItem * labyrinthe;
 
     //Movable
-    QGraphicsPixmapItem * Pacman;
+    PacMan * Pacman;
     QGraphicsPixmapItem * PhantomRed;
     QGraphicsPixmapItem * PhantomPink;
     QGraphicsPixmapItem * PhantomBlue;

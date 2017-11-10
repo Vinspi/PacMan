@@ -26,6 +26,9 @@ TileManager::TileManager(QString filename) : tiles()
 
 }
 
+
+
+
 QPixmap TileManager::drawTileMap(TileMap &map)
 {
     int tilesize = T_SIZE;

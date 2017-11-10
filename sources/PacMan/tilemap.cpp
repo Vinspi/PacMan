@@ -32,6 +32,16 @@ TileMap::TileMap(QString filename) : m_map()
     m_map.resize(m_width);
     m_map_collectibles.resize(m_width);
 
+
+    /* on recup la pos du pacman (init) */
+
+    node_list = dom.elementsByTagName("pacman-init");
+    QDomNode pos_pacman_init_node = node_list.at(0);
+    pos_pacman_init_col = pos_pacman_init_node.toElement().attribute("col","undefined").toInt();
+    pos_pacman_init_row = pos_pacman_init_node.toElement().attribute("row","undefined").toInt();
+    qDebug() << pos_pacman_init_col;
+
+
     node_list = dom.elementsByTagName("tilemap-height");
     QDomNode h_node = node_list.at(0);
     m_height = h_node.toElement().attribute("value","undefined").toInt();
@@ -146,4 +156,13 @@ int TileMap::tile_collectibles(int r, int c) const
 int TileMap::tile(int r, int c) const
 {
     return m_map[r][c];
+}
+
+int TileMap::get_pos_pacman_init_col(){
+    return pos_pacman_init_col;
+}
+
+
+int TileMap::get_pos_pacman_init_row(){
+    return pos_pacman_init_row;
 }
