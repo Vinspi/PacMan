@@ -25,16 +25,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-    controleur.cpp \
+    #controleur.cpp \
   #  entite.cpp \
     gameview.cpp \
-    graph.cpp \
+    #graph.cpp \
   #  joueur.cpp \
     main.cpp \
     mainwindow.cpp \
-    modele.cpp \
+    #modele.cpp \
     profil.cpp \
-    sommet.cpp \
+    #sommet.cpp \
     tilemanager.cpp \
     vuemenu.cpp \
     vueprofile.cpp \
@@ -42,19 +42,21 @@ SOURCES += \
     dotitem.cpp \
     gamescene.cpp \
     tilemap.cpp \
-    superdotitem.cpp
+    superdotitem.cpp \
+    entity.cpp \
+    pacman.cpp
 
 HEADERS += \
     const.h \
-    controleur.h \
+    #controleur.h \
  #   entite.h \
     gameview.h \
-    graph.h \
+   # graph.h \
  #   joueur.h \
     mainwindow.h \
-    modele.h \
+    #modele.h \
     profil.h \
-    sommet.h \
+    #sommet.h \
     tilemanager.h \
     vuemenu.h \
     vueprofile.h \
@@ -62,7 +64,9 @@ HEADERS += \
     dotitem.h \
     gamescene.h \
     tilemap.h \
-    superdotitem.h
+    superdotitem.h \
+    entity.h \
+    pacman.h
 
 
 

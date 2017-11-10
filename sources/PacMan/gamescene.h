@@ -11,6 +11,7 @@
 #include "dotitem.h"
 #include "const.h"
 #include "superdotitem.h"
+#include "collectableitem.h"
 
 class GameScene : public QGraphicsScene
 {

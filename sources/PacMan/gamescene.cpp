@@ -43,7 +43,7 @@ void GameScene::init(TileMap &map)
 
 
 
-    //Pacman = addPixmap(QPixmap("../pacmanmoves").copy(0,28,14,14));
+    Pacman = addPixmap(QPixmap("../pacmanmoves").copy(0,28,14,14));
     //Pacman->setOffset(21, 198);
 }
 
@@ -53,7 +53,7 @@ void GameScene::checkCollisions()
 
     for(int i = 0; i < list.size(); i++)
     {
-        if(DotItem *d = qgraphicsitem_cast<DotItem *>(list.at(i)))
+        if(CollectableItem *d = qgraphicsitem_cast<CollectableItem *>(list.at(i)))
         {
             score += d->value();
             removeItem(d);
