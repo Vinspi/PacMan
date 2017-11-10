@@ -14,6 +14,7 @@
 #include "collectableitem.h"
 #include "entity.h"
 #include "pacman.h"
+#include <QTimer>
 
 class GameScene : public QGraphicsScene
 {
@@ -24,6 +25,7 @@ public:
     //
     void init(TileMap &map);// niveau
     void keyPressEvent(QKeyEvent *event);
+    void updateScene();
     void checkCollisions();
 
 public slots:
@@ -52,6 +54,8 @@ private:
     //QGraphicsTextItem * score;
     QGraphicsTextItem * level;
     //vies
+
+    QTimer m_timer;
 
 };
 

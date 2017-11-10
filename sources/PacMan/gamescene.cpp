@@ -3,9 +3,18 @@
 #include <QPixmap>
 
 
-GameScene::GameScene(TileManager *tm) : QGraphicsScene(), dots(), superDots()
+GameScene::GameScene(TileManager *tm) : QGraphicsScene(), dots(), superDots(), m_timer()
 {
     this->tm = tm;
+    m_timer.setInterval(30);
+
+    connect(&m_timer,&QTimer::timeout,this,&GameScene::updateScene);
+     m_timer.start();
+}
+
+void GameScene::updateScene(){
+    Pacman->avance();
+    checkCollisions();
 }
 
 void GameScene::init(TileMap &map)
@@ -73,16 +82,16 @@ void GameScene::keyPressEvent(QKeyEvent *event)
     switch(event->key())
     {
         case Qt::Key_Right:
-            Pacman->setOffset(Pacman->offset() + QPointF(8, 0));
+            Pacman->setDirection(RIGHT);
             break;
         case Qt::Key_Left:
-            Pacman->setOffset(Pacman->offset() + QPointF(-8, 0));
+            Pacman->setDirection(LEFT);
             break;
         case Qt::Key_Down:
-            Pacman->setOffset(Pacman->offset() + QPointF(0, 8));
+            Pacman->setDirection(DOWN);
             break;
         case Qt::Key_Up:
-            Pacman->setOffset(Pacman->offset() + QPointF(0, -8));
+            Pacman->setDirection(UP);
             break;
         default:
             break;
