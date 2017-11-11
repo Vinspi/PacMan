@@ -18,8 +18,8 @@ public:
     int vitesse();
     void setDirection(int dir);
     void setVitesse(int v);
-    //QRectF boundingRect() const;
-    QPainterPath shape() const;
+    QRectF boundingRect() const override;
+    QPainterPath shape() const override;
     void paint(QPainter *painter,
                               const QStyleOptionGraphicsItem *option,
                               QWidget *widget);

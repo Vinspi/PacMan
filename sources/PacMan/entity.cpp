@@ -106,17 +106,17 @@ void Entity::avance(){
     m_frame=(m_frame+1)%(m_max_frame-1);
 }
 
-//QRectF Entity::boundingRect() const{
-//    return QRectF(0,0,30,30);
-//}
+QRectF Entity::boundingRect() const {
+    return QRectF(0,0,30,30);
+}
 
 int Entity::direction(){
     return m_direction;
 }
 
-QPainterPath Entity::shape() const  {
+QPainterPath Entity::shape() const {
     QPainterPath path;
 
-    path.addRect(QRectF(0,0,30,30));
+    path.addRect(QRectF(1,1,30,30));
     return path;
 }

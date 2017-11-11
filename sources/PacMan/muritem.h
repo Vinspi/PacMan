@@ -6,7 +6,8 @@ class MurItem : public BlocItem
 {
 public:
     MurItem();
-    //QPainterPath shape() const;
+    QPainterPath shape() const override;
+    QRectF boundingRect() const override;
     void paint(QPainter *painter,
                               const QStyleOptionGraphicsItem *option,
                               QWidget *widget);
