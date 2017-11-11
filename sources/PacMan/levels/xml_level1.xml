@@ -2,7 +2,7 @@
 <tilemap>
 	<tilemap-width value="24"></tilemap-width>
 	<tilemap-height value="24"></tilemap-height>
-	<pacman-init col="13" row="8"></pacman-init>
+	<pacman-init col="1" row="1"></pacman-init>
 		<layer id="background">
 			<row id="0">
 				<tile col="0" row="0" value="0"></tile>

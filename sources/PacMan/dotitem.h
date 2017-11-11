@@ -10,6 +10,8 @@ public:
 
     DotItem();
     int type() const;
+   // QRectF boundingRect() const;
+    QPainterPath shape() const;
 };
 
 #endif // DOTITEM_H

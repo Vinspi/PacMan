@@ -44,7 +44,9 @@ SOURCES += \
     tilemap.cpp \
     superdotitem.cpp \
     entity.cpp \
-    pacman.cpp
+    pacman.cpp \
+    blocitem.cpp \
+    muritem.cpp
 
 HEADERS += \
     const.h \
@@ -66,7 +68,9 @@ HEADERS += \
     tilemap.h \
     superdotitem.h \
     entity.h \
-    pacman.h
+    pacman.h \
+    blocitem.h \
+    muritem.h
 
 
 

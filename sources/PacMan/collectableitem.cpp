@@ -8,3 +8,4 @@ unsigned int CollectableItem::value() const
 {
     return score;
 }
+

@@ -8,6 +8,8 @@ class CollectableItem : public QGraphicsPixmapItem
 public:
     CollectableItem(unsigned int a);
     unsigned int value() const;
+
+
 protected:
     unsigned int score;
 };

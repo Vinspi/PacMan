@@ -1,20 +1,24 @@
 #include "gamescene.h"
 #include <QKeyEvent>
 #include <QPixmap>
+#include <iostream>
 
+using namespace std;
 
-GameScene::GameScene(TileManager *tm) : QGraphicsScene(), dots(), superDots(), m_timer()
+GameScene::GameScene(TileManager *tm) : QGraphicsScene(), dots(), m_timer()
 {
     this->tm = tm;
-    m_timer.setInterval(30);
+    m_timer.setInterval(10);
 
     connect(&m_timer,&QTimer::timeout,this,&GameScene::updateScene);
-     m_timer.start();
+    m_timer.start();
 }
 
 void GameScene::updateScene(){
     Pacman->avance();
     checkCollisions();
+
+    this->update();
 }
 
 void GameScene::init(TileMap &map)
@@ -31,6 +35,18 @@ void GameScene::init(TileMap &map)
     //labyrinthe->setOffset(16, 16);
 
     CollectableItem *dot;
+    BlocItem *mur;
+
+    for(int i=0;i<map.width();i++){
+        for(int j=0;j<map.height();j++){
+            /* si c'est un bloc */
+            if(map.tile(i,j) == 0){
+                mur = new MurItem();
+                mur->setPos(j*32,i*32);
+                addItem(mur);
+            }
+        }
+    }
 
     for(int i=0;i<map.width();i++){
         for(int j=0;j<map.height();j++){
@@ -65,13 +81,19 @@ void GameScene::checkCollisions()
 
     for(int i = 0; i < list.size(); i++)
     {
-        if(CollectableItem *d = qgraphicsitem_cast<CollectableItem *>(list.at(i)))
+        if(CollectableItem *d = dynamic_cast<CollectableItem *>(list.at(i)))
         {
+            removeItem(list.at(i));
+            delete list.at(i);
             score += d->value();
-            removeItem(d);
-            delete d;
+            qDebug() << "score" << score << endl;
+        }
+        else if(BlocItem *b = dynamic_cast<BlocItem *>(list.at(i))){
+            Pacman->annule_deplacement();
+            qDebug() << "deplacement annulé" << endl;
         }
     }
+
 }
 
 void GameScene::keyPressEvent(QKeyEvent *event)

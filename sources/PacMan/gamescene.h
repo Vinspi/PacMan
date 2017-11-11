@@ -15,6 +15,8 @@
 #include "entity.h"
 #include "pacman.h"
 #include <QTimer>
+#include "blocitem.h"
+#include "muritem.h"
 
 class GameScene : public QGraphicsScene
 {
@@ -47,7 +49,7 @@ private:
 
     //Collectable
     QList<CollectableItem * > dots;
-    QList<QGraphicsPixmapItem * > superDots;
+    QList<QGraphicsPixmapItem * > blocs;
     QGraphicsPixmapItem * fruit;
 
     //Game Info
