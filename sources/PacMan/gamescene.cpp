@@ -1,4 +1,4 @@
-#include "gamescene.h"
+﻿#include "gamescene.h"
 #include <QKeyEvent>
 #include <QPixmap>
 #include <iostream>
@@ -15,8 +15,14 @@ GameScene::GameScene(TileManager *tm) : QGraphicsScene(), dots(), m_timer()
 }
 
 void GameScene::updateScene(){
+
+    Pacman->setDirection(next_move);
     Pacman->avance();
-    checkCollisions();
+    if(checkCollisions()){
+        Pacman->avance();
+        checkCollisions();
+    }
+
 
     this->update();
 }
@@ -25,6 +31,7 @@ void GameScene::init(TileMap &map)
 {
     clear();
     score = 0;
+    next_move = UP;
     setSceneRect(0, 0, map.width() * T_SIZE, map.height() * T_SIZE);
     QPixmap bg(map.width() * T_SIZE, map.height() * T_SIZE);
     bg.fill(Qt::black);
@@ -75,8 +82,10 @@ void GameScene::init(TileMap &map)
     //Pacman->setOffset(21, 198);
 }
 
-void GameScene::checkCollisions()
+int GameScene::checkCollisions()
 {
+
+    int resultat = 0;
     QList<QGraphicsItem *> list = collidingItems(Pacman);
 
     for(int i = 0; i < list.size(); i++)
@@ -90,10 +99,11 @@ void GameScene::checkCollisions()
         }
         else if(BlocItem *b = dynamic_cast<BlocItem *>(list.at(i))){
             Pacman->annule_deplacement();
-            qDebug() << "deplacement annulé" << endl;
+            resultat = 1;
+           // qDebug() << "deplacement annulé" << endl;
         }
     }
-
+    return resultat;
 }
 
 void GameScene::keyPressEvent(QKeyEvent *event)
@@ -104,16 +114,20 @@ void GameScene::keyPressEvent(QKeyEvent *event)
     switch(event->key())
     {
         case Qt::Key_Right:
-            Pacman->setDirection(RIGHT);
+            next_move = RIGHT;
+            //Pacman->setDirection(RIGHT);
             break;
         case Qt::Key_Left:
-            Pacman->setDirection(LEFT);
+            next_move = LEFT;
+            //Pacman->setDirection(LEFT);
             break;
         case Qt::Key_Down:
-            Pacman->setDirection(DOWN);
+            next_move = DOWN;
+            //Pacman->setDirection(DOWN);
             break;
         case Qt::Key_Up:
-            Pacman->setDirection(UP);
+            next_move = UP;
+            //Pacman->setDirection(UP);
             break;
         default:
             break;

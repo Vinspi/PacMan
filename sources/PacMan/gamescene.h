@@ -28,7 +28,7 @@ public:
     void init(TileMap &map);// niveau
     void keyPressEvent(QKeyEvent *event);
     void updateScene();
-    void checkCollisions();
+    int checkCollisions();
 
 public slots:
 
@@ -58,6 +58,7 @@ private:
     //vies
 
     QTimer m_timer;
+    int next_move;
 
 };
 

@@ -6,6 +6,7 @@ class PacMan : public Entity
 {
 public:
     PacMan();
+    int moveIsLegal();
 };
 
 #endif // PACMAN_H

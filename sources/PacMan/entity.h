@@ -4,6 +4,7 @@
 #include <QVector>
 #include "const.h"
 #include <QPainter>
+#include <QDebug>
 
 
 
@@ -36,6 +37,8 @@ private:
     int m_frame;
     int m_max_frame;
     int m_last_frame;
+    int m_last_direction;
+    QPointF m_last_position;
 
 };
 

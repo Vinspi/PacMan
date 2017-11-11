@@ -4,11 +4,11 @@ Entity::Entity(QString skin) : QGraphicsPixmapItem()
 {
     QPixmap pixmap(skin);
     m_vitesse = 0;
-    m_direction = UP;
+    m_direction = RIGHT;
+    m_last_direction = RIGHT;
     m_frame = 0;
     m_last_frame = 0;
     int width = pixmap.width();
-
     moveUp.resize(width);
     moveDown.resize(width);
     moveLeft.resize(width);
@@ -53,35 +53,23 @@ int Entity::vitesse(){
     return m_vitesse;
 }
 
+
 void Entity::setDirection(int dir){
+    m_last_direction = m_direction;
     m_direction = dir;
 }
 
 void Entity::annule_deplacement(){
-    switch (direction()) {
-    case UP:
-        this->setPixmap(moveUp[m_frame]);
-        this->setPos(this->pos()+QPointF(0,vitesse()));
-        break;
-    case DOWN:
-        this->setPixmap(moveDown[m_frame]);
-        this->setPos(this->pos()+QPointF(0,-vitesse()));
-        break;
-    case LEFT:
-        this->setPixmap(moveLeft[m_frame]);
-        this->setPos(this->pos()+QPointF(vitesse(),0));
-        break;
-    case RIGHT:
-        this->setPixmap(moveRight[m_frame]);
-        this->setPos(this->pos()+QPointF(-vitesse(),0));
-        break;
-    default:
-        break;
-    }
+    setPos(m_last_position);
+    m_direction = m_last_direction;
     m_frame=m_last_frame;
 }
 
 void Entity::avance(){
+
+    m_last_position = pos();
+
+
     switch (direction()) {
     case UP:
         this->setPixmap(moveUp[m_frame]);
@@ -107,7 +95,7 @@ void Entity::avance(){
 }
 
 QRectF Entity::boundingRect() const {
-    return QRectF(0,0,30,30);
+    return QRectF(0,0,32,32);
 }
 
 int Entity::direction(){
@@ -116,7 +104,6 @@ int Entity::direction(){
 
 QPainterPath Entity::shape() const {
     QPainterPath path;
-
     path.addRect(QRectF(1,1,30,30));
     return path;
 }
