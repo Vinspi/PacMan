@@ -29,6 +29,7 @@ void GameScene::updateScene(){
 
 void GameScene::init(TileMap &map)
 {
+
     clear();
     score = 0;
     next_move = UP;
@@ -72,7 +73,7 @@ void GameScene::init(TileMap &map)
         }
     }
 
-    qDebug() << map.get_pos_pacman_init_col();
+    //qDebug() << map.get_pos_pacman_init_col();
     Pacman->setPos(map.get_pos_pacman_init_col()*T_SIZE,map.get_pos_pacman_init_row()*T_SIZE);
     addItem(Pacman);
 
@@ -95,7 +96,7 @@ int GameScene::checkCollisions()
             removeItem(list.at(i));
             delete list.at(i);
             score += d->value();
-            qDebug() << "score" << score << endl;
+            //qDebug() << "score" << score << endl;
         }
         else if(BlocItem *b = dynamic_cast<BlocItem *>(list.at(i))){
             Pacman->annule_deplacement();

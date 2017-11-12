@@ -39,7 +39,7 @@ TileMap::TileMap(QString filename) : m_map()
     QDomNode pos_pacman_init_node = node_list.at(0);
     pos_pacman_init_col = pos_pacman_init_node.toElement().attribute("col","undefined").toInt();
     pos_pacman_init_row = pos_pacman_init_node.toElement().attribute("row","undefined").toInt();
-    qDebug() << pos_pacman_init_col;
+    //qDebug() << pos_pacman_init_col;
 
 
     node_list = dom.elementsByTagName("tilemap-height");
@@ -93,7 +93,6 @@ TileMap::TileMap(QString filename) : m_map()
     while(!row.isNull()){
         /* pour chaque tile */
         while(!tile.isNull()){
-
             m_map_collectibles[tile.toElement().attribute("col").toInt()][tile.toElement().attribute("row").toInt()] = tile.toElement().attribute("value").toInt();
 
             tile = tile.nextSibling();
@@ -104,6 +103,14 @@ TileMap::TileMap(QString filename) : m_map()
 
 
     xml_level.close();
+
+//    for(int i=0;i<this->width();i++){
+//        for(int j=0;j<this->height();j++){
+//            cout << this->tile(i,j) << " ";
+//        }
+//        cout << endl;
+//    }
+
     /* --------------------------------------------------------*/
 //    QFile level_file(filename);
 //    if(level_file.open(QIODevice::ReadOnly))

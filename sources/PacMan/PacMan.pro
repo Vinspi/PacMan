@@ -28,7 +28,7 @@ SOURCES += \
     #controleur.cpp \
   #  entite.cpp \
     gameview.cpp \
-    #graph.cpp \
+    graph.cpp \
   #  joueur.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -53,7 +53,7 @@ HEADERS += \
     #controleur.h \
  #   entite.h \
     gameview.h \
-   # graph.h \
+    graph.h \
  #   joueur.h \
     mainwindow.h \
     #modele.h \

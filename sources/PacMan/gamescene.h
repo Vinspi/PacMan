@@ -17,6 +17,7 @@
 #include <QTimer>
 #include "blocitem.h"
 #include "muritem.h"
+#include "graph.h"
 
 class GameScene : public QGraphicsScene
 {
