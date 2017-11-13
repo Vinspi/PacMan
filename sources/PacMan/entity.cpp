@@ -36,14 +36,14 @@ Entity::Entity(QString skin) : QGraphicsPixmapItem()
             }
         }
     }
-    setPixmap(QPixmap(skin).copy(32,0,32,32));
+    setPixmap(QPixmap(skin).copy(0,0,32,32));
 }
 
 void Entity::paint(QPainter *painter,
                           const QStyleOptionGraphicsItem *option,
                           QWidget *widget){
     painter->drawPixmap(0,0,this->pixmap());
-    painter->drawRect(0,0,30,30);
+
 }
 
 void Entity::setVitesse(int v){

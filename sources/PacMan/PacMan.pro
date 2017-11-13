@@ -47,7 +47,8 @@ SOURCES += \
     pacman.cpp \
     blocitem.cpp \
     muritem.cpp \
-    blinky.cpp
+    blinky.cpp \
+    clyde.cpp
 
 HEADERS += \
     const.h \
@@ -72,7 +73,8 @@ HEADERS += \
     pacman.h \
     blocitem.h \
     muritem.h \
-    blinky.h
+    blinky.h \
+    clyde.h
 
 
 

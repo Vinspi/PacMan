@@ -21,38 +21,31 @@ void GameScene::updateScene(){
     QPoint pos_pacman = Pacman->current_tile_pos();
 
     int next_ghost_move = graph_control->next_move(pos_blinky.x(),pos_blinky.y(),pos_pacman.x(),pos_pacman.y());
-//    cout << "blinky : ";
-//    cout << pos_blinky.x() << " " << pos_blinky.y() << endl;
-//    cout << "pacman : ";
-//    cout << pos_pacman.x() << " " << pos_pacman.y() << endl;
-//    cout << next_ghost_move << endl;
 
     int next_move_c = graph_control->parse_move_c(next_ghost_move);
     int next_move_l = graph_control->parse_move_l(next_ghost_move);
 
-//    cout << "prochain saut " << next_move_c << " " << next_move_l << endl;
-
     /* la direction sera LEFT */
     if(pos_blinky.x() > next_move_c){
         next_move_blinky = LEFT;
-        //blinky->setDirection(LEFT);
+
     }
     /* la direction sera RIGHT */
     if(pos_blinky.x() < next_move_c){
         next_move_blinky = RIGHT;
-        //blinky->setDirection(RIGHT);
+
     }
     /* la direction sera UP */
     if(pos_blinky.y() > next_move_l){
         next_move_blinky = UP;
-        //blinky->setDirection(UP);
+
     }
     /* la direction sera DOWN */
     if(pos_blinky.y() < next_move_l){
         next_move_blinky = DOWN;
-        //blinky->setDirection(DOWN);
+
     }
-    //blinky->setDirection(LEFT);
+
 
 
     blinky->setDirection(next_move_blinky);
@@ -61,6 +54,7 @@ void GameScene::updateScene(){
         blinky->avance();
         checkCollisionsBlinky();
     }
+    /*********************************************************************************************************************/
 
     /* pour pacman */
     Pacman->setDirection(next_move);
@@ -85,6 +79,7 @@ void GameScene::init(TileMap &map)
     graph_control = new Graph(map);
     score = 0;
     next_move = UP;
+
     setSceneRect(0, 0, map.width() * T_SIZE, map.height() * T_SIZE);
     QPixmap bg(map.width() * T_SIZE, map.height() * T_SIZE);
     bg.fill(Qt::black);
@@ -92,7 +87,7 @@ void GameScene::init(TileMap &map)
     labyrinthe = addPixmap(tm->drawTileMap(map));
     Pacman = new PacMan();
     blinky = new Blinky();
-
+    clyde = new Clyde();
     //labyrinthe->setOffset(16, 16);
 
     CollectableItem *dot;
@@ -132,8 +127,10 @@ void GameScene::init(TileMap &map)
     Pacman->setPos(map.get_pos_pacman_init_col()*T_SIZE,map.get_pos_pacman_init_row()*T_SIZE);
 
     blinky->setPos(15*32,22*32);
+    clyde->setPos(2*32,22*32);
     addItem(blinky);
     addItem(Pacman);
+    addItem(clyde);
 
 
 
@@ -177,7 +174,7 @@ int GameScene::checkCollisions()
         else if(BlocItem *b = dynamic_cast<BlocItem *>(list.at(i))){
             Pacman->annule_deplacement();
             resultat = 1;
-           // qDebug() << "deplacement annulé" << endl;
+            //qDebug() << "deplacement annulé" << endl;
         }
         else if(Entity *e = dynamic_cast<Entity *>(list.at(i))){
             gameOver();

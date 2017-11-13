@@ -5,6 +5,7 @@
 #include "tilemap.h"
 #include <climits>
 #include <QList>
+#include <QPoint>
 
 using namespace std;
 
@@ -18,6 +19,7 @@ public:
     int parse_move_l(int move);
     void affiche() const;
     void affiche_routage() const;
+    QPoint next_random_move(int c, int l, int direction);
 
 private:
    int a[24*24][24*24]; /* maybe use a non static element like QVector instead ?? */

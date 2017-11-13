@@ -5,12 +5,6 @@ MurItem::MurItem() : BlocItem()
 
 }
 
-void MurItem::paint(QPainter *painter,
-                          const QStyleOptionGraphicsItem *option,
-                          QWidget *widget){
-    painter->drawRect(QRect(0,0,32,32));
-}
-
 
 QPainterPath MurItem::shape() const {
     QPainterPath path;

@@ -38,6 +38,39 @@ Graph::Graph(TileMap map)
 
 }
 
+QPoint Graph::next_random_move(int c, int l, int direction){
+
+    /* les directons possibles */
+
+    int gauche = 0;
+    int droite = 0;
+    int bas = 0;
+    int haut = 0;
+    int nb_choix = 0;
+
+    switch(direction){
+        case UP:
+            /* on regarde a gauche si il y a un chemin */
+        if(arc(c,l,c-1,l) == 1){
+            gauche = 1;
+            nb_choix++;
+        }
+        /* on regarde a droite si il y a un chemin */
+        if(arc(c,l,c+1,l) == 1){
+            droite = 1;
+            nb_choix++;
+        }
+        /* on regarde aussi si l'on peut continuer tout droit */
+        if(arc(c,l,c,l+1) == 1){
+            haut = 1;
+            nb_choix++;
+        }
+        break;
+
+    }
+    return QPoint(0,0);
+}
+
 void Graph::affiche_routage() const{
     for(int k=0;k<m_map_width*m_map_width;k++){
         for(int l=0;l<m_map_width*m_map_width;l++){

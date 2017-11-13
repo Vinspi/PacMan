@@ -20,6 +20,8 @@
 #include "graph.h"
 #include "blinky.h"
 #include "graph.h"
+#include "clyde.h"
+
 
 class GameScene : public QGraphicsScene
 {
@@ -47,6 +49,8 @@ private:
     //Movable
     PacMan * Pacman;
     Blinky * blinky;
+    Clyde * clyde;
+
     QGraphicsPixmapItem * PhantomRed;
     QGraphicsPixmapItem * PhantomPink;
     QGraphicsPixmapItem * PhantomBlue;
