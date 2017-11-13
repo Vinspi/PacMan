@@ -34,12 +34,30 @@ Graph::Graph(TileMap map)
 
     calcule_routage();
 
+
+
+}
+
+void Graph::affiche_routage() const{
+    for(int k=0;k<m_map_width*m_map_width;k++){
+        for(int l=0;l<m_map_width*m_map_width;l++){
+            cout << routage[l][k] << " ";
+        }
+        cout << endl;
+    }
 }
 
 void Graph::calcule_routage(){
 
     int prec[m_map_width*m_map_height];
     int k,m;
+
+    for(int target=0;target<m_map_width*m_map_height;target++){
+        for(int j=0;j<m_map_width*m_map_height;j++){
+            routage[target][j] = -1;
+        }
+
+    }
 
     /* pour toutes les sources possibles */
     for(int i=0;i<m_map_width;i++){
@@ -49,8 +67,9 @@ void Graph::calcule_routage(){
             for(int target=0;target<m_map_width*m_map_height;target++){
                 m = target;
                 /* si cette cible a pu etre atteinte par dijkstra */
-                if(prec[target] != -1){ /* erreur à corriger (infinite loop) */
+                if(prec[target] != -1){
                     /* tant que l'on est pas revenu à la source */
+                    k=0;
                     while (prec[m] != m) {
                         k = m;
                         m = prec[m];
@@ -58,9 +77,7 @@ void Graph::calcule_routage(){
                     /* le prochain mouvement en partant de cette source pour aller à cette cible est k */
                     routage[i*m_map_width+j][target] = k;
                 }
-                else {
-                    routage[i*m_map_width+j][target] = -1;
-                }
+
             }
         }
     }

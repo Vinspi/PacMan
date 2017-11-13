@@ -12,18 +12,18 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
 
-    TileMap tm("../PacMan/levels/xml_level1.xml");
+    TileMap tm("../PacMan/levels/xml_level2.xml");
 
     Graph *g = new Graph(tm);
 
-    int next_pos;
-    next_pos = g->next_move(1,1,1,4);
+    g->affiche();
+    g->affiche_routage();
+    //int next_move = g->next_move(2,2,1,1);
 
-    cout << "next move " << g->parse_move_c(next_pos) << " " << g->parse_move_l(next_pos) << endl;
+    //cout << g->parse_move_c(next_move) << " " << g->parse_move_l(next_move) << endl;
 
-
+    QApplication a(argc, argv);
     MainWindow w;
     w.show();
 

@@ -16,13 +16,14 @@ public:
     int next_move(int c1, int l1, int c2, int l2);
     int parse_move_c(int move);
     int parse_move_l(int move);
+    void affiche() const;
+    void affiche_routage() const;
 
 private:
    int a[24*24][24*24]; /* maybe use a non static element like QVector instead ?? */
    int routage[24*24][24*24];
    void initMatrice();
    void setArc(int l1, int c1, int l2, int c2);
-   void affiche() const;
    void Dijkstra(int l1, int c1, int prec[]) const;
    int findMin(QList<int> *front, int dist[]) const;
    int m_map_width;

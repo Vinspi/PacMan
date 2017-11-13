@@ -18,6 +18,8 @@
 #include "blocitem.h"
 #include "muritem.h"
 #include "graph.h"
+#include "blinky.h"
+#include "graph.h"
 
 class GameScene : public QGraphicsScene
 {
@@ -30,6 +32,7 @@ public:
     void keyPressEvent(QKeyEvent *event);
     void updateScene();
     int checkCollisions();
+    int checkCollisionsBlinky();
 
 public slots:
 
@@ -43,6 +46,7 @@ private:
 
     //Movable
     PacMan * Pacman;
+    Blinky * blinky;
     QGraphicsPixmapItem * PhantomRed;
     QGraphicsPixmapItem * PhantomPink;
     QGraphicsPixmapItem * PhantomBlue;
@@ -58,8 +62,13 @@ private:
     QGraphicsTextItem * level;
     //vies
 
+    Graph* graph_control;
     QTimer m_timer;
     int next_move;
+    int next_move_blinky;
+    int m_nb_dot;
+    void gameOver();
+    void win();
 
 };
 

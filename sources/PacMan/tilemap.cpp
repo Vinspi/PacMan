@@ -173,3 +173,9 @@ int TileMap::get_pos_pacman_init_col(){
 int TileMap::get_pos_pacman_init_row(){
     return pos_pacman_init_row;
 }
+
+//void TileMap::setTile(int* tiles, int w, int h){
+//    this->tile = tiles;
+//    this->m_height = h;
+//    this->m_width = w;
+//}

@@ -13,6 +13,7 @@ Entity::Entity(QString skin) : QGraphicsPixmapItem()
     moveDown.resize(width);
     moveLeft.resize(width);
     moveRight.resize(width);
+
     m_max_frame = pixmap.width()/T_SIZE;
 
     for(int c=0;c<pixmap.width()/T_SIZE;c++){
@@ -91,7 +92,7 @@ void Entity::avance(){
         break;
     }
     m_last_frame=m_frame;
-    m_frame=(m_frame+1)%(m_max_frame-1);
+    m_frame=(m_frame+1)%(m_max_frame);
 }
 
 QRectF Entity::boundingRect() const {
@@ -107,3 +108,12 @@ QPainterPath Entity::shape() const {
     path.addRect(QRectF(1,1,30,30));
     return path;
 }
+
+QPoint Entity::current_tile_pos(){
+    QPoint p((pos().x()+T_SIZE/2)/T_SIZE,(pos().y()+T_SIZE/2)/T_SIZE);
+    return p;
+}
+
+
+
+

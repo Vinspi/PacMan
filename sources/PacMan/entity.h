@@ -21,6 +21,8 @@ public:
     void setVitesse(int v);
     QRectF boundingRect() const override;
     QPainterPath shape() const override;
+    QPoint current_tile_pos();
+
     void paint(QPainter *painter,
                               const QStyleOptionGraphicsItem *option,
                               QWidget *widget);

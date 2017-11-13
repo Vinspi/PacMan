@@ -46,7 +46,8 @@ SOURCES += \
     entity.cpp \
     pacman.cpp \
     blocitem.cpp \
-    muritem.cpp
+    muritem.cpp \
+    blinky.cpp
 
 HEADERS += \
     const.h \
@@ -70,7 +71,8 @@ HEADERS += \
     entity.h \
     pacman.h \
     blocitem.h \
-    muritem.h
+    muritem.h \
+    blinky.h
 
 
 

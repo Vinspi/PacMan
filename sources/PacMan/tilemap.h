@@ -15,6 +15,7 @@ public:
     int tile_collectibles(int r,int c) const;
     int get_pos_pacman_init_row();
     int get_pos_pacman_init_col();
+    //void setTile(int tiles[][], int w, int h);
 
 private:
     unsigned int m_width;
