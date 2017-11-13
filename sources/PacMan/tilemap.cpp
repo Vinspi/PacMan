@@ -39,8 +39,34 @@ TileMap::TileMap(QString filename) : m_map()
     QDomNode pos_pacman_init_node = node_list.at(0);
     pos_pacman_init_col = pos_pacman_init_node.toElement().attribute("col","undefined").toInt();
     pos_pacman_init_row = pos_pacman_init_node.toElement().attribute("row","undefined").toInt();
-    //qDebug() << pos_pacman_init_col;
 
+    /* on recup la pos de blinky (init) */
+
+    node_list = dom.elementsByTagName("blinky-init");
+    QDomNode pos_blinky_init_node = node_list.at(0);
+    pos_blinky_init_col = pos_blinky_init_node.toElement().attribute("col","undefined").toInt();
+    pos_blinky_init_row = pos_blinky_init_node.toElement().attribute("row","undefined").toInt();
+
+    /* on recup la pos de pinky (init) */
+
+    node_list = dom.elementsByTagName("pinky-init");
+    QDomNode pos_pinky_init_node = node_list.at(0);
+    pos_pinky_init_col = pos_pinky_init_node.toElement().attribute("col","undefined").toInt();
+    pos_pinky_init_row = pos_pinky_init_node.toElement().attribute("row","undefined").toInt();
+
+    /* on recup la pos de clyde (init) */
+
+    node_list = dom.elementsByTagName("clyde-init");
+    QDomNode pos_clyde_init_node = node_list.at(0);
+    pos_clyde_init_col = pos_clyde_init_node.toElement().attribute("col","undefined").toInt();
+    pos_clyde_init_row = pos_clyde_init_node.toElement().attribute("row","undefined").toInt();
+
+    /* on recup la pos de inky (init) */
+
+    node_list = dom.elementsByTagName("inky-init");
+    QDomNode pos_inky_init_node = node_list.at(0);
+    pos_inky_init_col = pos_pacman_init_node.toElement().attribute("col","undefined").toInt();
+    pos_inky_init_row = pos_pacman_init_node.toElement().attribute("row","undefined").toInt();
 
     node_list = dom.elementsByTagName("tilemap-height");
     QDomNode h_node = node_list.at(0);
@@ -103,46 +129,6 @@ TileMap::TileMap(QString filename) : m_map()
 
 
     xml_level.close();
-
-//    for(int i=0;i<this->width();i++){
-//        for(int j=0;j<this->height();j++){
-//            cout << this->tile(i,j) << " ";
-//        }
-//        cout << endl;
-//    }
-
-    /* --------------------------------------------------------*/
-//    QFile level_file(filename);
-//    if(level_file.open(QIODevice::ReadOnly))
-//    {
-//        QTextStream in(&level_file);
-//        int width = 0, height = 0;
-//        int num = 0;
-
-//        in >> width;
-//        m_width = width;
-
-//        in >> height;
-//        m_height = height;
-
-//        m_map.resize(height);
-
-//        for(int r = 0; r < height; r++)//line
-//        {
-//            m_map[r].resize(width);
-
-//            for(int c = 0; c < width; c++)
-//            {
-//                in >> num;
-//                m_map[r][c] = num;
-//            }
-//        }
-//        level_file.close();
-//    }
-//    else
-//    {
-//        qDebug("cannot open file");
-//    }
 }
 
 unsigned int TileMap::width() const
@@ -165,13 +151,45 @@ int TileMap::tile(int r, int c) const
     return m_map[r][c];
 }
 
-int TileMap::get_pos_pacman_init_col(){
+int TileMap::get_pos_pacman_init_col() const{
     return pos_pacman_init_col;
 }
 
 
-int TileMap::get_pos_pacman_init_row(){
+int TileMap::get_pos_pacman_init_row() const{
     return pos_pacman_init_row;
+}
+
+int TileMap::get_pos_blinky_init_row() const{
+    return pos_blinky_init_row ;
+}
+
+int TileMap::get_pos_blinky_init_col() const{
+    return pos_blinky_init_col;
+}
+
+int TileMap::get_pos_inky_init_row() const{
+    return pos_inky_init_row;
+}
+
+int TileMap::get_pos_inky_init_col() const {
+    return pos_inky_init_col;
+}
+
+int TileMap::get_pos_pinky_init_row() const{
+    return pos_pinky_init_row;
+}
+
+int TileMap::get_pos_pinky_init_col() const {
+    return pos_pinky_init_col;
+}
+
+int TileMap::get_pos_clyde_init_row() const {
+    return pos_clyde_init_row;
+}
+
+int TileMap::get_pos_clyde_init_col() const {
+    return pos_clyde_init_col;
 }
 
 //void TileMap::setTile(int* tiles, int w, int h){

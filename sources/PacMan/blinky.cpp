@@ -1,7 +1,7 @@
 #include "blinky.h"
 
-Blinky::Blinky() : Entity("../PacMan/graphics_pacman/Blinky.png")
+Blinky::Blinky() : Ghost("../PacMan/graphics_pacman/Blinky.png")
 {
-    setVitesse(2);
+    setVitesse(1);
 }
 

@@ -1,5 +1,10 @@
 #include "entity.h"
 
+Entity::Entity() : QGraphicsPixmapItem()
+{
+
+}
+
 Entity::Entity(QString skin) : QGraphicsPixmapItem()
 {
     QPixmap pixmap(skin);
@@ -114,6 +119,8 @@ QPoint Entity::current_tile_pos(){
     return p;
 }
 
-
+void Entity::setMode(int mode){
+    m_mode = mode;
+}
 
 

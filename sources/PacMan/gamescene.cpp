@@ -5,17 +5,85 @@
 
 using namespace std;
 
-GameScene::GameScene(TileManager *tm) : QGraphicsScene(), dots(), m_timer()
+GameScene::GameScene(TileManager *tm) : QGraphicsScene(), dots(), m_timer(), m_timer_berzerk_mode()
 {
     this->tm = tm;
     m_timer.setInterval(10);
+    m_timer_berzerk_mode.setInterval(1000);
 
     connect(&m_timer,&QTimer::timeout,this,&GameScene::updateScene);
+    connect(&m_timer_berzerk_mode,&QTimer::timeout,this,&GameScene::updateBerzerkMode);
+
     m_timer.start();
+}
+
+void GameScene::updateBerzerkMode(){
+    if(m_time_elapsed_berzerk_mode == BERZERK_MODE_TIME){
+        /* on retire le berzerk mode */
+        QPointF pos_blinky = blinky->pos();
+        QPointF pos_clyde = clyde->pos();
+
+        removeItem(blinky);
+        removeItem(clyde);
+
+        delete blinky;
+        delete clyde;
+
+        blinky = new Blinky();
+        clyde = new Clyde();
+
+        blinky->setPos(pos_blinky);
+        clyde->setPos(pos_clyde);
+
+        addItem(blinky);
+        addItem(clyde);
+
+        m_timer_berzerk_mode.stop();
+    }
+    else if(m_time_elapsed_berzerk_mode > (BERZERK_MODE_TIME/2)) {
+        /* mon pikachu évolue en fantôme clignotant !!! */
+        QPointF pos_blinky = blinky->pos();
+        QPointF pos_clyde = clyde->pos();
+
+        removeItem(blinky);
+        removeItem(clyde);
+
+        delete blinky;
+        delete clyde;
+
+        blinky = new FlashAfraidGhost();
+        clyde = new FlashAfraidGhost();
+
+        blinky->setPos(pos_blinky);
+        clyde->setPos(pos_clyde);
+
+        addItem(blinky);
+        addItem(clyde);
+
+        m_time_elapsed_berzerk_mode++;
+    }
+    else {
+        m_time_elapsed_berzerk_mode++;
+    }
 }
 
 void GameScene::updateScene(){
 
+    /* pour clyde */
+
+    QPoint pos_clyde = clyde->current_tile_pos();
+    next_move_clyde = graph_control->next_random_move(pos_clyde.x(),pos_clyde.y(),clyde->direction());
+
+
+
+    clyde->setDirection(next_move_clyde);
+    clyde->avance();
+    if(checkCollisionsGhost(clyde)){
+        clyde->avance();
+        checkCollisionsGhost(clyde);
+    }
+
+    /*********************************************************************/
     /* pour blinky */
     QPoint pos_blinky = blinky->current_tile_pos();
     QPoint pos_pacman = Pacman->current_tile_pos();
@@ -50,9 +118,9 @@ void GameScene::updateScene(){
 
     blinky->setDirection(next_move_blinky);
     blinky->avance();
-    if(checkCollisionsBlinky()){
+    if(checkCollisionsGhost(blinky)){
         blinky->avance();
-        checkCollisionsBlinky();
+        checkCollisionsGhost(blinky);
     }
     /*********************************************************************************************************************/
 
@@ -126,8 +194,8 @@ void GameScene::init(TileMap &map)
     //qDebug() << map.get_pos_pacman_init_col();
     Pacman->setPos(map.get_pos_pacman_init_col()*T_SIZE,map.get_pos_pacman_init_row()*T_SIZE);
 
-    blinky->setPos(15*32,22*32);
-    clyde->setPos(2*32,22*32);
+    blinky->setPos(map.get_pos_blinky_init_col()*T_SIZE,map.get_pos_blinky_init_row()*T_SIZE);
+    clyde->setPos(map.get_pos_clyde_init_col()*T_SIZE,map.get_pos_clyde_init_row()*T_SIZE);
     addItem(blinky);
     addItem(Pacman);
     addItem(clyde);
@@ -138,18 +206,18 @@ void GameScene::init(TileMap &map)
     //Pacman->setOffset(21, 198);
 }
 
-int GameScene::checkCollisionsBlinky()
+int GameScene::checkCollisionsGhost(Ghost *ghost)
 {
 
     int resultat = 0;
-    QList<QGraphicsItem *> list = collidingItems(blinky);
+    QList<QGraphicsItem *> list = collidingItems(ghost);
 
     for(int i = 0; i < list.size(); i++)
     {
         if(BlocItem *b = dynamic_cast<BlocItem *>(list.at(i))){
-            blinky->annule_deplacement();
+            ghost->annule_deplacement();
             resultat = 1;
-           // qDebug() << "deplacement annulé" << endl;
+
         }
     }
     return resultat;
@@ -163,18 +231,56 @@ int GameScene::checkCollisions()
 
     for(int i = 0; i < list.size(); i++)
     {
-        if(CollectableItem *d = dynamic_cast<CollectableItem *>(list.at(i)))
+        if(DotItem *d = dynamic_cast<DotItem *>(list.at(i)))
         {
             removeItem(list.at(i));
             delete list.at(i);
             score += d->value();
             m_nb_dot--;
-            //qDebug() << "score" << score << endl;
+
+        }
+        else if(SuperDotItem *sd = dynamic_cast<SuperDotItem *>(list.at(i))){
+            removeItem(list.at(i));
+            delete list.at(i);
+            score += sd->value();
+            m_nb_dot--;
+            /* enable beast mode on pacman */
+            /* mettre le mode pucelle sur tous les fantômes */
+            QPointF pos_blinky = blinky->pos();
+            QPointF pos_clyde = clyde->pos();
+
+            removeItem(blinky);
+            removeItem(clyde);
+
+            delete blinky;
+            delete clyde;
+
+            blinky = new AfraidGhost();
+            clyde = new AfraidGhost();
+
+            blinky->setPos(pos_blinky);
+            clyde->setPos(pos_clyde);
+
+            addItem(blinky);
+            addItem(clyde);
+
+            m_time_elapsed_berzerk_mode = 0;
+            m_timer_berzerk_mode.start();
+
+
         }
         else if(BlocItem *b = dynamic_cast<BlocItem *>(list.at(i))){
             Pacman->annule_deplacement();
             resultat = 1;
-            //qDebug() << "deplacement annulé" << endl;
+
+        }
+        else if(AfraidGhost *ag = dynamic_cast<AfraidGhost *>(list.at(i))){
+            /* detruire le fantôme */
+        }
+        else if(FlashAfraidGhost *ag = dynamic_cast<FlashAfraidGhost *>(list.at(i))){
+            /* detruire le fantôme */
+
+
         }
         else if(Entity *e = dynamic_cast<Entity *>(list.at(i))){
             gameOver();

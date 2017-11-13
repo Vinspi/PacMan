@@ -5,7 +5,7 @@ using namespace std;
 
 Graph::Graph(TileMap map)
 {
-
+    srand(NULL);
     m_map_width = map.width();
     m_map_height = map.height();
     initMatrice();
@@ -38,37 +38,99 @@ Graph::Graph(TileMap map)
 
 }
 
-QPoint Graph::next_random_move(int c, int l, int direction){
+int Graph::next_random_move(int c, int l, int direction){
 
     /* les directons possibles */
 
-    int gauche = 0;
-    int droite = 0;
-    int bas = 0;
-    int haut = 0;
+    int directions[3] = {0,0,0};
     int nb_choix = 0;
+    int random_direction;
 
     switch(direction){
         case UP:
-            /* on regarde a gauche si il y a un chemin */
+        /* on regarde a gauche si il y a un chemin */
         if(arc(c,l,c-1,l) == 1){
-            gauche = 1;
+            directions[nb_choix] = LEFT;
             nb_choix++;
         }
         /* on regarde a droite si il y a un chemin */
         if(arc(c,l,c+1,l) == 1){
-            droite = 1;
+            directions[nb_choix] = RIGHT;
+            nb_choix++;
+        }
+        /* on regarde aussi si l'on peut continuer tout droit */
+        if(arc(c,l,c,l-1) == 1){
+            directions[nb_choix] = UP;
+            nb_choix++;
+        }
+
+        random_direction = rand()%nb_choix;
+        return directions[random_direction];
+
+    case DOWN:
+        /* on regarde a gauche si il y a un chemin */
+        if(arc(c,l,c-1,l) == 1){
+            directions[nb_choix] = LEFT;
+            nb_choix++;
+        }
+        /* on regarde a droite si il y a un chemin */
+        if(arc(c,l,c+1,l) == 1){
+            directions[nb_choix] = RIGHT;
             nb_choix++;
         }
         /* on regarde aussi si l'on peut continuer tout droit */
         if(arc(c,l,c,l+1) == 1){
-            haut = 1;
+            directions[nb_choix] = DOWN;
             nb_choix++;
         }
-        break;
+
+        random_direction = rand()%nb_choix;
+
+        return directions[random_direction];
+
+    case LEFT:
+        /* on regarde en bas si il y a un chemin */
+        if(arc(c,l,c,l+1) == 1){
+            directions[nb_choix] = DOWN;
+            nb_choix++;
+        }
+        /* on regarde en haut si il y a un chemin */
+        if(arc(c,l,c,l-1) == 1){
+            directions[nb_choix] = UP;
+            nb_choix++;
+        }
+        /* on regarde aussi si l'on peut continuer tout droit */
+        if(arc(c,l,c-1,l) == 1){
+            directions[nb_choix] = LEFT;
+            nb_choix++;
+        }
+
+        random_direction = rand()%nb_choix;
+
+        return directions[random_direction];
+
+    case RIGHT:
+        /* on regarde en bas si il y a un chemin */
+        if(arc(c,l,c,l+1) == 1){
+            directions[nb_choix] = DOWN;
+            nb_choix++;
+        }
+        /* on regarde en haut si il y a un chemin */
+        if(arc(c,l,c,l-1) == 1){
+            directions[nb_choix] = UP;
+            nb_choix++;
+        }
+        /* on regarde aussi si l'on peut continuer tout droit */
+        if(arc(c,l,c+1,l) == 1){
+            directions[nb_choix] = RIGHT;
+            nb_choix++;
+        }
+
+        random_direction = rand()%nb_choix;
+
+        return directions[random_direction];
 
     }
-    return QPoint(0,0);
 }
 
 void Graph::affiche_routage() const{
@@ -221,7 +283,7 @@ void Graph::setArc(int l1, int c1, int l2, int c2){
     a[x][y] = 1;
 }
 
-int Graph::arc(int l1, int c1, int l2, int c2){
+int Graph::arc(int c1, int l1, int c2, int l2){
 
     int x = l1*m_map_width + c1; /* use non static field instead 24 */
     int y = l2*m_map_width + c2;

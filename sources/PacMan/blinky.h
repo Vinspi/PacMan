@@ -1,8 +1,9 @@
 #ifndef BLINKY_H
 #define BLINKY_H
 #include "entity.h"
+#include "ghost.h"
 
-class Blinky : public Entity
+class Blinky : public Ghost
 {
 public:
     Blinky();

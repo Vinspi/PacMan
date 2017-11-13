@@ -48,7 +48,10 @@ SOURCES += \
     blocitem.cpp \
     muritem.cpp \
     blinky.cpp \
-    clyde.cpp
+    clyde.cpp \
+    ghost.cpp \
+    afraidghost.cpp \
+    flashafraidghost.cpp
 
 HEADERS += \
     const.h \
@@ -74,7 +77,10 @@ HEADERS += \
     blocitem.h \
     muritem.h \
     blinky.h \
-    clyde.h
+    clyde.h \
+    ghost.h \
+    afraidghost.h \
+    flashafraidghost.h
 
 
 

@@ -7,11 +7,13 @@
 #include <QStackedWidget>
 #include <QVBoxLayout>
 #include "tilemap.h"
+#include "affraidghost.h"
 
 using namespace std;
 
 int main(int argc, char *argv[])
 {
+
 
 
     QApplication a(argc, argv);

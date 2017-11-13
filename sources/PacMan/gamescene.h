@@ -21,6 +21,8 @@
 #include "blinky.h"
 #include "graph.h"
 #include "clyde.h"
+#include "afraidghost.h"
+#include "flashafraidghost.h"
 
 
 class GameScene : public QGraphicsScene
@@ -34,11 +36,12 @@ public:
     void keyPressEvent(QKeyEvent *event);
     void updateScene();
     int checkCollisions();
-    int checkCollisionsBlinky();
+    int checkCollisionsGhost(Ghost *ghost);
 
 public slots:
 
 private:
+    void updateBerzerkMode();
     int score;
     TileManager * tm;
     //RessourceManager ?
@@ -48,8 +51,8 @@ private:
 
     //Movable
     PacMan * Pacman;
-    Blinky * blinky;
-    Clyde * clyde;
+    Ghost * blinky;
+    Ghost * clyde;
 
     QGraphicsPixmapItem * PhantomRed;
     QGraphicsPixmapItem * PhantomPink;
@@ -68,8 +71,11 @@ private:
 
     Graph* graph_control;
     QTimer m_timer;
+    QTimer m_timer_berzerk_mode;
+    int m_time_elapsed_berzerk_mode;
     int next_move;
     int next_move_blinky;
+    int next_move_clyde;
     int m_nb_dot;
     void gameOver();
     void win();
