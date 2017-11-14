@@ -51,7 +51,9 @@ SOURCES += \
     clyde.cpp \
     ghost.cpp \
     afraidghost.cpp \
-    flashafraidghost.cpp
+    flashafraidghost.cpp \
+    inky.cpp \
+    pinky.cpp
 
 HEADERS += \
     const.h \
@@ -80,10 +82,12 @@ HEADERS += \
     clyde.h \
     ghost.h \
     afraidghost.h \
-    flashafraidghost.h
+    flashafraidghost.h \
+    inky.h \
+    pinky.h
 
 
-
+CONFIG += c++11
 
 FORMS += \
     mainwindow.ui \
