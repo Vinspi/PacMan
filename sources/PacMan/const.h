@@ -20,6 +20,8 @@ const int FLASH_AFFRAID_MODE = 3;
 
 const int BERZERK_MODE_TIME = 4; /* 4 sec de berserk */
 
+const int CYCLE_VITESSE = 10;
+
 
 
 

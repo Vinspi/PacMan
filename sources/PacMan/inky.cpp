@@ -1,5 +1,6 @@
 #include "inky.h"
 
-inky::inky()
+Inky::Inky() : Ghost("../PacMan/graphics_pacman/Inky.png")
 {
+    setVitesse(1.0);
 }

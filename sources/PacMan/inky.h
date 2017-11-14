@@ -1,10 +1,13 @@
 #ifndef INKY_H
 #define INKY_H
 
-class inky
+#include "entity.h"
+#include "ghost.h"
+
+class Inky : public Ghost
 {
 public:
-    inky();
+    Inky();
 };
 
 #endif // INKY_H

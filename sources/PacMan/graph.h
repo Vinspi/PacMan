@@ -21,6 +21,7 @@ public:
     void affiche() const;
     void affiche_routage() const;
     int next_random_move(int c, int l, int direction);
+    int next_ambush_move(int c, int l, int c_pacman, int l_pacman, int dir_pacman);
 
 private:
    int a[24*24][24*24]; /* maybe use a non static element like QVector instead ?? */

@@ -65,8 +65,8 @@ TileMap::TileMap(QString filename) : m_map()
 
     node_list = dom.elementsByTagName("inky-init");
     QDomNode pos_inky_init_node = node_list.at(0);
-    pos_inky_init_col = pos_pacman_init_node.toElement().attribute("col","undefined").toInt();
-    pos_inky_init_row = pos_pacman_init_node.toElement().attribute("row","undefined").toInt();
+    pos_inky_init_col = pos_inky_init_node.toElement().attribute("col","undefined").toInt();
+    pos_inky_init_row = pos_inky_init_node.toElement().attribute("row","undefined").toInt();
 
     node_list = dom.elementsByTagName("tilemap-height");
     QDomNode h_node = node_list.at(0);

@@ -1,10 +1,13 @@
 #ifndef PINKY_H
 #define PINKY_H
 
-class pinky
+#include "entity.h"
+#include "ghost.h"
+
+class Pinky : public Ghost
 {
 public:
-    pinky();
+    Pinky();
 };
 
 #endif // PINKY_H

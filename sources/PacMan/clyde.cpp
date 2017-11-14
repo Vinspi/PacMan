@@ -2,6 +2,6 @@
 
 Clyde::Clyde() : Ghost("../PacMan/graphics_pacman/Clyde.png")
 {
-    setVitesse(1);
+    setVitesse(1.0);
 }
 

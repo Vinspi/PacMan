@@ -38,6 +38,55 @@ Graph::Graph(TileMap map)
 
 }
 
+int Graph::next_ambush_move(int c, int l, int c_pacman, int l_pacman, int dir_pacman){
+
+    /* trouver le prochain endroit propice à une embuscade */
+
+    int c_tempo = c_pacman, l_tempo = l_pacman;
+
+    switch (dir_pacman) {
+    case UP:
+        /* si le pacman se dirige vers le haut on va chercher le prochain carrefour dans cette direction */
+        while (!arc(c_tempo,l_tempo,c_tempo-1,l_tempo) && !arc(c_tempo,l_tempo,c_tempo+1,l_tempo)) {
+            /* on recule donc d'une ligne */
+            l_tempo--;
+        }
+        /* ici la pos (c_tempo,l_tempo) est propice à l'embuscade */
+        return next_move(c,l,c_tempo,l_tempo);
+
+    case DOWN:
+        /* si le pacman se dirige vers le bas on va chercher le prochain carrefour dans cette direction */
+        while (!arc(c_tempo,l_tempo,c_tempo-1,l_tempo) && !arc(c_tempo,l_tempo,c_tempo+1,l_tempo)) {
+            /* on avance donc d'une ligne */
+            l_tempo++;
+        }
+        /* ici la pos (c_tempo,l_tempo) est propice à l'embuscade */
+        return next_move(c,l,c_tempo,l_tempo);
+
+    case RIGHT:
+        /* si le pacman se dirige vers la droite on va chercher le prochain carrefour dans cette direction */
+        while (!arc(c_tempo,l_tempo,c_tempo,l_tempo-1) && !arc(c_tempo,l_tempo,c_tempo,l_tempo+1)) {
+            /* on avance donc d'une colonne */
+            c_tempo++;
+        }
+        /* ici la pos (c_tempo,l_tempo) est propice à l'embuscade */
+        return next_move(c,l,c_tempo,l_tempo);
+
+    case LEFT:
+        /* si le pacman se dirige vers la gauche on va chercher le prochain carrefour dans cette direction */
+        while (!arc(c_tempo,l_tempo,c_tempo,l_tempo-1) && !arc(c_tempo,l_tempo,c_tempo,l_tempo+1)) {
+            /* on recule donc d'une colonne */
+            c_tempo--;
+        }
+        /* ici la pos (c_tempo,l_tempo) est propice à l'embuscade */
+        return next_move(c,l,c_tempo,l_tempo);
+
+    default:
+        break;
+    }
+
+}
+
 int Graph::next_random_move(int c, int l, int direction){
 
     /* les directons possibles */
