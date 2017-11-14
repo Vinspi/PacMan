@@ -7,7 +7,7 @@
 #include <QStackedWidget>
 #include <QVBoxLayout>
 #include "tilemap.h"
-#include "affraidghost.h"
+#include "afraidghost.h"
 
 using namespace std;
 
