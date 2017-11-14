@@ -29,17 +29,22 @@ dates : du 23 Octobre au 12 Novembre
   ### 100% de l'objectif du sprint à été atteint.
   
   ## Detail du prochain sprint:
-
     * Produire un Module de Graphe permettant les diverse implémentations des IA.
     * Produire une table de routage dans le Graphe associé au niveau actuel.
     * Produire une IA pour Blinky (fantôme rouge).
     * Produire une IA pour Inky (fantôme bleu).
     * Produire une IA pour Pinky (fantôme rose).
     * Produire une IA pour Clyde (fantôme orange).
-    * Produire un pattern state pour l'mplementation des etats des fantômes
+    * Produire un pattern state pour l'implementation des etats des fantômes
     * Produire une IA pour les fantômes effrayés.
     
     
    ## Screenshots de fin de sprint:
    
+   ### Le jeu:
+   ![screen1](/screenshots/screen1Sprint1)
+   ### Le menu général:
+   ![screen2](/screenshots/screen2Sprint1)
+   ### Le profil avec lancement d'un niveau:
+   ![screen3](/screenshots/screen31Sprint1)
    
