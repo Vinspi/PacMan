@@ -79,6 +79,7 @@ private:
     int m_nb_dot;
     void gameOver();
     void win();
+    bool berzerk_mode_active;
 
 };
 
