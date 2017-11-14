@@ -26,10 +26,11 @@ dates : du 23 Octobre au 12 Novembre
   * Un set de tiles personnalisé a été produit.
   * Le menu graphique (classe VueMenu et VueProfile).
   
-  ### 100% de l'objectif du sprint à été atteint.
+### 100% de l'objectif du sprint à été atteint.
   
-  ## Detail du prochain sprint:
-    *Produire un Module de Graphe permettant les diverse implémentations des IA.
+## Detail du prochain sprint:
+
+    * Produire un Module de Graphe permettant les diverse implémentations des IA.
     * Produire une table de routage dans le Graphe associé au niveau actuel.
     * Produire une IA pour Blinky (fantôme rouge).
     * Produire une IA pour Inky (fantôme bleu).
@@ -39,12 +40,12 @@ dates : du 23 Octobre au 12 Novembre
     * Produire une IA pour les fantômes effrayés.
     
     
-   ## Screenshots de fin de sprint:
+ ## Screenshots de fin de sprint:
    
-   ### Le jeu:
-   ![alt text](https://github.com/Vinspi/PacMan/blob/master/screenshots/capture1Sprint1.png)
-   ### Le menu général:
-   ![screen2](https://github.com/Vinspi/PacMan/blob/master/screenshots/capture2Sprint1.png)
-   ### Le profil avec lancement d'un niveau:
-   ![screen3](https://github.com/Vinspi/PacMan/blob/master/screenshots/capture3Sprint1.png)
+ ### Le jeu:
+ ![alt text](https://github.com/Vinspi/PacMan/blob/master/screenshots/capture1Sprint1.png)
+ ### Le menu général:
+ ![screen2](https://github.com/Vinspi/PacMan/blob/master/screenshots/capture2Sprint1.png)
+ ### Le profil avec lancement d'un niveau:
+ ![screen3](https://github.com/Vinspi/PacMan/blob/master/screenshots/capture3Sprint1.png)
    
