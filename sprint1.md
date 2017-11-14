@@ -42,9 +42,9 @@ dates : du 23 Octobre au 12 Novembre
    ## Screenshots de fin de sprint:
    
    ### Le jeu:
-   ![screen1](/screenshots/screen1Sprint1)
+   ![screen1](/screenshots/screen1Sprint1.png)
    ### Le menu général:
-   ![screen2](/screenshots/screen2Sprint1)
+   ![screen2](/screenshots/screen2Sprint1.png)
    ### Le profil avec lancement d'un niveau:
-   ![screen3](/screenshots/screen31Sprint1)
+   ![screen3](/screenshots/screen31Sprint1.png)
    
