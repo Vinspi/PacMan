@@ -29,7 +29,7 @@ dates : du 23 Octobre au 12 Novembre
   ### 100% de l'objectif du sprint à été atteint.
   
   ## Detail du prochain sprint:
-    * Produire un Module de Graphe permettant les diverse implémentations des IA.
+    *Produire un Module de Graphe permettant les diverse implémentations des IA.
     * Produire une table de routage dans le Graphe associé au niveau actuel.
     * Produire une IA pour Blinky (fantôme rouge).
     * Produire une IA pour Inky (fantôme bleu).
