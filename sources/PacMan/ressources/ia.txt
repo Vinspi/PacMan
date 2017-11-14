@@ -1,0 +1,4 @@
+Clyde -> Random
+Blinky -> chasse le pacman
+Inky -> chasse le pacman (comme Blinky)
+Pinky -> Ia degue (et je sais pas pk XD)
