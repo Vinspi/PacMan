@@ -4,3 +4,7 @@ FlashAfraidGhost::FlashAfraidGhost() : Ghost("../PacMan/graphics_pacman/Flash_af
 {
 
 }
+
+void FlashAfraidGhost::nextIAMove(Graph *graph_control,Entity *e){
+
+}

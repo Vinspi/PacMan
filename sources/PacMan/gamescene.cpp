@@ -100,10 +100,7 @@ void GameScene::updateScene()
     if(!berzerk_mode_active){
         /* pour clyde */
 
-        QPoint pos_clyde = clyde->current_tile_pos();
-        next_move_clyde = graph_control->next_random_move(pos_clyde.x(),pos_clyde.y(),clyde->direction());
-
-        clyde->setDirection(next_move_clyde);
+        (static_cast<Clyde*>(clyde))->nextIAMove(graph_control,Pacman);
         clyde->avance();
         if(checkCollisionsGhost(clyde)){
             clyde->avance();
@@ -114,35 +111,7 @@ void GameScene::updateScene()
 
         /* pour blinky */
 
-        QPoint pos_blinky = blinky->current_tile_pos();
-        pos_pacman = Pacman->current_tile_pos();
-
-        int next_blinky_move = graph_control->next_move(pos_blinky.x(),pos_blinky.y(),pos_pacman.x(),pos_pacman.y());
-
-        int next_move_c_blinky = graph_control->parse_move_c(next_blinky_move);
-        int next_move_l_blinky = graph_control->parse_move_l(next_blinky_move);
-
-        /* la direction sera LEFT */
-        if(pos_blinky.x() > next_move_c_blinky){
-            next_move_blinky = LEFT;
-
-        }
-        /* la direction sera RIGHT */
-        if(pos_blinky.x() < next_move_c_blinky){
-            next_move_blinky = RIGHT;
-
-        }
-        /* la direction sera UP */
-        if(pos_blinky.y() > next_move_l_blinky){
-            next_move_blinky = UP;
-
-        }
-        /* la direction sera DOWN */
-        if(pos_blinky.y() < next_move_l_blinky){
-            next_move_blinky = DOWN;
-        }
-
-        blinky->setDirection(next_move_blinky);
+        (static_cast<Blinky*>(blinky))->nextIAMove(graph_control,Pacman);
         blinky->avance();
         if(checkCollisionsGhost(blinky)){
             blinky->avance();
@@ -153,40 +122,7 @@ void GameScene::updateScene()
 
         /* pour inky */
 
-        QPoint pos_inky = inky->current_tile_pos();
-        pos_pacman = Pacman->current_tile_pos();
-
-        int next_inky_move = graph_control->next_ambush_move(pos_inky.x(),pos_inky.y(),pos_pacman.x(),pos_pacman.y(),Pacman->direction());
-
-        int next_move_c_inky = graph_control->parse_move_c(next_inky_move);
-        int next_move_l_inky = graph_control->parse_move_l(next_inky_move);
-
-
-
-        /* la direction sera LEFT */
-        if(pos_inky.x() > next_move_c_inky){
-            next_move_inky = LEFT;
-
-        }
-        /* la direction sera RIGHT */
-        if(pos_inky.x() < next_move_c_inky){
-            next_move_inky = RIGHT;
-
-        }
-        /* la direction sera UP */
-        if(pos_inky.y() > next_move_l_inky){
-            next_move_inky = UP;
-
-        }
-        /* la direction sera DOWN */
-        if(pos_inky.y() < next_move_l_inky){
-            next_move_inky = DOWN;
-
-        }
-
-
-
-        inky->setDirection(next_move_inky);
+        (static_cast<Inky*>(inky))->nextIAMove(graph_control,Pacman);
         inky->avance();
         if(checkCollisionsGhost(inky)){
             inky->avance();

@@ -8,6 +8,7 @@ class Pinky : public Ghost
 {
 public:
     Pinky();
+    void nextIAMove(Graph *graph_control, Entity *e);
 };
 
 #endif // PINKY_H

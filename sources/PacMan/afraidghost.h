@@ -6,6 +6,7 @@ class AfraidGhost : public Ghost
 {
 public:
     AfraidGhost();
+    void nextIAMove(Graph *grap_control, Entity *e);
 };
 
 #endif // AFRAIDGHOST_H

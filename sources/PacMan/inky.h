@@ -8,6 +8,7 @@ class Inky : public Ghost
 {
 public:
     Inky();
+    void nextIAMove(Graph *graph_control, Entity *e);
 };
 
 #endif // INKY_H
