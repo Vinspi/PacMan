@@ -23,6 +23,8 @@
 #include "clyde.h"
 #include "afraidghost.h"
 #include "flashafraidghost.h"
+#include "inky.h"
+#include "pinky.h"
 
 
 class GameScene : public QGraphicsScene
@@ -53,6 +55,8 @@ private:
     PacMan * Pacman;
     Ghost * blinky;
     Ghost * clyde;
+    Ghost * inky;
+    Ghost * pinky;
 
     QGraphicsPixmapItem * PhantomRed;
     QGraphicsPixmapItem * PhantomPink;
@@ -76,6 +80,8 @@ private:
     int next_move;
     int next_move_blinky;
     int next_move_clyde;
+    int next_move_inky;
+    int next_move_pinky;
     int m_nb_dot;
     void gameOver();
     void win();

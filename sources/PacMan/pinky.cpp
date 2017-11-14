@@ -1,5 +1,6 @@
 #include "pinky.h"
 
-pinky::pinky()
+Pinky::Pinky() : Ghost("../PacMan/graphics_pacman/Pinky.png")
 {
+    setVitesse(1);
 }

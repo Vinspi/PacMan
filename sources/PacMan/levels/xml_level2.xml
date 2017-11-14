@@ -4,8 +4,8 @@
 	<tilemap-height value="24"></tilemap-height>
 	<pacman-init col="2" row="1"></pacman-init>
 	<blinky-init col="22" row="22"></blinky-init>
-	<inky-init col="22" row="22"></inky-init>
-	<pinky-init col="22" row="22"></pinky-init>
+	<inky-init col="8" row="21"></inky-init>
+	<pinky-init col="15" row="21"></pinky-init>
 	<clyde-init col="1" row="22"></clyde-init>
 		<layer id="background">
 			<row id="0">

@@ -22,21 +22,33 @@ void GameScene::updateBerzerkMode(){
         /* on retire le berzerk mode */
         QPointF pos_blinky = blinky->pos();
         QPointF pos_clyde = clyde->pos();
+        QPointF pos_inky = inky->pos();
+        QPointF pos_pinky = pinky->pos();
 
         removeItem(blinky);
         removeItem(clyde);
+        removeItem(inky);
+        removeItem(pinky);
 
         delete blinky;
         delete clyde;
+        delete inky;
+        delete pinky;
 
         blinky = new Blinky();
         clyde = new Clyde();
+        inky = new Inky();
+        pinky = new Pinky();
 
         blinky->setPos(pos_blinky);
         clyde->setPos(pos_clyde);
+        inky->setPos(pos_inky);
+        pinky->setPos(pos_pinky);
 
         addItem(blinky);
         addItem(clyde);
+        addItem(inky);
+        addItem(pinky);
 
         m_timer_berzerk_mode.stop();
     }
@@ -44,21 +56,33 @@ void GameScene::updateBerzerkMode(){
         /* mon pikachu évolue en fantôme clignotant !!! */
         QPointF pos_blinky = blinky->pos();
         QPointF pos_clyde = clyde->pos();
+        QPointF pos_inky = inky->pos();
+        QPointF pos_pinky = pinky->pos();
 
         removeItem(blinky);
         removeItem(clyde);
+        removeItem(inky);
+        removeItem(pinky);
 
         delete blinky;
         delete clyde;
+        delete inky;
+        delete pinky;
 
         blinky = new FlashAfraidGhost();
         clyde = new FlashAfraidGhost();
+        inky = new FlashAfraidGhost();
+        pinky = new FlashAfraidGhost();
 
         blinky->setPos(pos_blinky);
         clyde->setPos(pos_clyde);
+        inky->setPos(pos_inky);
+        pinky->setPos(pos_pinky);
 
         addItem(blinky);
         addItem(clyde);
+        addItem(inky);
+        addItem(pinky);
 
         m_time_elapsed_berzerk_mode++;
     }
@@ -67,14 +91,14 @@ void GameScene::updateBerzerkMode(){
     }
 }
 
-void GameScene::updateScene(){
+void GameScene::updateScene()
+{
+    QPoint pos_pacman = Pacman->current_tile_pos();
 
     /* pour clyde */
 
     QPoint pos_clyde = clyde->current_tile_pos();
     next_move_clyde = graph_control->next_random_move(pos_clyde.x(),pos_clyde.y(),clyde->direction());
-
-
 
     clyde->setDirection(next_move_clyde);
     clyde->avance();
@@ -84,43 +108,121 @@ void GameScene::updateScene(){
     }
 
     /*********************************************************************/
+
     /* pour blinky */
+
     QPoint pos_blinky = blinky->current_tile_pos();
-    QPoint pos_pacman = Pacman->current_tile_pos();
+    pos_pacman = Pacman->current_tile_pos();
 
-    int next_ghost_move = graph_control->next_move(pos_blinky.x(),pos_blinky.y(),pos_pacman.x(),pos_pacman.y());
+    int next_blinky_move = graph_control->next_move(pos_blinky.x(),pos_blinky.y(),pos_pacman.x(),pos_pacman.y());
 
-    int next_move_c = graph_control->parse_move_c(next_ghost_move);
-    int next_move_l = graph_control->parse_move_l(next_ghost_move);
+    int next_move_c_blinky = graph_control->parse_move_c(next_blinky_move);
+    int next_move_l_blinky = graph_control->parse_move_l(next_blinky_move);
 
     /* la direction sera LEFT */
-    if(pos_blinky.x() > next_move_c){
+    if(pos_blinky.x() > next_move_c_blinky){
         next_move_blinky = LEFT;
 
     }
     /* la direction sera RIGHT */
-    if(pos_blinky.x() < next_move_c){
+    if(pos_blinky.x() < next_move_c_blinky){
         next_move_blinky = RIGHT;
 
     }
     /* la direction sera UP */
-    if(pos_blinky.y() > next_move_l){
+    if(pos_blinky.y() > next_move_l_blinky){
         next_move_blinky = UP;
 
     }
     /* la direction sera DOWN */
-    if(pos_blinky.y() < next_move_l){
+    if(pos_blinky.y() < next_move_l_blinky){
         next_move_blinky = DOWN;
-
     }
-
-
 
     blinky->setDirection(next_move_blinky);
     blinky->avance();
     if(checkCollisionsGhost(blinky)){
         blinky->avance();
         checkCollisionsGhost(blinky);
+    }
+
+    /*********************************************************************/
+
+    /* pour inky */
+
+    QPoint pos_inky = inky->current_tile_pos();
+    pos_pacman = Pacman->current_tile_pos();
+
+    int next_inky_move = graph_control->next_move(pos_inky.x(),pos_inky.y(),pos_pacman.x(),pos_pacman.y());
+
+    int next_move_c_inky = graph_control->parse_move_c(next_inky_move);
+    int next_move_l_inky = graph_control->parse_move_l(next_inky_move);
+
+    /* la direction sera LEFT */
+    if(pos_inky.x() > next_move_c_inky){
+        next_move_inky = LEFT;
+
+    }
+    /* la direction sera RIGHT */
+    if(pos_inky.x() < next_move_c_inky){
+        next_move_inky = RIGHT;
+
+    }
+    /* la direction sera UP */
+    if(pos_inky.y() > next_move_l_inky){
+        next_move_inky = UP;
+
+    }
+    /* la direction sera DOWN */
+    if(pos_inky.y() < next_move_l_inky){
+        next_move_inky = DOWN;
+
+    }
+
+
+
+    inky->setDirection(next_move_inky);
+    inky->avance();
+    if(checkCollisionsGhost(inky)){
+        inky->avance();
+        checkCollisionsGhost(inky);
+    }
+
+    /*********************************************************************/
+    /* pour pinky */
+    QPoint pos_pinky = blinky->current_tile_pos();
+    pos_pacman = Pacman->current_tile_pos();
+
+    int next_pinky_move = graph_control->next_move(pos_pinky.x(),pos_pinky.y(),pos_pacman.x(),pos_pacman.y());
+
+    int next_move_c_pinky = graph_control->parse_move_c(next_pinky_move);
+    int next_move_l_pinky = graph_control->parse_move_l(next_pinky_move);
+
+    /* la direction sera LEFT */
+    if(pos_pinky.x() > next_move_c_pinky){
+        next_move_pinky = LEFT;
+
+    }
+    /* la direction sera RIGHT */
+    if(pos_pinky.x() < next_move_c_pinky){
+        next_move_pinky = RIGHT;
+
+    }
+    /* la direction sera UP */
+    if(pos_pinky.y() > next_move_l_pinky){
+        next_move_pinky = UP;
+
+    }
+    /* la direction sera DOWN */
+    if(pos_pinky.y() < next_move_l_pinky){
+        next_move_pinky = DOWN;
+    }
+
+    pinky->setDirection(next_move_pinky);
+    pinky->avance();
+    if(checkCollisionsGhost(pinky)){
+        pinky->avance();
+        checkCollisionsGhost(pinky);
     }
     /*********************************************************************************************************************/
 
@@ -156,6 +258,8 @@ void GameScene::init(TileMap &map)
     Pacman = new PacMan();
     blinky = new Blinky();
     clyde = new Clyde();
+    inky = new Inky();
+    pinky = new Pinky();
     //labyrinthe->setOffset(16, 16);
 
     CollectableItem *dot;
@@ -193,12 +297,16 @@ void GameScene::init(TileMap &map)
 
     //qDebug() << map.get_pos_pacman_init_col();
     Pacman->setPos(map.get_pos_pacman_init_col()*T_SIZE,map.get_pos_pacman_init_row()*T_SIZE);
-
+    addItem(Pacman);
     blinky->setPos(map.get_pos_blinky_init_col()*T_SIZE,map.get_pos_blinky_init_row()*T_SIZE);
     clyde->setPos(map.get_pos_clyde_init_col()*T_SIZE,map.get_pos_clyde_init_row()*T_SIZE);
+    inky->setPos(map.get_pos_inky_init_col()*T_SIZE,map.get_pos_inky_init_row()*T_SIZE);
+    pinky->setPos(map.get_pos_pinky_init_col()*T_SIZE,map.get_pos_pinky_init_row()*T_SIZE);
     addItem(blinky);
-    addItem(Pacman);
     addItem(clyde);
+    addItem(inky);
+    addItem(pinky);
+
 
 
 
@@ -248,21 +356,33 @@ int GameScene::checkCollisions()
             /* mettre le mode pucelle sur tous les fantômes */
             QPointF pos_blinky = blinky->pos();
             QPointF pos_clyde = clyde->pos();
+            QPointF pos_inky = inky->pos();
+            QPointF pos_pinky = pinky->pos();
 
             removeItem(blinky);
             removeItem(clyde);
+            removeItem(inky);
+            removeItem(pinky);
 
             delete blinky;
             delete clyde;
+            delete inky;
+            delete pinky;
 
             blinky = new AfraidGhost();
             clyde = new AfraidGhost();
+            inky = new AfraidGhost();
+            pinky = new AfraidGhost();
 
             blinky->setPos(pos_blinky);
             clyde->setPos(pos_clyde);
+            inky->setPos(pos_inky);
+            pinky->setPos(pos_pinky);
 
             addItem(blinky);
             addItem(clyde);
+            addItem(inky);
+            addItem(pinky);
 
             m_time_elapsed_berzerk_mode = 0;
             m_timer_berzerk_mode.start();
