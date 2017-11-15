@@ -8,7 +8,7 @@ class Blinky : public Ghost
 {
 public:
     Blinky();
-    void nextIAMove(Graph *graph_control, Entity *e);
+    virtual void nextIAMove(Graph *graph_control, Entity *e);
 };
 
 #endif // BLINKY_H

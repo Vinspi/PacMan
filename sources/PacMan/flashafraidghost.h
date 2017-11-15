@@ -6,7 +6,7 @@ class FlashAfraidGhost : public Ghost
 {
 public:
     FlashAfraidGhost();
-    void nextIAMove(Graph *graph_control,Entity *e);
+    virtual void nextIAMove(Graph *graph_control,Entity *e);
 };
 
 #endif // FLASHAFRAIDGHOST_H

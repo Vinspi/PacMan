@@ -8,7 +8,7 @@ using namespace std;
 GameScene::GameScene(TileManager *tm) : QGraphicsScene(), dots(), m_timer(), m_timer_berzerk_mode()
 {
     this->tm = tm;
-    m_timer.setInterval(10);
+    m_timer.setInterval(40);
     m_timer_berzerk_mode.setInterval(1000);
 
     connect(&m_timer,&QTimer::timeout,this,&GameScene::updateScene);
@@ -97,114 +97,48 @@ void GameScene::updateScene()
     QPoint pos_pacman = Pacman->current_tile_pos();
     berzerk_debuff_vitesse = !berzerk_debuff_vitesse;
 
-    if(!berzerk_mode_active){
-        /* pour clyde */
 
-        (static_cast<Clyde*>(clyde))->nextIAMove(graph_control,Pacman);
+    /* pour clyde */
+
+    for(int i=0;i<clyde->vitesse();i++){
+        clyde->nextIAMove(graph_control,Pacman);
         clyde->avance();
         if(checkCollisionsGhost(clyde)){
             clyde->avance();
             checkCollisionsGhost(clyde);
         }
-
-        /*********************************************************************/
-
-        /* pour blinky */
-
-        (static_cast<Blinky*>(blinky))->nextIAMove(graph_control,Pacman);
-        blinky->avance();
-        if(checkCollisionsGhost(blinky)){
-            blinky->avance();
-            checkCollisionsGhost(blinky);
-        }
-
-        /*********************************************************************/
-
-        /* pour inky */
-
-        (static_cast<Inky*>(inky))->nextIAMove(graph_control,Pacman);
-        inky->avance();
-        if(checkCollisionsGhost(inky)){
-            inky->avance();
-            checkCollisionsGhost(inky);
-        }
-
-        /*********************************************************************/
-
-        /* pour pinky */
-        QPoint pos_pinky = pinky->current_tile_pos();
-        pos_pacman = Pacman->current_tile_pos();
-
-        int next_pinky_move = graph_control->next_move(pos_pinky.x(),pos_pinky.y(),pos_pacman.x(),pos_pacman.y());
-
-        int next_move_c_pinky = graph_control->parse_move_c(next_pinky_move);
-        int next_move_l_pinky = graph_control->parse_move_l(next_pinky_move);
-
-        /* la direction sera LEFT */
-        if(pos_pinky.x() > next_move_c_pinky){
-            next_move_pinky = LEFT;
-
-        }
-        /* la direction sera RIGHT */
-        if(pos_pinky.x() < next_move_c_pinky){
-            next_move_pinky = RIGHT;
-
-        }
-        /* la direction sera UP */
-        if(pos_pinky.y() > next_move_l_pinky){
-            next_move_pinky = UP;
-
-        }
-        /* la direction sera DOWN */
-        if(pos_pinky.y() < next_move_l_pinky){
-            next_move_pinky = DOWN;
-        }
-
-        pinky->setDirection(next_move_pinky);
-        pinky->avance();
-        if(checkCollisionsGhost(pinky)){
-            pinky->avance();
-            checkCollisionsGhost(pinky);
-        }
-        /*********************************************************************************************************************/
     }
-    else if(berzerk_debuff_vitesse){
-        QPoint pos_clyde = clyde->current_tile_pos();
-        next_move_clyde = graph_control->next_random_move(pos_clyde.x(),pos_clyde.y(),clyde->direction());
+    clyde->nextTile();
+    /*********************************************************************/
 
-        clyde->setDirection(next_move_clyde);
-        clyde->avance();
-        if(checkCollisionsGhost(clyde)){
-            clyde->avance();
-            checkCollisionsGhost(clyde);
-        }
-
-        QPoint pos_blinky = blinky->current_tile_pos();
-        next_move_blinky = graph_control->next_random_move(pos_blinky.x(),pos_blinky.y(),blinky->direction());
-
-        blinky->setDirection(next_move_blinky);
+    /* pour blinky */
+    for(int i=0;i<blinky->vitesse();i++){
+        blinky->nextIAMove(graph_control,Pacman);
         blinky->avance();
         if(checkCollisionsGhost(blinky)){
             blinky->avance();
             checkCollisionsGhost(blinky);
         }
+    }
+    blinky->nextTile();
+    /*********************************************************************/
 
-
-        QPoint pos_inky = inky->current_tile_pos();
-        next_move_inky = graph_control->next_random_move(pos_inky.x(),pos_inky.y(),inky->direction());
-
-        inky->setDirection(next_move_inky);
+    /* pour inky */
+    for(int i=0;i<inky->vitesse();i++){
+        inky->nextIAMove(graph_control,Pacman);
         inky->avance();
         if(checkCollisionsGhost(inky)){
             inky->avance();
             checkCollisionsGhost(inky);
         }
 
+    }
+    inky->nextTile();
+    /*********************************************************************/
 
-        QPoint pos_pinky = pinky->current_tile_pos();
-        next_move_pinky = graph_control->next_random_move(pos_pinky.x(),pos_pinky.y(),pinky->direction());
-
-        pinky->setDirection(next_move_pinky);
+    /* pour pinky */
+    for(int i=0;i<pinky->vitesse();i++){
+        pinky->nextIAMove(graph_control,Pacman);
         pinky->avance();
         if(checkCollisionsGhost(pinky)){
             pinky->avance();
@@ -212,15 +146,20 @@ void GameScene::updateScene()
         }
 
     }
+    pinky->nextTile();
+    /*********************************************************************************************************************/
+
     /* pour pacman */
-    Pacman->setDirection(next_move);
-    Pacman->avance();
-
-    if(checkCollisions()){
+    for(int i=0;i<Pacman->vitesse();i++){
+        Pacman->setDirection(next_move);
         Pacman->avance();
-        checkCollisions();
-    }
 
+        if(checkCollisions()){
+            Pacman->avance();
+            checkCollisions();
+        }
+    }
+    Pacman->nextTile();
     if(m_nb_dot == 0){
         win();
     }

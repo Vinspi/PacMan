@@ -52,11 +52,11 @@ void Entity::paint(QPainter *painter,
 
 }
 
-void Entity::setVitesse(float v){
+void Entity::setVitesse(int v){
     m_vitesse = v;
 }
 
-float Entity::vitesse(){
+int Entity::vitesse(){
     return m_vitesse;
 }
 
@@ -74,39 +74,43 @@ void Entity::annule_deplacement(){
 
 void Entity::avance(){
 
-    m_last_position = pos();
+        m_last_position = pos();
 
-    qDebug() << m_vitesse << " " << CYCLE_VITESSE << " " << m_vitesse*CYCLE_VITESSE << endl;
+        //qDebug() << m_vitesse << " " << CYCLE_VITESSE << " " << m_vitesse*CYCLE_VITESSE << endl;
 
-    switch (direction()) {
-    case UP:
-        this->setPixmap(moveUp[m_frame]);
+        switch (direction()) {
+        case UP:
+            this->setPixmap(moveUp[m_frame]);
 
-        this->setPos(this->pos()+QPointF(0,-1));
-        break;
-    case DOWN:
-        this->setPixmap(moveDown[m_frame]);
+            this->setPos(this->pos()+QPointF(0,-1));
+            break;
+        case DOWN:
+            this->setPixmap(moveDown[m_frame]);
 
-        this->setPos(this->pos()+QPointF(0,1));
-        break;
-    case LEFT:
-        this->setPixmap(moveLeft[m_frame]);
+            this->setPos(this->pos()+QPointF(0,1));
+            break;
+        case LEFT:
+            this->setPixmap(moveLeft[m_frame]);
 
-        this->setPos(this->pos()+QPointF(-1,0));
-        break;
-    case RIGHT:
-        this->setPixmap(moveRight[m_frame]);
+            this->setPos(this->pos()+QPointF(-1,0));
+            break;
+        case RIGHT:
+            this->setPixmap(moveRight[m_frame]);
 
-        this->setPos(this->pos()+QPointF(1,0));
-        break;
-    default:
-        break;
+            this->setPos(this->pos()+QPointF(1,0));
+            break;
+        default:
+            break;
+
+
     }
     m_last_frame=m_frame;
-    m_frame=(m_frame+1)%(m_max_frame);
 
 }
 
+void Entity::nextTile(){
+    m_frame=(m_frame+1)%(m_max_frame);
+}
 
 QRectF Entity::boundingRect() const {
     return QRectF(0,0,32,32);

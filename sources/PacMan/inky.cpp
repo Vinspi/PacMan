@@ -2,7 +2,7 @@
 
 Inky::Inky() : Ghost("../PacMan/graphics_pacman/Inky.png")
 {
-    setVitesse(1.0);
+    setVitesse(4);
 }
 
 void Inky::nextIAMove(Graph *graph_control,Entity *e){

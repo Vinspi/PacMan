@@ -2,7 +2,7 @@
 
 Blinky::Blinky() : Ghost("../PacMan/graphics_pacman/Blinky.png")
 {
-    setVitesse(0.8);
+    setVitesse(4);
 }
 
 void Blinky::nextIAMove(Graph *graph_control,Entity *e){

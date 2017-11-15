@@ -2,7 +2,7 @@
 
 PacMan::PacMan() : Entity("../PacMan/graphics_pacman/Pacman.png")
 {
-    setVitesse(2);
+    setVitesse(4);
 }
 
 

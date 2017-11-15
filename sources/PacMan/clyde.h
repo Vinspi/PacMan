@@ -8,7 +8,7 @@ class Clyde : public Ghost
 {
 public:
     Clyde();
-    void nextIAMove(Graph *graph_control,Entity *e);
+    virtual void nextIAMove(Graph *graph_control,Entity *e);
 
 };
 

@@ -2,7 +2,7 @@
 
 Clyde::Clyde() : Ghost("../PacMan/graphics_pacman/Clyde.png")
 {
-    setVitesse(1.0);
+    setVitesse(5);
 }
 
 void Clyde::nextIAMove(Graph *graph_control,Entity *e){

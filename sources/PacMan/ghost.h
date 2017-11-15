@@ -10,7 +10,7 @@ class Ghost : public Entity
 public:
     Ghost();
     Ghost(QString skin);
-    //virtual void nextIAMove(Graph *graph_control);
+    virtual void nextIAMove(Graph *graph_control, Entity *e);
 
 
 private:

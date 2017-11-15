@@ -16,14 +16,14 @@ public:
     void avance();
     void annule_deplacement();
     int direction();
-    float vitesse();
+    int vitesse();
     void setDirection(int dir);
-    void setVitesse(float v);
+    void setVitesse(int v);
     QRectF boundingRect() const override;
     QPainterPath shape() const override;
     QPoint current_tile_pos();
     void setMode(int mode);
-
+    void nextTile();
 
     void paint(QPainter *painter,
                               const QStyleOptionGraphicsItem *option,
@@ -31,8 +31,8 @@ public:
 
 private:
     int m_direction;
-    float m_vitesse; /* comprise entre 0 et 1 */
-
+    int m_vitesse;
+    int m_vitesse_iterator;
     int m_frame;
     int m_last_frame;
     int m_last_direction;
