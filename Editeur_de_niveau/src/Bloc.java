@@ -15,6 +15,11 @@ public class Bloc extends JButton implements MouseListener{
     private boolean survol = false;
     private int etat;
     public boolean isBigGum = false;
+    public boolean isPacman = false;
+    public boolean isBlinky = false;
+    public boolean isPinky = false;
+    public boolean isClyde = false;
+    public boolean isInky = false;
 
     public int getEtat() {
         return etat;
@@ -50,6 +55,7 @@ public class Bloc extends JButton implements MouseListener{
                 graphics.setColor(Color.RED);
                 graphics.fillRect(0, 0, this.getWidth(), this.getHeight());
             }
+
         }
         else {
             graphics.setColor(new Color(10, 20, 52));
@@ -61,6 +67,26 @@ public class Bloc extends JButton implements MouseListener{
             if(isBigGum) {
                 graphics.setColor(new Color(240, 221, 28));
                 graphics.fillRect(0, 0, this.getWidth(), this.getHeight());
+            }
+            if(isClyde) {
+                graphics.setColor(Color.ORANGE);
+                graphics.fillOval(0,0,this.getWidth(),this.getHeight());
+            }
+            if(isBlinky) {
+                graphics.setColor(Color.RED);
+                graphics.fillOval(0,0,this.getWidth(),this.getHeight());
+            }
+            if(isInky) {
+                graphics.setColor(Color.BLUE);
+                graphics.fillOval(0,0,this.getWidth(),this.getHeight());
+            }
+            if(isPinky) {
+                graphics.setColor(Color.PINK);
+                graphics.fillOval(0,0,this.getWidth(),this.getHeight());
+            }
+            if(isPacman) {
+                graphics.setColor(Color.YELLOW);
+                graphics.fillOval(0,0,this.getWidth(),this.getHeight());
             }
         }
 

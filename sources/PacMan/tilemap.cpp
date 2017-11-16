@@ -95,7 +95,7 @@ TileMap::TileMap(QString filename) : m_map()
         /* pour chaque tile */
         while(!tile.isNull()){
 
-            m_map[tile.toElement().attribute("col").toInt()][tile.toElement().attribute("row").toInt()] = tile.toElement().attribute("value").toInt();
+            m_map[tile.toElement().attribute("row").toInt()][tile.toElement().attribute("col").toInt()] = tile.toElement().attribute("value").toInt();
 
             tile = tile.nextSibling();
         }
@@ -119,7 +119,7 @@ TileMap::TileMap(QString filename) : m_map()
     while(!row.isNull()){
         /* pour chaque tile */
         while(!tile.isNull()){
-            m_map_collectibles[tile.toElement().attribute("col").toInt()][tile.toElement().attribute("row").toInt()] = tile.toElement().attribute("value").toInt();
+            m_map_collectibles[tile.toElement().attribute("row").toInt()][tile.toElement().attribute("col").toInt()] = tile.toElement().attribute("value").toInt();
 
             tile = tile.nextSibling();
         }

@@ -112,9 +112,11 @@ int Graph::next_random_move(int c, int l, int direction){
             directions[nb_choix] = UP;
             nb_choix++;
         }
-
-        random_direction = rand()%nb_choix;
-        return directions[random_direction];
+        if(nb_choix){
+            random_direction = rand()%nb_choix;
+            return directions[random_direction];
+        }
+        else return DOWN;
 
     case DOWN:
         /* on regarde a gauche si il y a un chemin */
@@ -133,9 +135,11 @@ int Graph::next_random_move(int c, int l, int direction){
             nb_choix++;
         }
 
-        random_direction = rand()%nb_choix;
-
-        return directions[random_direction];
+        if(nb_choix){
+            random_direction = rand()%nb_choix;
+            return directions[random_direction];
+        }
+        else return UP;
 
     case LEFT:
         /* on regarde en bas si il y a un chemin */
@@ -153,10 +157,11 @@ int Graph::next_random_move(int c, int l, int direction){
             directions[nb_choix] = LEFT;
             nb_choix++;
         }
-
-        random_direction = rand()%nb_choix;
-
-        return directions[random_direction];
+        if(nb_choix){
+            random_direction = rand()%nb_choix;
+            return directions[random_direction];
+        }
+        else return RIGHT;
 
     case RIGHT:
         /* on regarde en bas si il y a un chemin */
@@ -174,10 +179,11 @@ int Graph::next_random_move(int c, int l, int direction){
             directions[nb_choix] = RIGHT;
             nb_choix++;
         }
-
-        random_direction = rand()%nb_choix;
-
-        return directions[random_direction];
+        if(nb_choix){
+            random_direction = rand()%nb_choix;
+            return directions[random_direction];
+        }
+        else return LEFT;
 
     }
 }
