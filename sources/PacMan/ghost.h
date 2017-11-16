@@ -11,10 +11,11 @@ public:
     Ghost();
     Ghost(QString skin);
     virtual void nextIAMove(Graph *graph_control, Entity *e);
+    void setSpawnPoint(QPoint spawn_point);
+    QPoint spawnPoint();
 
-
-private:
-
+protected:
+    QPoint m_spawn_point;
 
 };
 

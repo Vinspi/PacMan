@@ -53,7 +53,12 @@ SOURCES += \
     afraidghost.cpp \
     flashafraidghost.cpp \
     inky.cpp \
-    pinky.cpp
+    pinky.cpp \
+    deadghost.cpp \
+    spawnblocclyde.cpp \
+    spawnblocblinky.cpp \
+    spawnblocinky.cpp \
+    spawnblocpinky.cpp
 
 HEADERS += \
     const.h \
@@ -84,7 +89,12 @@ HEADERS += \
     afraidghost.h \
     flashafraidghost.h \
     inky.h \
-    pinky.h
+    pinky.h \
+    deadghost.h \
+    spawnblocclyde.h \
+    spawnblocblinky.h \
+    spawnblocinky.h \
+    spawnblocpinky.h
 
 
 CONFIG += c++11

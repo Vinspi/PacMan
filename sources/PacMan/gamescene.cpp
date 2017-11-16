@@ -21,69 +21,107 @@ void GameScene::updateBerzerkMode(){
 
     if(m_time_elapsed_berzerk_mode == BERZERK_MODE_TIME){
         /* on retire le berzerk mode */
-        QPointF pos_blinky = blinky->pos();
-        QPointF pos_clyde = clyde->pos();
-        QPointF pos_inky = inky->pos();
-        QPointF pos_pinky = pinky->pos();
 
-        removeItem(blinky);
-        removeItem(clyde);
-        removeItem(inky);
-        removeItem(pinky);
 
-        delete blinky;
-        delete clyde;
-        delete inky;
-        delete pinky;
+        Ghost *tmp;
 
-        blinky = new Blinky();
-        clyde = new Clyde();
-        inky = new Inky();
-        pinky = new Pinky();
+        if(FlashAfraidGhost *fg = dynamic_cast<FlashAfraidGhost *> (blinky)){
+            tmp = blinky;
+            removeItem(blinky);
 
-        blinky->setPos(pos_blinky);
-        clyde->setPos(pos_clyde);
-        inky->setPos(pos_inky);
-        pinky->setPos(pos_pinky);
+            blinky = new Blinky();
+            blinky->setPos(tmp->pos());
+            blinky->setSpawnPoint(tmp->spawnPoint());
+            addItem(blinky);
 
-        addItem(blinky);
-        addItem(clyde);
-        addItem(inky);
-        addItem(pinky);
+            delete tmp;
+        }
+        if(FlashAfraidGhost *fg2 = dynamic_cast<FlashAfraidGhost *> (inky)){
+            tmp = inky;
+            removeItem(inky);
+
+            inky = new Inky();
+            inky->setPos(tmp->pos());
+            inky->setSpawnPoint(tmp->spawnPoint());
+            addItem(inky);
+
+            delete tmp;
+        }
+        if(FlashAfraidGhost *fg3 = dynamic_cast<FlashAfraidGhost *> (pinky)){
+            tmp = pinky;
+            removeItem(pinky);
+
+            pinky = new Pinky();
+            pinky->setPos(tmp->pos());
+            pinky->setSpawnPoint(tmp->spawnPoint());
+            addItem(pinky);
+
+            delete tmp;
+        }
+        if(FlashAfraidGhost *fg4 = dynamic_cast<FlashAfraidGhost *> (clyde)){
+            tmp = clyde;
+            removeItem(clyde);
+
+            clyde = new Clyde();
+            clyde->setPos(tmp->pos());
+            clyde->setSpawnPoint(tmp->spawnPoint());
+            addItem(clyde);
+
+            delete tmp;
+        }
+
         berzerk_mode_active = false;
         m_timer_berzerk_mode.stop();
     }
     else if(m_time_elapsed_berzerk_mode > (BERZERK_MODE_TIME/2)) {
         /* mon pikachu évolue en pikachu clignotant !!! */
-        QPointF pos_blinky = blinky->pos();
-        QPointF pos_clyde = clyde->pos();
-        QPointF pos_inky = inky->pos();
-        QPointF pos_pinky = pinky->pos();
 
-        removeItem(blinky);
-        removeItem(clyde);
-        removeItem(inky);
-        removeItem(pinky);
+        Ghost *tmp;
 
-        delete blinky;
-        delete clyde;
-        delete inky;
-        delete pinky;
+        if(AfraidGhost *fg = dynamic_cast<AfraidGhost *> (blinky)){
+            tmp = blinky;
+            removeItem(blinky);
 
-        blinky = new FlashAfraidGhost();
-        clyde = new FlashAfraidGhost();
-        inky = new FlashAfraidGhost();
-        pinky = new FlashAfraidGhost();
+            blinky = new FlashAfraidGhost();
+            blinky->setPos(tmp->pos());
+            blinky->setSpawnPoint(tmp->spawnPoint());
+            addItem(blinky);
 
-        blinky->setPos(pos_blinky);
-        clyde->setPos(pos_clyde);
-        inky->setPos(pos_inky);
-        pinky->setPos(pos_pinky);
+            delete tmp;
+        }
+        if(AfraidGhost *fg2 = dynamic_cast<AfraidGhost *> (inky)){
+            tmp = inky;
+            removeItem(inky);
 
-        addItem(blinky);
-        addItem(clyde);
-        addItem(inky);
-        addItem(pinky);
+            inky = new FlashAfraidGhost();
+            inky->setPos(tmp->pos());
+            inky->setSpawnPoint(tmp->spawnPoint());
+            addItem(inky);
+
+            delete tmp;
+        }
+        if(AfraidGhost *fg3 = dynamic_cast<AfraidGhost *> (pinky)){
+            tmp = pinky;
+            removeItem(pinky);
+
+            pinky = new FlashAfraidGhost();
+            pinky->setPos(tmp->pos());
+            pinky->setSpawnPoint(tmp->spawnPoint());
+            addItem(pinky);
+
+            delete tmp;
+        }
+        if(AfraidGhost *fg4 = dynamic_cast<AfraidGhost *> (clyde)){
+            tmp = clyde;
+            removeItem(clyde);
+
+            clyde = new FlashAfraidGhost();
+            clyde->setPos(tmp->pos());
+            clyde->setSpawnPoint(tmp->spawnPoint());
+            addItem(clyde);
+
+            delete tmp;
+        }
 
         m_time_elapsed_berzerk_mode++;
     }
@@ -221,12 +259,36 @@ void GameScene::init(TileMap &map)
     }
 
 
+    SpawnBlocClyde *sbc = new SpawnBlocClyde();
+    sbc->setPos(map.get_pos_clyde_init_col()*T_SIZE,map.get_pos_clyde_init_row()*T_SIZE);
+    addItem(sbc);
+
+    SpawnBlocInky *sbi = new SpawnBlocInky();
+    sbi->setPos(map.get_pos_inky_init_col()*T_SIZE,map.get_pos_inky_init_row()*T_SIZE);
+    addItem(sbi);
+
+    SpawnBlocPinky *sbp = new SpawnBlocPinky();
+    sbp->setPos(map.get_pos_pinky_init_col()*T_SIZE,map.get_pos_pinky_init_row()*T_SIZE);
+    addItem(sbp);
+
+    SpawnBlocBlinky *sbb = new SpawnBlocBlinky();
+    sbb->setPos(map.get_pos_blinky_init_col()*T_SIZE,map.get_pos_blinky_init_row()*T_SIZE);
+    addItem(sbb);
+
     Pacman->setPos(map.get_pos_pacman_init_col()*T_SIZE,map.get_pos_pacman_init_row()*T_SIZE);
     addItem(Pacman);
+
     blinky->setPos(map.get_pos_blinky_init_col()*T_SIZE,map.get_pos_blinky_init_row()*T_SIZE);
+    blinky->setSpawnPoint(QPoint(map.get_pos_blinky_init_col(),map.get_pos_blinky_init_row()));
     clyde->setPos(map.get_pos_clyde_init_col()*T_SIZE,map.get_pos_clyde_init_row()*T_SIZE);
+    clyde->setSpawnPoint(QPoint(map.get_pos_clyde_init_col(),map.get_pos_clyde_init_row()));
     inky->setPos(map.get_pos_inky_init_col()*T_SIZE,map.get_pos_inky_init_row()*T_SIZE);
+    inky->setSpawnPoint(QPoint(map.get_pos_inky_init_col(),map.get_pos_inky_init_row()));
     pinky->setPos(map.get_pos_pinky_init_col()*T_SIZE,map.get_pos_pinky_init_row()*T_SIZE);
+    pinky->setSpawnPoint(QPoint(map.get_pos_pinky_init_col(),map.get_pos_pinky_init_row()));
+
+
+
     addItem(blinky);
     addItem(clyde);
     addItem(inky);
@@ -235,23 +297,78 @@ void GameScene::init(TileMap &map)
 
 
 
-    //Pacman = addPixmap(QPixmap("../pacmanmoves").copy(0,28,14,14));
-    //Pacman->setOffset(21, 198);
 }
 
 int GameScene::checkCollisionsGhost(Ghost *ghost)
 {
 
     int resultat = 0;
+    Ghost *tmp;
     QList<QGraphicsItem *> list = collidingItems(ghost);
 
     for(int i = 0; i < list.size(); i++)
     {
-        if(BlocItem *b = dynamic_cast<BlocItem *>(list.at(i))){
+        if(MurItem *b = dynamic_cast<MurItem *>(list.at(i))){
             ghost->annule_deplacement();
             resultat = 1;
 
         }
+     }
+     if(DeadGhost *dg = dynamic_cast<DeadGhost *>(ghost)){
+         for(int i = 0; i < list.size(); i++){
+                if(SpawnBlocBlinky *sbb = dynamic_cast<SpawnBlocBlinky *>(list.at(i))){
+                    if(blinky == ghost){
+                        tmp = blinky;
+                        removeItem(blinky);
+
+                        blinky = new Blinky();
+                        blinky->setPos(tmp->pos());
+                        blinky->setSpawnPoint(tmp->spawnPoint());
+                        addItem(blinky);
+
+                        delete tmp;
+                    }
+                }
+                else if(SpawnBlocClyde *sbc = dynamic_cast<SpawnBlocClyde *>(list.at(i))){
+                    if(clyde == ghost){
+                        tmp = clyde;
+                        removeItem(clyde);
+
+                        clyde = new Clyde();
+                        clyde->setPos(tmp->pos());
+                        clyde->setSpawnPoint(tmp->spawnPoint());
+                        addItem(clyde);
+
+                        delete tmp;
+                    }
+                }
+                else if(SpawnBlocPinky *sbp = dynamic_cast<SpawnBlocPinky *>(list.at(i))){
+                    if(pinky == ghost){
+                        tmp = pinky;
+                        removeItem(pinky);
+
+                        pinky = new Pinky();
+                        pinky->setPos(tmp->pos());
+                        pinky->setSpawnPoint(tmp->spawnPoint());
+                        addItem(pinky);
+
+                        delete tmp;
+                    }
+                }
+                else if(SpawnBlocInky *sbi = dynamic_cast<SpawnBlocInky *>(list.at(i))){
+                    if(inky == ghost){
+                        tmp = inky;
+                        removeItem(inky);
+
+                        inky = new Inky();
+                        inky->setPos(tmp->pos());
+                        inky->setSpawnPoint(tmp->spawnPoint());
+                        addItem(inky);
+
+                        delete tmp;
+                    }
+                }
+            }
     }
     return resultat;
 }
@@ -277,56 +394,155 @@ int GameScene::checkCollisions()
             delete list.at(i);
             score += sd->value();
             m_nb_dot--;
+            Ghost *tmp;
             /* enable beast mode on pacman */
             /* mettre le mode pucelle sur tous les fantômes */
-            QPointF pos_blinky = blinky->pos();
-            QPointF pos_clyde = clyde->pos();
-            QPointF pos_inky = inky->pos();
-            QPointF pos_pinky = pinky->pos();
+            DeadGhost *fg = dynamic_cast<DeadGhost *> (blinky);
+            DeadGhost *fg2 = dynamic_cast<DeadGhost *> (inky);
+            DeadGhost *fg3 = dynamic_cast<DeadGhost *> (pinky);
+            DeadGhost *fg4 = dynamic_cast<DeadGhost *> (clyde);
+            if(!fg){
+                tmp = blinky;
+                removeItem(blinky);
 
-            removeItem(blinky);
-            removeItem(clyde);
-            removeItem(inky);
-            removeItem(pinky);
+                blinky = new AfraidGhost();
+                blinky->setPos(tmp->pos());
+                blinky->setSpawnPoint(tmp->spawnPoint());
+                addItem(blinky);
 
-            delete blinky;
-            delete clyde;
-            delete inky;
-            delete pinky;
+                delete tmp;
+            }
+            if(!fg2){
+                tmp = inky;
+                removeItem(inky);
 
-            blinky = new AfraidGhost();
-            clyde = new AfraidGhost();
-            inky = new AfraidGhost();
-            pinky = new AfraidGhost();
+                inky = new AfraidGhost();
+                inky->setPos(tmp->pos());
+                inky->setSpawnPoint(tmp->spawnPoint());
+                addItem(inky);
 
-            blinky->setPos(pos_blinky);
-            clyde->setPos(pos_clyde);
-            inky->setPos(pos_inky);
-            pinky->setPos(pos_pinky);
+                delete tmp;
+            }
+            if(!fg3){
+                tmp = pinky;
+                removeItem(pinky);
 
-            addItem(blinky);
-            addItem(clyde);
-            addItem(inky);
-            addItem(pinky);
+                pinky = new AfraidGhost();
+                pinky->setPos(tmp->pos());
+                pinky->setSpawnPoint(tmp->spawnPoint());
+                addItem(pinky);
 
+                delete tmp;
+            }
+            if(!fg4){
+                tmp = clyde;
+                removeItem(clyde);
+
+                clyde = new AfraidGhost();
+                clyde->setPos(tmp->pos());
+                clyde->setSpawnPoint(tmp->spawnPoint());
+                addItem(clyde);
+
+                delete tmp;
+            }
             berzerk_mode_active = true;
             m_time_elapsed_berzerk_mode = 0;
             m_timer_berzerk_mode.start();
 
 
         }
-        else if(BlocItem *b = dynamic_cast<BlocItem *>(list.at(i))){
+        else if(MurItem *b = dynamic_cast<MurItem *>(list.at(i))){
             Pacman->annule_deplacement();
             resultat = 1;
 
         }
         else if(AfraidGhost *ag = dynamic_cast<AfraidGhost *>(list.at(i))){
             /* detruire le fantôme */
+            QPointF pos_ghost = ag->pos();
+
+            removeItem(ag);
+
+            Ghost *tmp;
+
+            if(ag == clyde){
+                tmp = new DeadGhost();
+                tmp->setSpawnPoint(clyde->spawnPoint());
+                tmp->setPos(clyde->pos());
+                delete clyde;
+                clyde = tmp;
+                addItem(clyde);
+            }
+            else if(ag == inky){
+                tmp = new DeadGhost();
+                tmp->setSpawnPoint(inky->spawnPoint());
+                tmp->setPos(inky->pos());
+                delete inky;
+                inky = tmp;
+                addItem(inky);
+            }
+            else if(ag == pinky){
+                tmp = new DeadGhost();
+                tmp->setSpawnPoint(pinky->spawnPoint());
+                tmp->setPos(pinky->pos());
+                delete pinky;
+                pinky = tmp;
+                addItem(pinky);
+            }
+            else if(ag == blinky){
+                tmp = new DeadGhost();
+                tmp->setSpawnPoint(blinky->spawnPoint());
+                tmp->setPos(blinky->pos());
+                delete blinky;
+                blinky = tmp;
+                addItem(blinky);
+            }
+
         }
         else if(FlashAfraidGhost *ag = dynamic_cast<FlashAfraidGhost *>(list.at(i))){
             /* detruire le fantôme */
+            QPointF pos_ghost = ag->pos();
+
+            removeItem(ag);
+
+            Ghost *tmp;
+
+            if(ag == clyde){
+                tmp = new DeadGhost();
+                tmp->setSpawnPoint(clyde->spawnPoint());
+                tmp->setPos(clyde->pos());
+                delete clyde;
+                clyde = tmp;
+                addItem(clyde);
+            }
+            else if(ag == inky){
+                tmp = new DeadGhost();
+                tmp->setSpawnPoint(inky->spawnPoint());
+                tmp->setPos(inky->pos());
+                delete inky;
+                inky = tmp;
+                addItem(inky);
+            }
+            else if(ag == pinky){
+                tmp = new DeadGhost();
+                tmp->setSpawnPoint(pinky->spawnPoint());
+                tmp->setPos(pinky->pos());
+                delete pinky;
+                pinky = tmp;
+                addItem(pinky);
+            }
+            else if(ag == blinky){
+                tmp = new DeadGhost();
+                tmp->setSpawnPoint(blinky->spawnPoint());
+                tmp->setPos(blinky->pos());
+                delete blinky;
+                blinky = tmp;
+                addItem(blinky);
+            }
 
 
+        }
+        else if(DeadGhost *dg = dynamic_cast<DeadGhost *>(list.at(i))){
+            /* ne rien faire */
         }
         else if(Entity *e = dynamic_cast<Entity *>(list.at(i))){
             gameOver();

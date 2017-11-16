@@ -25,6 +25,11 @@
 #include "flashafraidghost.h"
 #include "inky.h"
 #include "pinky.h"
+#include "deadghost.h"
+#include "spawnblocclyde.h"
+#include "spawnblocinky.h"
+#include "spawnblocblinky.h"
+#include "spawnblocpinky.h"
 
 
 class GameScene : public QGraphicsScene

@@ -7,6 +7,9 @@ Ghost::Ghost(QString skin) : Entity(skin)
     setVitesse(1);
 }
 
+void Ghost::setSpawnPoint(QPoint spawn_point){
+    m_spawn_point = spawn_point;
+}
 
 void Ghost::nextIAMove(Graph *graph_control, Entity *e) {
     QPoint pos_ghost = current_tile_pos();
@@ -14,4 +17,8 @@ void Ghost::nextIAMove(Graph *graph_control, Entity *e) {
 
     setDirection(next_move_ghost);
 
+}
+
+QPoint Ghost::spawnPoint(){
+    return m_spawn_point;
 }
