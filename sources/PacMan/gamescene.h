@@ -46,6 +46,8 @@ public:
     void updateScene();
     int checkCollisions();
     int checkCollisionsGhost(Ghost *ghost);
+    void updateTimerDebut();
+    void reset();
 
 public slots:
 
@@ -95,7 +97,16 @@ private:
     bool berzerk_mode_active;
     bool berzerk_debuff_vitesse;
     HUD *hud;
+    QPoint pacman_spawn_point;
 
+    /* pour le timer de début de partie */
+
+    QLabel *m_nombre_timer_deb;
+    int compteur_timer_deb;
+    QTimer *timer_debut;
+    QGraphicsProxyWidget *tmp_prox;
+
+    /*************************************/
 
 };
 

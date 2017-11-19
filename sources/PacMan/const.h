@@ -14,7 +14,7 @@ const int BERZERK_MODE_TIME = 4; /* 4 sec de berserk */
 
 const int CYCLE_VITESSE = 10;
 
-const int NB_VIE_MAX = 5;
+const int NB_VIE_MAX = 10;
 
 
 #endif // CONST_H

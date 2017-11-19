@@ -14,7 +14,55 @@ GameScene::GameScene(TileManager *tm) : QGraphicsScene(), dots(), m_timer(), m_t
     connect(&m_timer,&QTimer::timeout,this,&GameScene::updateScene);
     connect(&m_timer_berzerk_mode,&QTimer::timeout,this,&GameScene::updateBerzerkMode);
 
-    m_timer.start();
+
+
+
+
+
+}
+
+
+void GameScene::updateTimerDebut(){
+
+    if(compteur_timer_deb > 20){
+        m_nombre_timer_deb->setStyleSheet(QString("color: rgba(0,0,0,%1);"
+                                          "font-size: 200px;"
+                                          "background: transparent;").arg(qreal(compteur_timer_deb-20)/10));
+    }
+    else if(compteur_timer_deb <= 20 && compteur_timer_deb > 10){
+        if (compteur_timer_deb == 20){
+            m_nombre_timer_deb->setText("2");
+            m_nombre_timer_deb->setStyleSheet(QString("color: rgba(0,0,0,1);"
+                                                      "font-size: 200px;"
+                                                      "background: transparent;"));
+        }
+        else{
+            m_nombre_timer_deb->setStyleSheet(QString("color: rgba(0,0,0,%1);"
+                                              "font-size: 200px;"
+                                              "background: transparent;").arg(qreal(compteur_timer_deb-10)/10));
+        }
+    }
+    else {
+        if(compteur_timer_deb == 10){
+            m_nombre_timer_deb->setText("1");
+            m_nombre_timer_deb->setStyleSheet(QString("color: rgba(0,0,0,1);"
+                                                      "font-size: 200px;"
+                                                      "background: transparent;"));
+        }
+        else if(compteur_timer_deb == 0){
+            m_timer.start();
+            m_nombre_timer_deb->setVisible(false);
+            timer_debut->stop();
+
+        }
+        else{
+            m_nombre_timer_deb->setStyleSheet(QString("color: rgba(0,0,0,%1);"
+                                              "font-size: 200px;"
+                                              "background: transparent;").arg(qreal(compteur_timer_deb)/10));
+        }
+
+    }
+    compteur_timer_deb--;
 }
 
 void GameScene::updateBerzerkMode(){
@@ -205,6 +253,62 @@ void GameScene::updateScene()
     this->update();
 }
 
+void GameScene::reset(){
+
+    m_timer.stop();
+    Ghost *tmp_blinky = blinky;
+    Ghost *tmp_clyde = clyde;
+    Ghost *tmp_inky = inky;
+    Ghost *tmp_pinky = pinky;
+    PacMan *tmp_pacman = Pacman;
+
+    Pacman = new PacMan();
+
+    Pacman->setPos(pacman_spawn_point);
+
+    removeItem(tmp_pacman);
+    addItem(Pacman);
+
+    blinky = new Blinky();
+    clyde = new Clyde();
+    inky = new Inky();
+    pinky = new Pinky();
+
+    blinky->setPos(tmp_blinky->spawnPoint()*T_SIZE);
+    blinky->setSpawnPoint(tmp_blinky->spawnPoint());
+
+    clyde->setPos(tmp_clyde->spawnPoint()*T_SIZE);
+    clyde->setSpawnPoint(tmp_clyde->spawnPoint());
+
+    inky->setPos(tmp_inky->spawnPoint()*T_SIZE);
+    inky->setSpawnPoint(tmp_inky->spawnPoint());
+
+    pinky->setPos(tmp_pinky->spawnPoint()*T_SIZE);
+    pinky->setSpawnPoint(tmp_pinky->spawnPoint());
+
+    addItem(blinky);
+    addItem(clyde);
+    addItem(inky);
+    addItem(pinky);
+
+    removeItem(tmp_blinky);
+    removeItem(tmp_pinky);
+    removeItem(tmp_inky);
+    removeItem(tmp_clyde);
+
+    delete tmp_blinky;
+    delete tmp_clyde;
+    delete tmp_inky;
+    delete tmp_pinky;
+
+    compteur_timer_deb = 30;
+    m_nombre_timer_deb->setText("3");
+    m_nombre_timer_deb->setVisible(true);
+    timer_debut->start();
+
+
+}
+
 void GameScene::init(TileMap &map)
 {
     clear();
@@ -214,6 +318,20 @@ void GameScene::init(TileMap &map)
     next_move = UP;
     berzerk_debuff_vitesse = true;
     setSceneRect(0, 0, map.width() * T_SIZE, map.height() * T_SIZE);
+
+    /* background */
+
+    QLabel *m_background = new QLabel();
+    m_background->setGeometry(0,0,1280,800);
+    m_background->setPixmap(QPixmap("../PacMan/graphics_pacman/background_pacman.png").scaled(1280,800));
+    QGraphicsProxyWidget *proxy_tmp = new QGraphicsProxyWidget();
+
+    proxy_tmp->setWidget(m_background);
+    proxy_tmp->setPos(-255,-15);
+    addItem(proxy_tmp);
+
+    /******************/
+
     QPixmap bg(map.width() * T_SIZE, map.height() * T_SIZE);
     bg.fill(Qt::black);
     background = addPixmap(bg);
@@ -223,7 +341,7 @@ void GameScene::init(TileMap &map)
     clyde = new Clyde();
     inky = new Inky();
     pinky = new Pinky();
-    //labyrinthe->setOffset(16, 16);
+
 
     CollectableItem *dot;
     BlocItem *mur;
@@ -275,6 +393,8 @@ void GameScene::init(TileMap &map)
     sbb->setPos(map.get_pos_blinky_init_col()*T_SIZE,map.get_pos_blinky_init_row()*T_SIZE);
     addItem(sbb);
 
+    pacman_spawn_point = QPoint(map.get_pos_pacman_init_col()*T_SIZE,map.get_pos_pacman_init_row()*T_SIZE);
+
     Pacman->setPos(map.get_pos_pacman_init_col()*T_SIZE,map.get_pos_pacman_init_row()*T_SIZE);
     addItem(Pacman);
 
@@ -296,7 +416,7 @@ void GameScene::init(TileMap &map)
 
     /* test */
 
-    hud = new HUD(4);
+    hud = new HUD(5);
     QGraphicsProxyWidget *proxy = new QGraphicsProxyWidget();
 
     proxy->setWidget(hud);
@@ -308,6 +428,38 @@ void GameScene::init(TileMap &map)
 
     /*********************/
 
+
+    /* pour le compteur de début de partie */
+
+
+    m_nombre_timer_deb = new QLabel("3");
+    m_nombre_timer_deb->setStyleSheet("color: rgba(0,0,0,1);"
+                                      "font-size: 200px;"
+                                      "background: transparent;"
+                                      "opacity: 0.5;");
+
+
+
+
+    timer_debut = new QTimer();
+
+    connect(timer_debut,&QTimer::timeout,this,&GameScene::updateTimerDebut);
+
+    timer_debut->setInterval(100); /* 10 clocks pour 1 sec */
+    compteur_timer_deb = 30; /* 3 sec soit 30 clocks */
+    timer_debut->start();
+
+
+
+    tmp_prox = new QGraphicsProxyWidget();
+
+    tmp_prox->setWidget(m_nombre_timer_deb);
+
+    tmp_prox->setPos(width()/2-50,height()/2-120);
+
+    addItem(tmp_prox);
+
+    /****************************************/
 
 }
 
@@ -472,6 +624,8 @@ int GameScene::checkCollisions()
             /* detruire le fantôme */
             QPointF pos_ghost = ag->pos();
 
+            hud->addToScore(100);
+
             removeItem(ag);
 
             Ghost *tmp;
@@ -513,6 +667,9 @@ int GameScene::checkCollisions()
         else if(FlashAfraidGhost *ag = dynamic_cast<FlashAfraidGhost *>(list.at(i))){
             /* detruire le fantôme */
             QPointF pos_ghost = ag->pos();
+
+
+            hud->addToScore(200);
 
             removeItem(ag);
 
@@ -557,7 +714,13 @@ int GameScene::checkCollisions()
             /* ne rien faire */
         }
         else if(Entity *e = dynamic_cast<Entity *>(list.at(i))){
-            gameOver();
+            if(hud->nb_vie() > 0){
+                hud->perd_une_vie();
+                reset();
+            }
+            else {
+                gameOver();
+            }
         }
     }
     return resultat;

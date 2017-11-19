@@ -17,6 +17,7 @@ public:
     void addToScore(int points);
     void updateTime();
     int nb_vie();
+    void perd_une_vie();
 
 private:
     QLabel *m_score_label;

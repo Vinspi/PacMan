@@ -19,7 +19,8 @@ HUD::HUD(int nb_vie) : QWidget()
     m_score = 0;
     m_score_label = new QLabel("score : 0");
 
-    m_score_label->setStyleSheet("border: node;");
+    m_score_label->setStyleSheet("border: none;"
+                                 "opacity: 0.3;");
 
     layout->addWidget(m_score_label);
 
@@ -49,6 +50,14 @@ HUD::HUD(int nb_vie) : QWidget()
 
 HUD::HUD() : QWidget()
 {
+
+}
+
+void HUD::perd_une_vie(){
+    if(m_nb_vie > 0){
+        m_nb_vie--;
+        vie[m_nb_vie]->setVisible(false);
+    }
 
 }
 
