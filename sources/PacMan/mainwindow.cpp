@@ -42,7 +42,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     /* et on teste un niveau */
     GameScene* gs = new GameScene(new TileManager("../PacMan/graphics_pacman/tileset.png"));
-    TileMap tm("../PacMan/levels/xml_level2.xml");
+    TileMap tm("../PacMan/levels/xml_level1.xml");
     gs->init(tm);
     QGraphicsView* gv = new QGraphicsView(gs);
     gv->show();
