@@ -135,6 +135,7 @@ void GameScene::updateScene()
     QPoint pos_pacman = Pacman->current_tile_pos();
     berzerk_debuff_vitesse = !berzerk_debuff_vitesse;
 
+    hud->updateTime();
 
     /* pour clyde */
 
@@ -206,7 +207,6 @@ void GameScene::updateScene()
 
 void GameScene::init(TileMap &map)
 {
-
     clear();
     m_nb_dot = 0;
     graph_control = new Graph(map);
@@ -294,7 +294,19 @@ void GameScene::init(TileMap &map)
     addItem(inky);
     addItem(pinky);
 
+    /* test */
 
+    hud = new HUD(4);
+    QGraphicsProxyWidget *proxy = new QGraphicsProxyWidget();
+
+    proxy->setWidget(hud);
+
+    proxy->setPos(-200,0);
+
+    addItem(proxy);
+
+
+    /*********************/
 
 
 }
@@ -385,14 +397,14 @@ int GameScene::checkCollisions()
         {
             removeItem(list.at(i));
             delete list.at(i);
-            score += d->value();
+            hud->addToScore(d->value());
             m_nb_dot--;
 
         }
         else if(SuperDotItem *sd = dynamic_cast<SuperDotItem *>(list.at(i))){
             removeItem(list.at(i));
             delete list.at(i);
-            score += sd->value();
+            hud->addToScore(sd->value());
             m_nb_dot--;
             Ghost *tmp;
             /* enable beast mode on pacman */

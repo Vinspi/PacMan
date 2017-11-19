@@ -58,7 +58,8 @@ SOURCES += \
     spawnblocclyde.cpp \
     spawnblocblinky.cpp \
     spawnblocinky.cpp \
-    spawnblocpinky.cpp
+    spawnblocpinky.cpp \
+    hud.cpp
 
 HEADERS += \
     const.h \
@@ -94,7 +95,8 @@ HEADERS += \
     spawnblocclyde.h \
     spawnblocblinky.h \
     spawnblocinky.h \
-    spawnblocpinky.h
+    spawnblocpinky.h \
+    hud.h
 
 
 CONFIG += c++11

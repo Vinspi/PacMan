@@ -30,6 +30,8 @@
 #include "spawnblocinky.h"
 #include "spawnblocblinky.h"
 #include "spawnblocpinky.h"
+#include "hud.h"
+#include <QGraphicsProxyWidget>
 
 
 class GameScene : public QGraphicsScene
@@ -92,6 +94,7 @@ private:
     void win();
     bool berzerk_mode_active;
     bool berzerk_debuff_vitesse;
+    HUD *hud;
 
 
 };
