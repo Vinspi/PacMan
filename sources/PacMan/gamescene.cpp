@@ -416,7 +416,7 @@ void GameScene::init(TileMap &map)
 
     /* test */
 
-    hud = new HUD(5);
+    hud = new HUD(3);
     QGraphicsProxyWidget *proxy = new QGraphicsProxyWidget();
 
     proxy->setWidget(hud);
@@ -728,7 +728,19 @@ int GameScene::checkCollisions()
 
 void GameScene::gameOver(){
     m_timer.stop();
-    qDebug() << "Game Over !";
+
+    QLabel *gameOver = new QLabel("GAME OVER !");
+
+    gameOver->setStyleSheet("background: transparent;"
+                            "color: red;"
+                            "font-size: 100px;");
+
+    QGraphicsProxyWidget *pw = new QGraphicsProxyWidget();
+    pw->setWidget(gameOver);
+    pw->setPos(width()/2-300,height()/2-100);
+    addItem(pw);
+
+
 }
 
 void GameScene::win(){
