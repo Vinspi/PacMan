@@ -7,6 +7,7 @@
 #include "gamescene.h"
 #include <QGraphicsView>
 
+#include <sstream>
 
 using namespace std;
 
@@ -27,7 +28,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     /* on ajoute des element au QStackWidget */
     /* vue profil */
-    VueProfile* vp = new VueProfile();
+    VueProfile* vp = new VueProfile(this);
+    vp->setMainWindow(this);
     vp->show();
     vp->setProfil(Profil::loadProfile("../PacMan/profil/pierre.pf"));
     ui->stackedWidget->addWidget(vp);
@@ -39,15 +41,24 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->stackedWidget->addWidget(vm);
 
     ui->stackedWidget->setCurrentIndex(1);
+}
 
-    /* et on teste un niveau */
+void MainWindow::launchGame(int level){
     GameScene* gs = new GameScene(new TileManager("../PacMan/graphics_pacman/tileset.png"));
-    TileMap tm("../PacMan/levels/xml_level1.xml");
-    gs->init(tm);
-    QGraphicsView* gv = new QGraphicsView(gs);
-    gv->show();
-    ui->stackedWidget->addWidget(gv);
-    ui->stackedWidget->setCurrentIndex(2);
+            QString tileMap = "../PacMan/levels/xml_level";
+            tileMap.append(QString::number(level));
+            tileMap.append(".xml");
+
+            std::printf("Level : %d", level);
+
+            std::printf(tileMap.toStdString().c_str());
+
+            TileMap tm(tileMap);
+            gs->init(tm);
+            QGraphicsView* gv = new QGraphicsView(gs);
+            gv->show();
+            ui->stackedWidget->addWidget(gv);
+            ui->stackedWidget->setCurrentIndex(2);
 }
 
 MainWindow::~MainWindow()

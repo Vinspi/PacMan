@@ -13,8 +13,6 @@
 
 #include <sstream>
 
-
-
 using namespace std;
 
 VueProfile::VueProfile(QWidget *parent) :
@@ -22,6 +20,7 @@ VueProfile::VueProfile(QWidget *parent) :
     ui(new Ui::VueProfile)
 {
     ui->setupUi(this);
+    VueProfile::mw = (MainWindow*) parent;
     //p = Profil::loadProfile("../PacMan/profil/"+profil+".pf");
 
     //QString str(p->getNom().c_str());
@@ -31,6 +30,10 @@ VueProfile::VueProfile(QWidget *parent) :
 VueProfile::~VueProfile()
 {
     delete ui;
+}
+
+void VueProfile::setMainWindow(MainWindow *w){
+       VueProfile::mw = w;
 }
 
 void VueProfile::setProfil(Profil *p){
@@ -78,7 +81,7 @@ void VueProfile::setProfil(Profil *p){
         bt->setMinimumHeight(50);
         bt->setAccessibleName(name.str().c_str());
 
-        connect(bt, SIGNAL (clicked()), this, SLOT (playlingLevelSelected()));
+        connect(bt, SIGNAL (clicked()), this, SLOT (selectLevel()));
 
         scrollwidget->layout()->addWidget(bt);
     }
@@ -96,8 +99,7 @@ void VueProfile::changeProfil(){
     setProfil(Profil::loadProfile(fileName.toStdString()));
 }
 
-void VueProfile::playlingLevelSelected(){
-
+void VueProfile::selectLevel(){
 
     // On reset d'abord tous les boutons de niveau
     QWidget *main = ui->scrollArea->widget();
@@ -115,5 +117,28 @@ void VueProfile::playlingLevelSelected(){
     if( button != NULL )
     {
         button->setStyleSheet("background-color: black; color: white; font-weight: bold;");
+        levelSelected = button->accessibleName();
+    }
+}
+
+void VueProfile::playlingLevelSelected(){
+    std::printf("LEvel selected : ");
+    std::printf(levelSelected.toStdString().c_str());
+    std::printf("\n");
+
+    if(levelSelected != NULL){
+        int tileMapToLaunch;
+
+        if(!levelSelected.compare(new QString("level1")))
+            tileMapToLaunch = 1;
+        else if(!levelSelected.compare(new QString("level2")))
+            tileMapToLaunch = 2;
+        else
+            tileMapToLaunch = -1;
+
+        printf("Level after checking = %d\n", tileMapToLaunch);
+
+       if(tileMapToLaunch > 0)
+           VueProfile::mw->launchGame(tileMapToLaunch);
     }
 }
