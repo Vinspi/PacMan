@@ -4,6 +4,15 @@
 
 HUD::HUD(int nb_vie) : QWidget()
 {
+
+    m_mystery_item = new QLabel();
+    //m_mystery_item->setGeometry(0,0,200,200);
+
+    m_mystery_item->setPixmap(QPixmap("../PacMan/graphics_pacman/mystery_box.png").copy(0,0,32,32).scaled(180,180));
+    m_mystery_item->setStyleSheet("background-color: #061c29;"
+                                  "border: none;"
+                                  "color: white;");
+
     time = new QTime();
     time->start();
     setGeometry(0,0,200,200);
@@ -45,8 +54,12 @@ HUD::HUD(int nb_vie) : QWidget()
 
     layout->addWidget(frame_vie);
 
+    layout->addWidget(m_mystery_item);
+
     setLayout(layout);
     timeout = QTime(0,5,0,0);
+
+
 }
 
 
@@ -88,4 +101,8 @@ int HUD::updateTime(){
 void HUD::addToScore(int points){
     m_score += points;
     m_score_label->setText(QString("score : %1").arg(m_score));
+}
+
+void HUD::setMysteryItem(MysteryItem *mi){
+    m_mystery_item->setPixmap(mi->pixmap().scaled(180,180));
 }

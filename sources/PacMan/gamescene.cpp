@@ -417,7 +417,7 @@ void GameScene::init(TileMap &map)
     addItem(inky);
     addItem(pinky);
 
-    /* test */
+    /* HUD */
 
     hud = new HUD(3);
     QGraphicsProxyWidget *proxy = new QGraphicsProxyWidget();
@@ -463,6 +463,14 @@ void GameScene::init(TileMap &map)
     addItem(tmp_prox);
 
     /****************************************/
+
+    /* test mysterybloc */
+
+    MysteryBloc *mb = new MysteryBloc();
+    mb->setPos(2*T_SIZE,T_SIZE);
+    addItem(mb);
+
+    /****************************/
 
 }
 
@@ -539,6 +547,9 @@ int GameScene::checkCollisionsGhost(Ghost *ghost)
     }
     return resultat;
 }
+
+
+
 
 int GameScene::checkCollisions()
 {

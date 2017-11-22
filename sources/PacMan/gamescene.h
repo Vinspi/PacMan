@@ -32,6 +32,7 @@
 #include "spawnblocpinky.h"
 #include "hud.h"
 #include <QGraphicsProxyWidget>
+#include "mysterybloc.h"
 
 
 class GameScene : public QGraphicsScene
@@ -48,6 +49,7 @@ public:
     int checkCollisionsGhost(Ghost *ghost);
     void updateTimerDebut();
     void reset();
+    void handleMysteryItem(QGraphicsPixmapItem item);
 
 public slots:
 

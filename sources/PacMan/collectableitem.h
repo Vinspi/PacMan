@@ -1,9 +1,9 @@
 #ifndef COLLECTABLEITEM_H
 #define COLLECTABLEITEM_H
 
-#include <QGraphicsPixmapItem>
+#include "blocitem.h"
 
-class CollectableItem : public QGraphicsPixmapItem
+class CollectableItem : public BlocItem
 {
 public:
     CollectableItem(unsigned int a);

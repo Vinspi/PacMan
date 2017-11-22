@@ -1,6 +1,6 @@
 #include "collectableitem.h"
 
-CollectableItem::CollectableItem(unsigned int a) : QGraphicsPixmapItem(), score(a)
+CollectableItem::CollectableItem(unsigned int a) : BlocItem(), score(a)
 {
 }
 

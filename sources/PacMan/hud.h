@@ -6,6 +6,8 @@
 #include <QLabel>
 #include <QTime>
 #include "const.h"
+#include "mysteryitem.h"
+#include "superdotitem.h"
 
 
 
@@ -18,11 +20,13 @@ public:
     int updateTime();
     int nb_vie();
     void perd_une_vie();
+    void setMysteryItem(MysteryItem *mi);
 
 private:
     QLabel *m_score_label;
     QLabel *vie[NB_VIE_MAX];
     QLabel *m_chrono;
+    QLabel *m_mystery_item;
     QTime *time;
     int m_nb_vie;
     int m_score;
