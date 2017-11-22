@@ -49,7 +49,8 @@ public:
     int checkCollisionsGhost(Ghost *ghost);
     void updateTimerDebut();
     void reset();
-    void handleMysteryItem(QGraphicsPixmapItem item);
+    void useMysteryItem();
+    void enableBerzerkMode();
 
 public slots:
 
@@ -101,6 +102,7 @@ private:
     bool berzerk_debuff_vitesse;
     HUD *hud;
     QPoint pacman_spawn_point;
+    MysteryItem *m_mysteryItem;
 
     /* pour le timer de début de partie */
 

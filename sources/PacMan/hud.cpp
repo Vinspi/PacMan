@@ -106,3 +106,7 @@ void HUD::addToScore(int points){
 void HUD::setMysteryItem(MysteryItem *mi){
     m_mystery_item->setPixmap(mi->pixmap().scaled(180,180));
 }
+
+void HUD::resetMysteryItem(){
+    m_mystery_item->setPixmap(QPixmap("../PacMan/graphics_pacman/mystery_box.png").copy(0,0,32,32).scaled(180,180));
+}

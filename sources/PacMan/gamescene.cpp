@@ -549,7 +549,62 @@ int GameScene::checkCollisionsGhost(Ghost *ghost)
 }
 
 
+void GameScene::enableBerzerkMode(){
+    Ghost *tmp;
+    /* enable beast mode on pacman */
+    /* mettre le mode pucelle sur tous les fantômes */
+    DeadGhost *fg = dynamic_cast<DeadGhost *> (blinky);
+    DeadGhost *fg2 = dynamic_cast<DeadGhost *> (inky);
+    DeadGhost *fg3 = dynamic_cast<DeadGhost *> (pinky);
+    DeadGhost *fg4 = dynamic_cast<DeadGhost *> (clyde);
+    if(!fg){
+        tmp = blinky;
+        removeItem(blinky);
 
+        blinky = new AfraidGhost();
+        blinky->setPos(tmp->pos());
+        blinky->setSpawnPoint(tmp->spawnPoint());
+        addItem(blinky);
+
+        delete tmp;
+    }
+    if(!fg2){
+        tmp = inky;
+        removeItem(inky);
+
+        inky = new AfraidGhost();
+        inky->setPos(tmp->pos());
+        inky->setSpawnPoint(tmp->spawnPoint());
+        addItem(inky);
+
+        delete tmp;
+    }
+    if(!fg3){
+        tmp = pinky;
+        removeItem(pinky);
+
+        pinky = new AfraidGhost();
+        pinky->setPos(tmp->pos());
+        pinky->setSpawnPoint(tmp->spawnPoint());
+        addItem(pinky);
+
+        delete tmp;
+    }
+    if(!fg4){
+        tmp = clyde;
+        removeItem(clyde);
+
+        clyde = new AfraidGhost();
+        clyde->setPos(tmp->pos());
+        clyde->setSpawnPoint(tmp->spawnPoint());
+        addItem(clyde);
+
+        delete tmp;
+    }
+    berzerk_mode_active = true;
+    m_time_elapsed_berzerk_mode = 0;
+    m_timer_berzerk_mode.start();
+}
 
 int GameScene::checkCollisions()
 {
@@ -567,65 +622,19 @@ int GameScene::checkCollisions()
             m_nb_dot--;
 
         }
+        else if(MysteryBloc *mb = dynamic_cast<MysteryBloc *>(list.at(i))){
+            /* en construction */
+            MysteryItem *mi = mb->randomItem();
+            hud->setMysteryItem(mi);
+            m_mysteryItem = mi;
+            /********************/
+        }
         else if(SuperDotItem *sd = dynamic_cast<SuperDotItem *>(list.at(i))){
             removeItem(list.at(i));
             delete list.at(i);
             hud->addToScore(sd->value());
             m_nb_dot--;
-            Ghost *tmp;
-            /* enable beast mode on pacman */
-            /* mettre le mode pucelle sur tous les fantômes */
-            DeadGhost *fg = dynamic_cast<DeadGhost *> (blinky);
-            DeadGhost *fg2 = dynamic_cast<DeadGhost *> (inky);
-            DeadGhost *fg3 = dynamic_cast<DeadGhost *> (pinky);
-            DeadGhost *fg4 = dynamic_cast<DeadGhost *> (clyde);
-            if(!fg){
-                tmp = blinky;
-                removeItem(blinky);
-
-                blinky = new AfraidGhost();
-                blinky->setPos(tmp->pos());
-                blinky->setSpawnPoint(tmp->spawnPoint());
-                addItem(blinky);
-
-                delete tmp;
-            }
-            if(!fg2){
-                tmp = inky;
-                removeItem(inky);
-
-                inky = new AfraidGhost();
-                inky->setPos(tmp->pos());
-                inky->setSpawnPoint(tmp->spawnPoint());
-                addItem(inky);
-
-                delete tmp;
-            }
-            if(!fg3){
-                tmp = pinky;
-                removeItem(pinky);
-
-                pinky = new AfraidGhost();
-                pinky->setPos(tmp->pos());
-                pinky->setSpawnPoint(tmp->spawnPoint());
-                addItem(pinky);
-
-                delete tmp;
-            }
-            if(!fg4){
-                tmp = clyde;
-                removeItem(clyde);
-
-                clyde = new AfraidGhost();
-                clyde->setPos(tmp->pos());
-                clyde->setSpawnPoint(tmp->spawnPoint());
-                addItem(clyde);
-
-                delete tmp;
-            }
-            berzerk_mode_active = true;
-            m_time_elapsed_berzerk_mode = 0;
-            m_timer_berzerk_mode.start();
+            enableBerzerkMode();
 
 
         }
@@ -785,9 +794,25 @@ void GameScene::keyPressEvent(QKeyEvent *event)
             next_move = UP;
             //Pacman->setDirection(UP);
             break;
+        case Qt::Key_Space:
+            useMysteryItem();
+            break;
         default:
             break;
     }
 
     checkCollisions();
+}
+
+
+void GameScene::useMysteryItem(){
+    if(m_mysteryItem){
+        if(SuperDotItem *sdi = dynamic_cast<SuperDotItem *>(m_mysteryItem)){
+            enableBerzerkMode();
+
+        }
+        hud->resetMysteryItem();
+        delete m_mysteryItem;
+        m_mysteryItem = nullptr;
+    }
 }

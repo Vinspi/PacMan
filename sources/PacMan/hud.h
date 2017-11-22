@@ -21,6 +21,7 @@ public:
     int nb_vie();
     void perd_une_vie();
     void setMysteryItem(MysteryItem *mi);
+    void resetMysteryItem();
 
 private:
     QLabel *m_score_label;

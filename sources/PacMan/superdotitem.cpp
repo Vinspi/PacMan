@@ -3,6 +3,7 @@
 SuperDotItem::SuperDotItem(): CollectableItem(100), MysteryItem()
 {
     MysteryItem::setPixmap(QPixmap("../PacMan/graphics_pacman/supergumgum.png").copy(0,0,32,32));
+    CollectableItem::setPixmap(QPixmap("../PacMan/graphics_pacman/supergumgum.png").copy(0,0,32,32));
 }
 
 
