@@ -5,6 +5,10 @@ Entity::Entity() : QGraphicsPixmapItem()
 
 }
 
+void Entity::setLastPos(QPointF lastpos){
+    m_last_position = lastpos;
+}
+
 Entity::Entity(QString skin) : QGraphicsPixmapItem()
 {
     QPixmap pixmap(skin);

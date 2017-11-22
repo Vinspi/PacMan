@@ -24,7 +24,7 @@ public:
     QPoint current_tile_pos();
     void setMode(int mode);
     void nextTile();
-
+    void setLastPos(QPointF lastpos);
     void paint(QPainter *painter,
                               const QStyleOptionGraphicsItem *option,
                               QWidget *widget);

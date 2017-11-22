@@ -265,6 +265,7 @@ void GameScene::reset(){
     Pacman = new PacMan();
 
     Pacman->setPos(pacman_spawn_point);
+    Pacman->setLastPos(pacman_spawn_point);
 
     removeItem(tmp_pacman);
     addItem(Pacman);
