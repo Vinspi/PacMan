@@ -183,7 +183,9 @@ void GameScene::updateScene()
     QPoint pos_pacman = Pacman->current_tile_pos();
     berzerk_debuff_vitesse = !berzerk_debuff_vitesse;
 
-    hud->updateTime();
+    if(!(hud->updateTime())){
+        gameOver(); /* gamover (timeout) */
+    }
 
     /* pour clyde */
 

@@ -52,6 +52,7 @@ public:
 public slots:
 
 private:
+
     void updateBerzerkMode();
     int score;
     TileManager * tm;

@@ -1,4 +1,5 @@
 #include "hud.h"
+#include <QDebug>
 
 
 HUD::HUD(int nb_vie) : QWidget()
@@ -45,6 +46,7 @@ HUD::HUD(int nb_vie) : QWidget()
     layout->addWidget(frame_vie);
 
     setLayout(layout);
+    timeout = QTime(0,5,0,0);
 }
 
 
@@ -65,12 +67,22 @@ int HUD::nb_vie(){
     return m_nb_vie;
 }
 
-void HUD::updateTime(){
+int HUD::updateTime(){
+
+
+    timeout = timeout.addMSecs(-40);
+
     int total = time->elapsed();
-    int milisec = total%1000;
-    int seconds = (total/1000)%60;
-    int minute = (total/1000)/60;
+    int milisec = timeout.msec();
+    int seconds = timeout.second();
+    int minute = timeout.minute();
     m_chrono->setText(QString("chrono : %1:%2:%3").arg(minute).arg(seconds).arg(milisec));
+
+    if(milisec == 0 && seconds == 0 && minute == 0){
+        qDebug() << milisec << seconds << minute;
+        return 0;
+    }
+    return 1;
 }
 
 void HUD::addToScore(int points){

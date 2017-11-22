@@ -15,7 +15,7 @@ public:
     HUD();
     HUD(int nb_vie);
     void addToScore(int points);
-    void updateTime();
+    int updateTime();
     int nb_vie();
     void perd_une_vie();
 
@@ -26,6 +26,7 @@ private:
     QTime *time;
     int m_nb_vie;
     int m_score;
+    QTime timeout;
 };
 
 #endif // HUD_H
