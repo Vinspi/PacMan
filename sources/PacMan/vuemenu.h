@@ -1,8 +1,7 @@
 #ifndef VUEMENU_H
 #define VUEMENU_H
-
 #include <QWidget>
-
+#include "mainwindow.h"
 
 namespace Ui {
 class VueMenu;
@@ -15,9 +14,11 @@ class VueMenu : public QWidget
 public:
     explicit VueMenu(QWidget *parent = 0);
     ~VueMenu();
+    void setMainWindow(MainWindow *mainW);
 
 private:
     Ui::VueMenu *ui;
+    MainWindow *mw;
 
 
 public slots:

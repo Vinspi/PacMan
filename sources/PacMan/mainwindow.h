@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <QStackedWidget>
+#include "gamescene.h"
+#include "gameview.h"
 
 namespace Ui {
 class MainWindow;
@@ -11,9 +13,6 @@ class MainWindow;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-
-
-
 
 public:
     explicit MainWindow(QWidget *parent = 0);
@@ -24,6 +23,9 @@ public:
 private:
     Ui::MainWindow *ui;
     QStackedWidget* stackedWidget;
+    GameView* gv;
+    GameScene* gs;
+    TileMap *tm;
 };
 
 #endif // MAINWINDOW_H

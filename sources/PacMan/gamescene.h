@@ -34,6 +34,7 @@
 #include <QGraphicsProxyWidget>
 #include "mysterybloc.h"
 #include "time.h"
+#include <QGraphicsProxyWidget>
 
 
 class GameScene : public QGraphicsScene
@@ -43,6 +44,7 @@ public:
     explicit GameScene(TileManager *tm);
     //build scene from modele/level
     //
+
     void init(TileMap &map);// niveau
     void keyPressEvent(QKeyEvent *event);
     void updateScene();
@@ -54,8 +56,21 @@ public:
     void enableBerzerkMode();
 
 public slots:
+    void on_click_retour();
+    void on_click_recommencer();
 
 private:
+
+    QGraphicsProxyWidget *pwrecommencer;
+    QGraphicsProxyWidget *pwretour;
+    QGraphicsProxyWidget *pwcontinuer;
+
+    QGraphicsProxyWidget *pwgameover;
+    QGraphicsProxyWidget *pwwin;
+
+    QGraphicsProxyWidget *proxy_hud;
+
+    const int NB_VIE_LEVEL = 3;
     bool mystery_box_spawn;
     void updateBerzerkMode();
     void updateTimerDebut();
@@ -108,6 +123,7 @@ private:
     HUD *hud;
     QPoint pacman_spawn_point;
     MysteryItem *m_mysteryItem;
+
 
     /* pour le timer de début de partie */
 

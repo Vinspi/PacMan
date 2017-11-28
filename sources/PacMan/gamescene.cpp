@@ -2,6 +2,8 @@
 #include <QKeyEvent>
 #include <QPixmap>
 #include <iostream>
+#include <QPushButton>
+#include <QStackedWidget>
 
 using namespace std;
 
@@ -426,14 +428,14 @@ void GameScene::init(TileMap &map)
 
     /* HUD */
 
-    hud = new HUD(3);
-    QGraphicsProxyWidget *proxy = new QGraphicsProxyWidget();
+    hud = new HUD(0);
+    proxy_hud = new QGraphicsProxyWidget();
 
-    proxy->setWidget(hud);
+    proxy_hud->setWidget(hud);
 
-    proxy->setPos(-200,0);
+    proxy_hud->setPos(-200,0);
 
-    addItem(proxy);
+    addItem(proxy_hud);
 
 
     /*********************/
@@ -470,6 +472,56 @@ void GameScene::init(TileMap &map)
     addItem(tmp_prox);
 
     /****************************************/
+
+
+    /***** nécéssaire au gameOver ***********/
+
+    QLabel *gameOver = new QLabel("GAME OVER !");
+
+    gameOver->setStyleSheet("color: #ffffff;"
+                            "font-size: 85px;"
+                            "background: #2d2703;"
+                            "padding: 10px 20px 10px 20px;"
+                            "border: 5px solid #ffdb0f ;"
+                            "text-decoration: none;");
+
+    pwgameover = new QGraphicsProxyWidget();
+    pwgameover->setWidget(gameOver);
+    pwgameover->setPos(width()/2-300,height()/2-100);
+
+
+
+    QPushButton *retour = new QPushButton("retour");
+    QPushButton *recommencer = new QPushButton("recommencer");
+
+    pwretour = new QGraphicsProxyWidget();
+    pwretour->setWidget(retour);
+
+    pwrecommencer = new QGraphicsProxyWidget();
+    pwrecommencer->setWidget(recommencer);
+
+    pwretour->setPos(width()/2-300,height()/2+100);
+    pwrecommencer->setPos(width()/2-50,height()/2+100);
+
+    retour->setStyleSheet("color: #ffffff;"
+                            "font-size: 50px;"
+                            "background: #2d2703;"
+                            "padding: 10px 20px 10px 20px;"
+                            "border: 5px solid #ffdb0f ;"
+                            "text-decoration: none;");
+
+    recommencer->setStyleSheet("color: #ffffff;"
+                            "font-size: 50px;"
+                            "background: #2d2703;"
+                            "padding: 10px 20px 10px 20px;"
+                            "border: 5px solid #ffdb0f ;"
+                            "text-decoration: none;");
+
+    /* on connecte les boutons au bon slots */
+    connect(retour,&QPushButton::clicked,this,&GameScene::on_click_retour);
+    connect(recommencer,&QPushButton::clicked,this,&GameScene::on_click_recommencer);
+
+    /*****************************************/
 
 
 
@@ -748,6 +800,7 @@ int GameScene::checkCollisions()
             }
             else {
                 gameOver();
+                break;
             }
         }
     }
@@ -756,19 +809,39 @@ int GameScene::checkCollisions()
 
 void GameScene::gameOver(){
     m_timer.stop();
-
-    QLabel *gameOver = new QLabel("GAME OVER !");
-
-    gameOver->setStyleSheet("background: transparent;"
-                            "color: red;"
-                            "font-size: 100px;");
-
-    QGraphicsProxyWidget *pw = new QGraphicsProxyWidget();
-    pw->setWidget(gameOver);
-    pw->setPos(width()/2-300,height()/2-100);
-    addItem(pw);
+    qDebug() << "gameOver";
 
 
+    addItem(pwretour);
+    addItem(pwrecommencer);
+    addItem(pwgameover);
+
+
+
+
+}
+
+void GameScene::on_click_retour(){
+
+    m_timer.stop();
+
+}
+
+
+void GameScene::on_click_recommencer(){
+
+    removeItem(pwgameover);
+    removeItem(pwrecommencer);
+    removeItem(pwretour);
+
+    /* peut etre detruire quelques objets ici :/ */
+    delete clyde;
+    delete Pacman;
+    delete blinky;
+    delete inky;
+    delete pinky;
+    mystery_box_spawn = false;
+    init(tilemap);
 }
 
 void GameScene::win(){

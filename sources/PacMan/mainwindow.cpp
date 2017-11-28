@@ -15,6 +15,12 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    gs = new GameScene(new TileManager("../PacMan/graphics_pacman/tileset.png"));
+
+    gv = new GameView(gs);
+
+
+
     ui->setupUi(this);
     /* on enleve les deux vue créée par le designer */
     QWidget* tmp = ui->stackedWidget->widget(0);
@@ -36,32 +42,27 @@ MainWindow::MainWindow(QWidget *parent) :
 
     /* le menu */
     VueMenu* vm = new VueMenu();
+    vm->setMainWindow(this);
     vm->show();
 
     ui->stackedWidget->addWidget(vm);
-
+    ui->stackedWidget->addWidget(gv);
     ui->stackedWidget->setCurrentIndex(1);
 }
 
 void MainWindow::launchGame(QString level){
-    GameScene* gs = new GameScene(new TileManager("../PacMan/graphics_pacman/tileset.png"));
-            QString tileMap = "../PacMan/levels/";
 
-            tileMap = tileMap+level;
+    QString tileMap = "../PacMan/levels/";
 
-//            tileMap.append(QString::number(level));
-//            tileMap.append(".xml");
+    tileMap = tileMap+level;
 
-            std::printf("Level : %d", level);
 
-            std::printf(tileMap.toStdString().c_str());
+    tm = new TileMap(tileMap);
+    gs->init(*tm);
+    gv->show();
 
-            TileMap tm(tileMap);
-            gs->init(tm);
-            QGraphicsView* gv = new QGraphicsView(gs);
-            gv->show();
-            ui->stackedWidget->addWidget(gv);
-            ui->stackedWidget->setCurrentIndex(2);
+    ui->stackedWidget->setCurrentIndex(2);
+
 }
 
 MainWindow::~MainWindow()

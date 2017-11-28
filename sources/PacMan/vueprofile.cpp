@@ -123,9 +123,6 @@ void VueProfile::selectLevel(){
 }
 
 void VueProfile::playlingLevelSelected(){
-    std::printf("Level selected : ");
-    std::printf(levelSelected.toStdString().c_str());
-    std::printf("\n");
 
     if(levelSelected != NULL){
         int tileMapToLaunch;
@@ -135,5 +132,6 @@ void VueProfile::playlingLevelSelected(){
         tileMap = tileMap+levelSelected+".xml";
 
         VueProfile::mw->launchGame(tileMap);
+        //((MainWindow*) this->parent()->parent())->launchGame(tileMap);
     }
 }

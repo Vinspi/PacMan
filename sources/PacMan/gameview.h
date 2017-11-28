@@ -5,21 +5,23 @@
 #include <QLabel>
 #include <QPushButton>
 #include "tilemanager.h"
+#include <QGraphicsView>
+#include <QStackedWidget>
 
-class GameView : public QWidget
+class GameView : public QGraphicsView
 {
     Q_OBJECT
     public:
-        explicit GameView(QWidget *parent = nullptr);
-        //setmodel
+        explicit GameView(QGraphicsScene *parent = nullptr);
+        void setWid(QStackedWidget *w);
 
     signals:
 
     public slots:
 
     private:
-        QLabel * labyrinthe;
-        QLabel * dynamic; // Ou une liste pour représenter chaque entités
+        QStackedWidget *wid;
+
 };
 
 #endif // GAMEVIEW_H

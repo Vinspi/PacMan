@@ -1,8 +1,9 @@
 #include "gameview.h"
 #include <QPainter>
+#include <QStackedWidget>
 
-GameView::GameView(QWidget *parent) : QWidget(parent)
+GameView::GameView(QGraphicsScene *parent) : QGraphicsView(parent)
 {
-    labyrinthe = new QLabel(this);
-    labyrinthe->setPixmap(QPixmap());
+
 }
+
