@@ -13,6 +13,7 @@
 
 #include <sstream>
 
+
 using namespace std;
 
 VueProfile::VueProfile(QWidget *parent) :
@@ -73,7 +74,7 @@ void VueProfile::setProfil(Profil *p){
         std::stringstream s;
         s << "Niveau " << i << std::endl << "Meilleur score : " << 0 << std::endl << "Meilleur temps : " << 0;
         std::stringstream name;
-        name << "level" << i;
+        name << i;
 
         QPushButton *bt = new QPushButton(s.str().c_str());
         bt->setStyleSheet("background-color : rgb(237, 212, 0);color: black;border: 3px solid gray;border-radius: 15px;");
@@ -122,23 +123,17 @@ void VueProfile::selectLevel(){
 }
 
 void VueProfile::playlingLevelSelected(){
-    std::printf("LEvel selected : ");
+    std::printf("Level selected : ");
     std::printf(levelSelected.toStdString().c_str());
     std::printf("\n");
 
     if(levelSelected != NULL){
         int tileMapToLaunch;
 
-        if(!levelSelected.compare(new QString("level1")))
-            tileMapToLaunch = 1;
-        else if(!levelSelected.compare(new QString("level2")))
-            tileMapToLaunch = 2;
-        else
-            tileMapToLaunch = -1;
+        QString tileMap("xml_level");
 
-        printf("Level after checking = %d\n", tileMapToLaunch);
+        tileMap = tileMap+levelSelected+".xml";
 
-       if(tileMapToLaunch > 0)
-           VueProfile::mw->launchGame(tileMapToLaunch);
+        VueProfile::mw->launchGame(tileMap);
     }
 }

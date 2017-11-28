@@ -43,11 +43,14 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->stackedWidget->setCurrentIndex(1);
 }
 
-void MainWindow::launchGame(int level){
+void MainWindow::launchGame(QString level){
     GameScene* gs = new GameScene(new TileManager("../PacMan/graphics_pacman/tileset.png"));
-            QString tileMap = "../PacMan/levels/xml_level";
-            tileMap.append(QString::number(level));
-            tileMap.append(".xml");
+            QString tileMap = "../PacMan/levels/";
+
+            tileMap = tileMap+level;
+
+//            tileMap.append(QString::number(level));
+//            tileMap.append(".xml");
 
             std::printf("Level : %d", level);
 

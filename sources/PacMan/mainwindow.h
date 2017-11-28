@@ -19,7 +19,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     QStackedWidget* getStackedWidget();
-    void launchGame(int level);
+    void launchGame(QString level);
 
 private:
     Ui::MainWindow *ui;
