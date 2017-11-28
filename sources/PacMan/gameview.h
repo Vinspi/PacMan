@@ -13,7 +13,7 @@ class GameView : public QGraphicsView
     Q_OBJECT
     public:
         explicit GameView(QGraphicsScene *parent = nullptr);
-        void setWid(QStackedWidget *w);
+        void setWid();
 
     signals:
 

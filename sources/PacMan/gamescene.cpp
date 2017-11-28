@@ -388,6 +388,8 @@ void GameScene::init(TileMap &map)
         }
     }
 
+    /* cheat */
+    m_nb_dot = 3;
 
     SpawnBlocClyde *sbc = new SpawnBlocClyde();
     sbc->setPos(map.get_pos_clyde_init_col()*T_SIZE,map.get_pos_clyde_init_row()*T_SIZE);
@@ -474,7 +476,31 @@ void GameScene::init(TileMap &map)
     /****************************************/
 
 
-    /***** nécéssaire au gameOver ***********/
+    /***** nécéssaire au gameOver et au Win ***********/
+
+    QLabel *gagne = new QLabel("GAGNE !");
+    gagne->setStyleSheet("color: #ffffff;"
+                       "font-size: 85px;"
+                       "background: #2d2703;"
+                       "padding: 10px 20px 10px 20px;"
+                       "border: 5px solid #ffdb0f ;"
+                       "text-decoration: none;");
+    pwwin = new QGraphicsProxyWidget();
+    pwwin->setWidget(gagne);
+    pwwin->setPos(width()/2-200,height()/2-100);
+
+    QPushButton *continuer = new QPushButton("continuer");
+    continuer->setStyleSheet("color: #ffffff;"
+                             "font-size: 50px;"
+                             "background: #2d2703;"
+                             "padding: 10px 20px 10px 20px;"
+                             "border: 5px solid #ffdb0f ;"
+                             "text-decoration: none;");
+
+    pwcontinuer = new QGraphicsProxyWidget();
+    pwcontinuer->setWidget(continuer);
+    pwcontinuer->setPos(width()/2,height()/2+100);
+
 
     QLabel *gameOver = new QLabel("GAME OVER !");
 
@@ -520,6 +546,7 @@ void GameScene::init(TileMap &map)
     /* on connecte les boutons au bon slots */
     connect(retour,&QPushButton::clicked,this,&GameScene::on_click_retour);
     connect(recommencer,&QPushButton::clicked,this,&GameScene::on_click_recommencer);
+    connect(continuer,&QPushButton::clicked,this,&GameScene::on_click_continuer);
 
     /*****************************************/
 
@@ -807,6 +834,26 @@ int GameScene::checkCollisions()
     return resultat;
 }
 
+void GameScene::win(){
+    QString level_actuel("");
+    QStringList liste = tilemap.getFileName().split("");
+
+    for(int i=27;i<liste.length();i++){
+
+        if(!liste.at(i).compare(QString(".")))
+               break;
+        level_actuel = level_actuel+liste.at(i);
+    }
+
+
+    m_timer.stop();
+    addItem(pwretour);
+    if(level_actuel.toInt() < NB_NIV_MAX)
+        addItem(pwcontinuer);
+    addItem(pwwin);
+}
+
+
 void GameScene::gameOver(){
     m_timer.stop();
     qDebug() << "gameOver";
@@ -821,12 +868,49 @@ void GameScene::gameOver(){
 
 }
 
-void GameScene::on_click_retour(){
+void GameScene::on_click_continuer(){
+    QString level_actuel("");
+    QStringList liste = tilemap.getFileName().split("");
 
-    m_timer.stop();
+    for(int i=27;i<liste.length();i++){
+
+        if(!liste.at(i).compare(QString(".")))
+               break;
+        level_actuel = level_actuel+liste.at(i);
+    }
+
+    QString niveau_suivant("../PacMan/levels/xml_level");
+    niveau_suivant = niveau_suivant + QString::number(level_actuel.toInt()+1) + QString(".xml");
+
+    removeItem(pwwin);
+    removeItem(pwretour);
+    removeItem(pwcontinuer);
+
+
+    /* peut etre detruire quelques objets ici :/ */
+    delete clyde;
+    delete Pacman;
+    delete blinky;
+    delete inky;
+    delete pinky;
+    mystery_box_spawn = false;
+    //qDebug() << niveau_suivant;
+    TileMap *t = new TileMap(niveau_suivant);
+
+    init(*t);
 
 }
 
+void GameScene::on_click_retour(){
+
+    m_timer.stop();
+    gv->setWid();
+
+}
+
+void GameScene::setGameView(GameView *g){
+    gv = g;
+}
 
 void GameScene::on_click_recommencer(){
 
@@ -844,10 +928,6 @@ void GameScene::on_click_recommencer(){
     init(tilemap);
 }
 
-void GameScene::win(){
-    m_timer.stop();
-    qDebug() << "winner !";
-}
 
 void GameScene::keyPressEvent(QKeyEvent *event)
 {

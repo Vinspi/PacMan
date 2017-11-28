@@ -16,5 +16,6 @@ const int CYCLE_VITESSE = 10;
 
 const int NB_VIE_MAX = 10;
 
+const int NB_NIV_MAX = 2;
 
 #endif // CONST_H

@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     gv = new GameView(gs);
 
-
+    gs->setGameView(gv);
 
     ui->setupUi(this);
     /* on enleve les deux vue créée par le designer */
@@ -62,6 +62,7 @@ void MainWindow::launchGame(QString level){
     gv->show();
 
     ui->stackedWidget->setCurrentIndex(2);
+
 
 }
 

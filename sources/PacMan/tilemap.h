@@ -28,9 +28,10 @@ public:
 
     int get_pos_clyde_init_row() const;
     int get_pos_clyde_init_col() const;
-
+    QString getFileName();
 
 private:
+    QString file;
     unsigned int m_width;
     unsigned int m_height;
     QVector< QVector<int>> m_map;

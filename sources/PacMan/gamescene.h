@@ -35,6 +35,7 @@
 #include "mysterybloc.h"
 #include "time.h"
 #include <QGraphicsProxyWidget>
+#include "gameview.h"
 
 
 class GameScene : public QGraphicsScene
@@ -50,7 +51,7 @@ public:
     void updateScene();
     int checkCollisions();
     int checkCollisionsGhost(Ghost *ghost);
-
+    void setGameView(GameView *g);
     void reset();
     void useMysteryItem();
     void enableBerzerkMode();
@@ -58,9 +59,10 @@ public:
 public slots:
     void on_click_retour();
     void on_click_recommencer();
+    void on_click_continuer();
 
 private:
-
+    GameView *gv;
     QGraphicsProxyWidget *pwrecommencer;
     QGraphicsProxyWidget *pwretour;
     QGraphicsProxyWidget *pwcontinuer;

@@ -10,10 +10,15 @@ TileMap::TileMap(){
 
 }
 
+QString TileMap::getFileName(){
+    return file;
+}
+
 TileMap::TileMap(QString filename) : m_map()
 {
     /* test XML */
     /* ouverture du fichier */
+    file = filename;
     QDomDocument dom(filename);
     QFile xml_level(filename);
 
