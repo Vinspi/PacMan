@@ -33,6 +33,7 @@
 #include "hud.h"
 #include <QGraphicsProxyWidget>
 #include "mysterybloc.h"
+#include "time.h"
 
 
 class GameScene : public QGraphicsScene
@@ -47,7 +48,7 @@ public:
     void updateScene();
     int checkCollisions();
     int checkCollisionsGhost(Ghost *ghost);
-    void updateTimerDebut();
+
     void reset();
     void useMysteryItem();
     void enableBerzerkMode();
@@ -55,10 +56,14 @@ public:
 public slots:
 
 private:
-
+    bool mystery_box_spawn;
     void updateBerzerkMode();
+    void updateTimerDebut();
+    void spawnMysteryBloc();
+    QTimer timerSpawnMysteryBloc;
     int score;
     TileManager * tm;
+    TileMap tilemap;
     //RessourceManager ?
     //Background
     QGraphicsPixmapItem * background;

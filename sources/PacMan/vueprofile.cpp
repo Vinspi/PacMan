@@ -95,8 +95,8 @@ void VueProfile::changeProfil(){
 
     QString fileName = QFileDialog::getOpenFileName(this,
         tr("Open File"), "./profil/", tr("Image Files (*.pf)"));
-
-    setProfil(Profil::loadProfile(fileName.toStdString()));
+    if(fileName != NULL)
+        setProfil(Profil::loadProfile(fileName.toStdString()));
 }
 
 void VueProfile::selectLevel(){

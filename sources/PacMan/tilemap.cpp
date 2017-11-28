@@ -6,6 +6,10 @@
 
 using namespace std;
 
+TileMap::TileMap(){
+
+}
+
 TileMap::TileMap(QString filename) : m_map()
 {
     /* test XML */

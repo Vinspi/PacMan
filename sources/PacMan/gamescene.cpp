@@ -5,7 +5,7 @@
 
 using namespace std;
 
-GameScene::GameScene(TileManager *tm) : QGraphicsScene(), dots(), m_timer(), m_timer_berzerk_mode()
+GameScene::GameScene(TileManager *tm) : QGraphicsScene(), dots(), m_timer(), m_timer_berzerk_mode(), tilemap(), timerSpawnMysteryBloc()
 {
     this->tm = tm;
     m_timer.setInterval(40);
@@ -14,10 +14,13 @@ GameScene::GameScene(TileManager *tm) : QGraphicsScene(), dots(), m_timer(), m_t
     connect(&m_timer,&QTimer::timeout,this,&GameScene::updateScene);
     connect(&m_timer_berzerk_mode,&QTimer::timeout,this,&GameScene::updateBerzerkMode);
 
+    connect(&timerSpawnMysteryBloc,&QTimer::timeout,this,&GameScene::spawnMysteryBloc);
 
 
+    srand(time(NULL));
 
-
+    timerSpawnMysteryBloc.setInterval(5000);
+    mystery_box_spawn = false;
 
 }
 
@@ -51,6 +54,8 @@ void GameScene::updateTimerDebut(){
         }
         else if(compteur_timer_deb == 0){
             m_timer.start();
+            timerSpawnMysteryBloc.start();
+
             m_nombre_timer_deb->setVisible(false);
             timer_debut->stop();
 
@@ -258,6 +263,7 @@ void GameScene::updateScene()
 void GameScene::reset(){
 
     m_timer.stop();
+    timerSpawnMysteryBloc.stop();
     Ghost *tmp_blinky = blinky;
     Ghost *tmp_clyde = clyde;
     Ghost *tmp_inky = inky;
@@ -317,6 +323,7 @@ void GameScene::init(TileMap &map)
     clear();
     m_nb_dot = 0;
     graph_control = new Graph(map);
+    tilemap = map;
     score = 0;
     next_move = UP;
     berzerk_debuff_vitesse = true;
@@ -464,13 +471,7 @@ void GameScene::init(TileMap &map)
 
     /****************************************/
 
-    /* test mysterybloc */
 
-    MysteryBloc *mb = new MysteryBloc();
-    mb->setPos(2*T_SIZE,T_SIZE);
-    addItem(mb);
-
-    /****************************/
 
 }
 
@@ -627,6 +628,10 @@ int GameScene::checkCollisions()
             MysteryItem *mi = mb->randomItem();
             hud->setMysteryItem(mi);
             m_mysteryItem = mi;
+            timerSpawnMysteryBloc.start();
+            removeItem(mb);
+            delete mb;
+            mystery_box_spawn = false;
             /********************/
         }
         else if(SuperDotItem *sd = dynamic_cast<SuperDotItem *>(list.at(i))){
@@ -815,4 +820,23 @@ void GameScene::useMysteryItem(){
         delete m_mysteryItem;
         m_mysteryItem = nullptr;
     }
+}
+
+void GameScene::spawnMysteryBloc(){
+    if(!mystery_box_spawn){
+        int c;
+        int l;
+        mystery_box_spawn = true;
+        do{
+            c = rand()%24;
+            l = rand()%24;
+        }while(tilemap.tile(c,l) != 1);
+
+        MysteryBloc *mb = new MysteryBloc();
+        mb->setPos(c*T_SIZE,l*T_SIZE);
+        addItem(mb);
+    }
+
+    timerSpawnMysteryBloc.stop();
+
 }

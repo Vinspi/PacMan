@@ -7,6 +7,7 @@
 class TileMap
 {
 public:
+    TileMap();
     TileMap(QString filename);
 
     unsigned int width() const;
