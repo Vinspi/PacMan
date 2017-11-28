@@ -388,8 +388,6 @@ void GameScene::init(TileMap &map)
         }
     }
 
-    /* cheat */
-    m_nb_dot = 3;
 
     SpawnBlocClyde *sbc = new SpawnBlocClyde();
     sbc->setPos(map.get_pos_clyde_init_col()*T_SIZE,map.get_pos_clyde_init_row()*T_SIZE);
@@ -430,7 +428,7 @@ void GameScene::init(TileMap &map)
 
     /* HUD */
 
-    hud = new HUD(0);
+    hud = new HUD(NB_VIE_LEVEL);
     proxy_hud = new QGraphicsProxyWidget();
 
     proxy_hud->setWidget(hud);
