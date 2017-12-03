@@ -1,7 +1,7 @@
 #! /bin/sh
 export PATH=/opt/qt-everywhere-opensource-src-5.7.0/bin:$PATH
 cp -r ../../sources/PacMan/* ./
-qmake -release
+qmake
 make
 rm *.o
 rm *.cpp
