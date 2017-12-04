@@ -37,7 +37,6 @@ MainWindow::MainWindow(QWidget *parent) :
     VueProfile* vp = new VueProfile(this);
     vp->setMainWindow(this);
     vp->show();
-    vp->setProfil(Profil::loadProfile("../PacMan/profil/pierre.pf"));
     ui->stackedWidget->addWidget(vp);
 
     /* le menu */
@@ -50,7 +49,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->stackedWidget->setCurrentIndex(1);
 }
 
-void MainWindow::launchGame(QString level){
+void MainWindow::launchGame(Profil *p, QString level){
 
     QString tileMap = "../PacMan/levels/";
 
@@ -59,11 +58,10 @@ void MainWindow::launchGame(QString level){
 
     tm = new TileMap(tileMap);
     gs->init(*tm);
+    gs->setActiveProfil(p);
     gv->show();
 
     ui->stackedWidget->setCurrentIndex(2);
-
-
 }
 
 MainWindow::~MainWindow()

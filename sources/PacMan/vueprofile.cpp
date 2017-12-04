@@ -131,7 +131,7 @@ void VueProfile::playlingLevelSelected(){
 
         tileMap = tileMap+levelSelected+".xml";
 
-        VueProfile::mw->launchGame(tileMap);
+        VueProfile::mw->launchGame(p, tileMap);
         //((MainWindow*) this->parent()->parent())->launchGame(tileMap);
     }
 }

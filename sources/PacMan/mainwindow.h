@@ -5,6 +5,7 @@
 #include <QStackedWidget>
 #include "gamescene.h"
 #include "gameview.h"
+#include "profil.h"
 
 namespace Ui {
 class MainWindow;
@@ -18,7 +19,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     QStackedWidget* getStackedWidget();
-    void launchGame(QString level);
+    void launchGame(Profil *p, QString level);
 
 private:
     Ui::MainWindow *ui;

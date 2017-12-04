@@ -19,6 +19,7 @@ public:
     int getScore();
     int getNivMax();
     int getClassement();
+    void setNivMax(int niv);
 
 private:
     int score;

@@ -548,8 +548,12 @@ void GameScene::init(TileMap &map)
 
     /*****************************************/
 
+    m_nb_dot = 4;
 
+}
 
+void GameScene::setActiveProfil(Profil *profil){
+       activeProfile = profil;
 }
 
 int GameScene::checkCollisionsGhost(Ghost *ghost)
@@ -833,6 +837,7 @@ int GameScene::checkCollisions()
 }
 
 void GameScene::win(){
+    //std::cout << "Profil " << activeProfile->getNom() << " niv max = " << activeProfile->getNivMax();
     QString level_actuel("");
     QStringList liste = tilemap.getFileName().split("");
 
@@ -843,11 +848,17 @@ void GameScene::win(){
         level_actuel = level_actuel+liste.at(i);
     }
 
+    if(level_actuel.toInt() > activeProfile->getNivMax()){
+        activeProfile->setNivMax(level_actuel.toInt());
+        std::cout << "Nouveau niveau atteint pour " << activeProfile->getNom() << " : " << level_actuel.toInt();
+        activeProfile->saveProfile("./profil/");
+    }
 
     m_timer.stop();
     addItem(pwretour);
     if(level_actuel.toInt() < NB_NIV_MAX)
         addItem(pwcontinuer);
+
     addItem(pwwin);
 }
 
@@ -860,10 +871,6 @@ void GameScene::gameOver(){
     addItem(pwretour);
     addItem(pwrecommencer);
     addItem(pwgameover);
-
-
-
-
 }
 
 void GameScene::on_click_continuer(){
@@ -879,7 +886,6 @@ void GameScene::on_click_continuer(){
 
     QString niveau_suivant("../PacMan/levels/xml_level");
     niveau_suivant = niveau_suivant + QString::number(level_actuel.toInt()+1) + QString(".xml");
-
     removeItem(pwwin);
     removeItem(pwretour);
     removeItem(pwcontinuer);
@@ -903,7 +909,6 @@ void GameScene::on_click_retour(){
 
     m_timer.stop();
     gv->setWid();
-
 }
 
 void GameScene::setGameView(GameView *g){

@@ -168,7 +168,7 @@ border: 3px solid gray;
 border-radius: 15px;</string>
     </property>
     <property name="text">
-     <string>CHOISIR UN AUTRE PROFIL</string>
+     <string>CHOISIR UN PROFIL</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_2">

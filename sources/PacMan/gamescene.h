@@ -36,6 +36,7 @@
 #include "time.h"
 #include <QGraphicsProxyWidget>
 #include "gameview.h"
+#include "profil.h"
 
 
 class GameScene : public QGraphicsScene
@@ -55,6 +56,7 @@ public:
     void reset();
     void useMysteryItem();
     void enableBerzerkMode();
+    void setActiveProfil(Profil *profil);
 
 public slots:
     void on_click_retour();
@@ -71,6 +73,8 @@ private:
     QGraphicsProxyWidget *pwwin;
 
     QGraphicsProxyWidget *proxy_hud;
+
+    Profil *activeProfile;
 
     const int NB_VIE_LEVEL = 3;
     bool mystery_box_spawn;

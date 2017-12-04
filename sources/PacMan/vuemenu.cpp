@@ -19,7 +19,7 @@ VueMenu::~VueMenu()
 }
 
 void VueMenu::on_play_as_guest_clicked(){
-     mw->launchGame("xml_level1.xml");
+     mw->launchGame(new Profil("guest"), "xml_level1.xml");
 }
 
 void VueMenu::on_load_profile_clicked(){ 

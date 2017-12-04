@@ -27,6 +27,8 @@ Profil::Profil(){
     nom = "anonymousse";
 }
 
+
+
 Profil* Profil::loadProfile(string filename){
     ifstream file(filename,ios::in);
 
@@ -55,6 +57,10 @@ Profil* Profil::loadProfile(string filename){
         cout << "impossible d'ouvrir le fichier" << endl;
         return nullptr;
     }
+}
+
+void Profil::setNivMax(int niv){
+    this->niv_max_atteint = niv;
 }
 
 void Profil::saveProfile(string directory){
