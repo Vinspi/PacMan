@@ -24,6 +24,7 @@ private:
 public slots:
     void on_play_as_guest_clicked();
     void on_load_profile_clicked();
+    void on_create_profile_clicked();
 };
 
 #endif // VUEMENU_H

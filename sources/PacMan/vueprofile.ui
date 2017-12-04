@@ -162,10 +162,20 @@
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color : rgb(237, 212, 0);
-color: black;
-border: 3px solid gray;
-border-radius: 15px;</string>
+     <string notr="true">
+ QPushButton#pushButton {
+     background-color : rgb(237, 212, 0);
+	color: black;
+	border: 3px solid gray;
+	border-radius: 15px;
+ }
+
+
+QPushButton#pushButton:hover {
+     background-color: rgb(255, 128, 0);
+ }
+
+</string>
     </property>
     <property name="text">
      <string>CHOISIR UN PROFIL</string>
@@ -201,9 +211,20 @@ border-radius: 15px;</string>
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: black; 
-color: white; 
-border: 3px solid gray;</string>
+     <string notr="true">
+ QPushButton#pushButton_2 {
+     background-color : rgb(153, 102, 0);
+	color: white;
+	border: 3px solid gray;
+	border-radius: 15px;
+ }
+
+QPushButton#pushButton_2:hover {
+     background-color:rgb(255, 153, 51);
+color: black;
+ }
+
+</string>
     </property>
     <property name="text">
      <string>JOUER A CE NIVEAU</string>

@@ -74,15 +74,71 @@
        <enum>Qt::LeftToRight</enum>
       </property>
       <property name="styleSheet">
-       <string notr="true">padding: 10px;
+       <string notr="true"> QPushButton#play_as_guest{
+padding: 10px;
 background-color :rgb(168, 146, 6);
 color: white;
 border: 3px solid white;
 border-radius: 15px;
+}
+
+
+ QPushButton#play_as_guest:hover {
+     background-color : rgb(153, 102, 0);
+	color: white;
+	border: 3px solid gray;
+	border-radius: 15px;
+ }
 </string>
       </property>
       <property name="text">
        <string>JOUER EN TANT QU'INVITÉ</string>
+      </property>
+     </widget>
+    </item>
+    <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+     <widget class="QPushButton" name="create_profile">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>300</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"> QPushButton#create_profile{
+padding: 10px;
+background-color :rgb(168, 146, 6);
+color: white;
+border: 3px solid white;
+border-radius: 15px;
+}
+
+
+ QPushButton#create_profile:hover {
+     background-color : rgb(153, 102, 0);
+	color: white;
+	border: 3px solid gray;
+	border-radius: 15px;
+ }
+</string>
+      </property>
+      <property name="text">
+       <string>CREER UN PROFIL</string>
       </property>
      </widget>
     </item>
@@ -106,12 +162,26 @@ border-radius: 15px;
         <bold>true</bold>
        </font>
       </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
       <property name="styleSheet">
-       <string notr="true">padding: 10px;
+       <string notr="true"> QPushButton#load_profile{
+padding: 10px;
 background-color :rgb(168, 146, 6);
 color: white;
 border: 3px solid white;
-border-radius: 15px;</string>
+border-radius: 15px;
+}
+
+
+ QPushButton#load_profile:hover {
+     background-color : rgb(153, 102, 0);
+	color: white;
+	border: 3px solid gray;
+	border-radius: 15px;
+ }
+</string>
       </property>
       <property name="text">
        <string>CHARGER UN PROFIL</string>

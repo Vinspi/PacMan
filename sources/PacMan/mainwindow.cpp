@@ -4,6 +4,7 @@
 #include "vueprofile.h"
 #include "profil.h"
 #include "vuemenu.h"
+#include "vuecreationprofil.h"
 #include "gamescene.h"
 #include <QGraphicsView>
 
@@ -44,8 +45,11 @@ MainWindow::MainWindow(QWidget *parent) :
     vm->setMainWindow(this);
     vm->show();
 
+    vuecreationprofil *vcp = new vuecreationprofil();
+
     ui->stackedWidget->addWidget(vm);
     ui->stackedWidget->addWidget(gv);
+    ui->stackedWidget->addWidget(vcp);
     ui->stackedWidget->setCurrentIndex(1);
 }
 

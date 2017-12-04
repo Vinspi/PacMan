@@ -26,3 +26,7 @@ void VueMenu::on_load_profile_clicked(){
     ((QStackedWidget*)this->parent())->setCurrentIndex(0);
 }
 
+void VueMenu::on_create_profile_clicked(){
+     ((QStackedWidget*)this->parent())->setCurrentIndex(3);
+}
+
