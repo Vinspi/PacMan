@@ -14,7 +14,7 @@
    <string>Form</string>
   </property>
   <property name="autoFillBackground">
-   <bool>true</bool>
+   <bool>false</bool>
   </property>
   <property name="styleSheet">
    <string notr="true">background: linear-gradient(45deg, #dca 12%, transparent 0, transparent 88%, #dca 0),
@@ -53,7 +53,7 @@
      </widget>
     </item>
     <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
-     <widget class="QTextEdit" name="textEdit">
+     <widget class="QTextEdit" name="pseudo_input">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
         <horstretch>0</horstretch>
@@ -107,7 +107,7 @@
      </widget>
     </item>
     <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="submit_form">
       <property name="minimumSize">
        <size>
         <width>400</width>
@@ -121,16 +121,16 @@
        </size>
       </property>
       <property name="styleSheet">
-       <string notr="true"> QPushButton#pushButton{
+       <string notr="true"> QPushButton#submit_form{
     color: brown; font-weight: 900; font-size: 20px; border: 2px dotted black; background-color: white; padding: 20px; border-radius: 10px ;
  }
 
- QPushButton#pushButton:hover {
+ QPushButton#submit_form:hover {
      background-color: rgb(255, 204, 0);
 	 color: black;
  }
 
- QPushButton#pushButton:pressed {
+ QPushButton#submit_form:pressed {
      background-color: 	rgb(255, 128, 0);
 	 color: black;
  }</string>

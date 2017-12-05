@@ -12,6 +12,10 @@
 
 using namespace std;
 
+VueProfile *vp;
+VueMenu *vm;
+vuecreationprofil *vcp;
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -35,17 +39,18 @@ MainWindow::MainWindow(QWidget *parent) :
 
     /* on ajoute des element au QStackWidget */
     /* vue profil */
-    VueProfile* vp = new VueProfile(this);
+    vp = new VueProfile(this);
     vp->setMainWindow(this);
     vp->show();
     ui->stackedWidget->addWidget(vp);
 
     /* le menu */
-    VueMenu* vm = new VueMenu();
+    vm = new VueMenu();
     vm->setMainWindow(this);
     vm->show();
 
-    vuecreationprofil *vcp = new vuecreationprofil();
+    vcp = new vuecreationprofil();
+    vcp->setMainWindow(this);
 
     ui->stackedWidget->addWidget(vm);
     ui->stackedWidget->addWidget(gv);
@@ -66,6 +71,11 @@ void MainWindow::launchGame(Profil *p, QString level){
     gv->show();
 
     ui->stackedWidget->setCurrentIndex(2);
+}
+
+void MainWindow::profileCreated(Profil *p){
+     ui->stackedWidget->setCurrentIndex(0);
+     vp->setProfil(p);
 }
 
 MainWindow::~MainWindow()

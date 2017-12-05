@@ -8,7 +8,7 @@ using namespace std;
 Profil::Profil(string name)
 {
     score = 0;
-    niv_max_atteint = 0;
+    niv_max_atteint = 1;
     classement = -1;
     nom = name;
 }

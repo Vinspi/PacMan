@@ -61,7 +61,8 @@ SOURCES += \
     spawnblocpinky.cpp \
     hud.cpp \
     mysteryitem.cpp \
-    mysterybloc.cpp
+    mysterybloc.cpp \
+    vuecreationprofil.cpp
 
 HEADERS += \
     const.h \
@@ -100,7 +101,8 @@ HEADERS += \
     spawnblocpinky.h \
     hud.h \
     mysteryitem.h \
-    mysterybloc.h
+    mysterybloc.h \
+    vuecreationprofil.h
 
 
 CONFIG += c++11
@@ -108,7 +110,8 @@ CONFIG += c++11
 FORMS += \
     mainwindow.ui \
     vueprofile.ui \
-    vuemenu.ui
+    vuemenu.ui \
+    vuecreationprofil.ui
 
 RESOURCES += \
     resources.qrc

@@ -20,6 +20,8 @@ public:
     ~MainWindow();
     QStackedWidget* getStackedWidget();
     void launchGame(Profil *p, QString level);
+    void profileCreated(Profil *p);
+
 
 private:
     Ui::MainWindow *ui;
