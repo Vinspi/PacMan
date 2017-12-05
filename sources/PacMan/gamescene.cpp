@@ -548,7 +548,7 @@ void GameScene::init(TileMap &map)
 
     /*****************************************/
 
-    m_nb_dot = 4;
+
 
 }
 
