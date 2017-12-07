@@ -62,7 +62,9 @@ SOURCES += \
     hud.cpp \
     mysteryitem.cpp \
     mysterybloc.cpp \
-    vuecreationprofil.cpp
+    vuecreationprofil.cpp \
+    testmodulegraph.cpp \
+    testmodulemap.cpp
 
 HEADERS += \
     const.h \
@@ -102,7 +104,9 @@ HEADERS += \
     hud.h \
     mysteryitem.h \
     mysterybloc.h \
-    vuecreationprofil.h
+    vuecreationprofil.h \
+    testmodulegraph.h \
+    testmodulemap.h
 
 
 CONFIG += c++11
